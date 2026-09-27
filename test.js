@@ -1513,7 +1513,7 @@ await okAsync('what is typed in the chat is taken, translated, said - and the cl
   const r = await sayTranslated({ keys, clipboard: board, translate: async (t) => ({ out: 'RU:' + t }), note: (n) => notes.push(n), wait: noWait });
   assert.deepEqual(r, { said: true, typed: 'go rosh', out: 'RU:go rosh' });
   assert.equal(keys.said, 'RU:go rosh');
-  assert.deepEqual(keys.log, ['copy', 'send']);
+  assert.deepEqual(keys.log, ['copy', 'copy', 'send']);
   assert.equal(board.text, 'something of the player\'s own');
   // Shown as the player's own line while it is away, and taken down when it is said.
   assert.deepEqual([notes[0].kind, notes[0].text], ['note', 'go rosh']);
@@ -1535,8 +1535,30 @@ await okAsync('what the line MEANS is handed over BEFORE the keys that say it', 
   const b2 = fakeBoard('mine');
   const k2 = fakeKeys(b2, 'gg');
   const r = await sayTranslated({ keys: k2, clipboard: b2, translate: async () => ({ out: 'RU' }), learned: () => { throw new Error('x'); }, wait: noWait });
-  assert.deepEqual(k2.log, ['copy', 'send']);
+  assert.deepEqual(k2.log, ['copy', 'copy', 'send']);
   assert.equal(typeof r.said, 'boolean');
+});
+
+await okAsync('a chat sent or closed while the line was away is NOT sent into; Enter is held meanwhile', async () => {
+  // The user, 2026-09-27: Enter pressed while waiting sent the English and
+  // closed the chat; the app's Ctrl+A, Ctrl+V, Enter then opened an empty
+  // chat that took the keyboard.
+  const board = fakeBoard('mine');
+  const keys = fakeKeys(board, 'stop feeding');
+  const held = []; const notes = [];
+  let field = 'stop feeding';
+  keys.copy = async () => { keys.log.push('copy'); if (field) board.writeText(field); return { ok: true }; };
+  const r = await sayTranslated({ keys, clipboard: board, hold: (on) => held.push(on), translate: async () => { field = ''; return { out: 'RU' }; }, note: (n) => notes.push(n), wait: noWait });
+  assert.equal(r.said, false);
+  assert.deepEqual(keys.log, ['copy', 'copy']);
+  assert.equal(board.text, 'RU', 'the translation is left to paste');
+  assert.match(notes.at(-1).more, /not sent/);
+  assert.deepEqual(held, [true, false]);
+  // A failed translation lets go of Enter too.
+  const h2 = [];
+  const b2 = fakeBoard('mine');
+  await sayTranslated({ keys: fakeKeys(b2, 'gg'), clipboard: b2, hold: (on) => h2.push(on), translate: async () => { throw new Error('x'); }, wait: noWait });
+  assert.deepEqual(h2, [true, false]);
 });
 
 await okAsync('the row shown while a line is away is the player\'s OWN row once the app knows who they are', async () => {

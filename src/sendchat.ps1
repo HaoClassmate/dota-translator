@@ -54,6 +54,13 @@ public static class SayKeys {
     return owner == pid;
   }
 
+  /// Every key this script ever presses, let go - whatever happened in the
+  /// middle. A Ctrl left down turns every key the player presses into
+  /// Ctrl+key, which the game ignores: the user, 2026-09-27, "couldnt press
+  /// a single button and had to quit dota". An extra key-up for a key that
+  /// is already up does nothing.
+  public static void ReleaseAll() { Up(V); Up(C); Up(A); Up(ENTER); Up(CTRL); }
+
   static bool Held(byte vk) { return (GetAsyncKeyState(vk) & 0x8000) != 0; }
 
   /// The player's own Ctrl and Enter are still going up from the key that
@@ -100,5 +107,7 @@ while ($true) {
     Write-Output 'sent'
   } catch {
     Write-Output 'NOT DONE: the helper failed'
+  } finally {
+    try { [SayKeys]::ReleaseAll() } catch { }
   }
 }

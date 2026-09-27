@@ -251,6 +251,8 @@ async function start() {
     // Up only while the game is the window in front.
     onFocus: (on) => {
       setSayHotkey(on);
+      // Enter is held only while Dota is in front, never over another program.
+      if (!on && enterHeld) { globalShortcut.unregister('Enter'); enterHeld = false; }
       inFront = on;
       heartbeat(on);
       if (!win || win.isDestroyed() || hidden) return;
@@ -338,6 +340,7 @@ const sayIt = createOutgoing({
 const keys = createKeySender();
 let sayKeyOn = false;
 let saying = false;
+let enterHeld = false;
 // WHO the player is, learnt from the game: a line that comes back out of
 // the chat with the words the app has just sent for them is THEIR line,
 // and carries their name, colour slot and hero. Known from their first
@@ -380,6 +383,11 @@ async function sayKey() {
         if (sentForMe.size > 50) sentForMe.delete(sentForMe.values().next().value);
       },
       who: () => me,
+      // An Enter pressed while the line is away is swallowed, not sent.
+      hold: (on) => {
+        if (on) { try { enterHeld = globalShortcut.register('Enter', () => {}); } catch { enterHeld = false; } }
+        else if (enterHeld) { globalShortcut.unregister('Enter'); enterHeld = false; }
+      },
       translate: (typed) => sayIt(typed, into),
       note: (s) => send('status', withFace(s)),
     });

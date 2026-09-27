@@ -69,7 +69,7 @@ export function createKeySender({ spawnImpl = spawn, script = SEND_SCRIPT, timeo
  * copy what is in the chat field -> translate -> put it back and send.
  * The player's clipboard is theirs and is put back whatever happens.
  */
-export async function sayTranslated({ keys, clipboard, translate, into = '', explain = (m) => m, learned = () => {}, who = null, note = () => {}, wait = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
+export async function sayTranslated({ keys, clipboard, translate, into = '', explain = (m) => m, learned = () => {}, who = null, note = () => {}, hold = () => {}, wait = (ms) => new Promise((r) => setTimeout(r, ms)) }) {
   const before = clipboard.readText();
   const restore = () => clipboard.writeText(before);
   // Emptied first: an empty clipboard afterwards means nothing was copied -
@@ -84,8 +84,15 @@ export async function sayTranslated({ keys, clipboard, translate, into = '', exp
   // them - so the row is drawn as THEIR chat row, not as a loose line.
   const mine = typeof who === 'function' ? who() : who;
   note({ kind: 'note', text: typed, more: ARROW + ' ' + (into || 'translating') + DOTS, holdMs: 12000, ...(mine && mine.name ? { name: mine.name, slot: mine.slot, hero: mine.hero } : {}) });
+  // `hold(true)`: the player's own Enter is kept from the game while the line
+  // is away (the user, 2026-09-27: an impatient Enter sent the English and
+  // closed the chat, and the app's Enter then opened an empty one that took
+  // the keyboard). Let go before any key of ours is pressed.
+  const let_go = () => { try { hold(false); } catch { /* nothing held */ } };
+  try { hold(true); } catch { /* the check below still guards it */ }
   let out;
   try { out = (await translate(typed)).out; } catch (err) {
+    let_go();
     restore();
     gone();
     const why = String((err && err.message) || err);
@@ -100,6 +107,19 @@ export async function sayTranslated({ keys, clipboard, translate, into = '', exp
   // SEEN: the line was read at .483 and its meaning handed over after
   // that, so the model was asked anyway ("how often do u shower" came
   // back as "how often do you wash yourself").
+  let_go();
+  // Is what was typed STILL in the chat? If the chat was sent or closed
+  // meanwhile (Enter, Escape, a click), Ctrl+A, Ctrl+V, Enter would land in
+  // a closed chat - and that Enter opens an empty one. Nothing is sent then;
+  // the translation is left on the clipboard.
+  clipboard.writeText('');
+  const again = await keys.copy();
+  const still = again.ok ? String(clipboard.readText() || '').trim() : '';
+  if (still !== typed) {
+    clipboard.writeText(out);
+    note({ kind: 'note', text: out, more: '- not sent: the chat was closed. Ctrl+V pastes it' });
+    return { said: false, why: again.ok ? 'the chat changed while translating' : again.why, out };
+  }
   try { learned(out, typed); } catch { /* the line is still said */ }
   clipboard.writeText(out);
   const sent = await keys.send();

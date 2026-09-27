@@ -1513,7 +1513,7 @@ await okAsync('what is typed in the chat is taken, translated, said - and the cl
   const r = await sayTranslated({ keys, clipboard: board, translate: async (t) => ({ out: 'RU:' + t }), note: (n) => notes.push(n), wait: noWait });
   assert.deepEqual(r, { said: true, typed: 'go rosh', out: 'RU:go rosh' });
   assert.equal(keys.said, 'RU:go rosh');
-  assert.deepEqual(keys.log, ['copy', 'send']);
+  assert.deepEqual(keys.log, ['copy', 'copy', 'send']);
   assert.equal(board.text, 'something of the player\'s own');
   // Shown as the player's own line while it is away, and taken down when it is said.
   assert.deepEqual([notes[0].kind, notes[0].text], ['note', 'go rosh']);
@@ -1535,8 +1535,114 @@ await okAsync('what the line MEANS is handed over BEFORE the keys that say it', 
   const b2 = fakeBoard('mine');
   const k2 = fakeKeys(b2, 'gg');
   const r = await sayTranslated({ keys: k2, clipboard: b2, translate: async () => ({ out: 'RU' }), learned: () => { throw new Error('x'); }, wait: noWait });
-  assert.deepEqual(k2.log, ['copy', 'send']);
+  assert.deepEqual(k2.log, ['copy', 'copy', 'send']);
   assert.equal(typeof r.said, 'boolean');
+});
+
+await okAsync('a chat sent or closed while the line was away is NOT sent into; Enter is held meanwhile', async () => {
+  // The user, 2026-09-27: Enter pressed while waiting sent the English and
+  // closed the chat; the app's Ctrl+A, Ctrl+V, Enter then opened an empty
+  // chat that took the keyboard.
+  const board = fakeBoard('mine');
+  const keys = fakeKeys(board, 'stop feeding');
+  const held = []; const notes = [];
+  let field = 'stop feeding';
+  keys.copy = async () => { keys.log.push('copy'); if (field) board.writeText(field); return { ok: true }; };
+  const r = await sayTranslated({ keys, clipboard: board, hold: (on) => held.push(on), translate: async () => { field = ''; return { out: 'RU' }; }, note: (n) => notes.push(n), wait: noWait });
+  assert.equal(r.said, false);
+  assert.deepEqual(keys.log, ['copy', 'copy']);
+  assert.equal(board.text, 'RU', 'the translation is left to paste');
+  assert.match(notes.at(-1).more, /not sent/);
+  assert.deepEqual(held, [true, false]);
+  // A failed translation lets go of Enter too.
+  const h2 = [];
+  const b2 = fakeBoard('mine');
+  await sayTranslated({ keys: fakeKeys(b2, 'gg'), clipboard: b2, hold: (on) => h2.push(on), translate: async () => { throw new Error('x'); }, wait: noWait });
+  assert.deepEqual(h2, [true, false]);
+});
+
+// A stand-in for Dota's chat, for the default way: open or closed, the field,
+// and what was SENT. Enter opens a closed chat, and sends (or, empty, just
+// closes) an open one - as the game does.
+const fakeChat = (board, { open = false, field = '', channel = 'team' } = {}) => {
+  const g = { open, field, channel, sent: [], log: [] };
+  const ok = async () => ({ ok: true });
+  const enter = (ch) => { if (!g.open) { g.open = true; g.channel = ch; g.field = ''; } else { if (g.field) g.sent.push([g.channel, g.field]); g.open = false; g.field = ''; } };
+  g.keys = {
+    copy: async () => { g.log.push('copy'); if (g.open && g.field) board.writeText(g.field); return { ok: true }; },
+    clear: async () => { g.log.push('clear'); g.field = ''; g.open = false; return { ok: true }; },
+    open: async (ch) => { g.log.push('open ' + ch); enter(ch); return { ok: true }; },
+    paste: async () => { g.log.push('paste'); if (g.open) g.field = board.readText(); return { ok: true }; },
+    enter: async () => { g.log.push('enter'); enter(g.channel); return { ok: true }; },
+  };
+  return g;
+};
+const { takeLine, sayLine } = await import('./src/sendchat.js');
+
+await okAsync('the default way: the line is taken and the chat closed at once, then said in the chat the key named', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: 'stop feeding' });
+  const t = await takeLine({ keys: g.keys, clipboard: board });
+  assert.deepEqual(t, { typed: 'stop feeding' });
+  assert.equal(g.open, false, 'the chat is closed at once');
+  assert.equal(board.text, 'mine', 'the clipboard is given back');
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'хватит фидить', channel: 'all', wait: noWait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['all', 'хватит фидить']]);
+  assert.equal(g.open, false);
+  assert.equal(board.text, 'mine');
+  // Nothing typed: nothing cleared, nothing sent.
+  const g2 = fakeChat(board);
+  assert.deepEqual(await takeLine({ keys: g2.keys, clipboard: board }), { why: 'nothing typed' });
+  assert.deepEqual(g2.log, ['copy']);
+});
+
+await okAsync('the default way: the player typing a new line is waited for, never sent or overwritten', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: 'half a line' });
+  let waits = 0;
+  const wait = async () => { if (++waits === 3) { g.sent.push([g.channel, g.field]); g.open = false; g.field = ''; } };
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', channel: 'team', wait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['team', 'half a line'], ['team', 'RU']], 'theirs went first, by their own Enter');
+  // They never finish: the line is left to paste, and nothing of theirs is touched.
+  let clock = 0;
+  const g2 = fakeChat(board, { open: true, field: 'still typing' });
+  const r2 = await sayLine({ keys: g2.keys, clipboard: board, out: 'RU', wait: async () => { clock += 400; }, now: () => clock, patienceMs: 2000 });
+  assert.equal(r2.said, false);
+  assert.deepEqual(g2.sent, []);
+  assert.equal(g2.field, 'still typing');
+  assert.equal(board.text, 'RU');
+});
+
+await okAsync('the default way: an EMPTY open chat is closed by the first Enter and opened by the second - one line said', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: '' });
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', channel: 'team', wait: noWait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['team', 'RU']]);
+});
+
+await okAsync('the default way: something else in the chat after the paste is NEVER sent', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board);
+  g.keys.paste = async () => { g.log.push('paste'); g.field = 'not ours'; return { ok: true }; };
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', wait: noWait });
+  assert.equal(r.said, false);
+  assert.deepEqual(g.sent, []);
+  assert.equal(board.text, 'RU');
+  // A game field that keeps only the start of a long line: still said.
+  const g2 = fakeChat(board);
+  g2.keys.paste = async () => { if (g2.open) g2.field = board.readText().slice(0, 5); return { ok: true }; };
+  assert.equal((await sayLine({ keys: g2.keys, clipboard: board, out: 'RU long line', wait: noWait })).said, true);
+});
+
+await okAsync('the default way is the default, and both keys are there', () => {
+  assert.equal(DEFAULTS.sayMode, 'close');
+  assert.equal(DEFAULTS.sayHotkey, 'Control+Enter');
+  assert.equal(DEFAULTS.sayAllHotkey, 'Control+Shift+Enter');
+  const ps = fs.readFileSync(path.join('src', 'sendchat.ps1'), 'utf8');
+  for (const w of ['clear', 'open team', 'open all', 'paste', 'enter']) assert.ok(ps.includes("'" + w + "'"), w);
 });
 
 await okAsync('the row shown while a line is away is the player\'s OWN row once the app knows who they are', async () => {
@@ -1599,15 +1705,23 @@ await okAsync('the key helper is asked one word at a time and its answers are re
   child.stdin.end = () => {};
   const sender = createKeySender({ spawnImpl: () => child, timeoutMs: 200 });
   const first = sender.copy();
-  assert.deepEqual(await sender.send(), { ok: false, why: 'busy' });
+  // A second word waits for the first, in order - never refused, never both at once.
+  const queued = sender.send();
+  await new Promise((r) => setImmediate(r));
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy']);
   child.stdout.emit('data', 'ready\r\ncop');
   child.stdout.emit('data', 'ied\r\n');
   assert.deepEqual(await first, { ok: true });
+  await new Promise((r) => setImmediate(r));
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send']);
+  child.stdout.emit('data', 'done\r\n');
+  assert.deepEqual(await queued, { ok: true });
   const second = sender.send();
+  await new Promise((r) => setImmediate(r));
   child.stdout.emit('data', 'NOT DONE: the game is not in front\r\n');
   assert.deepEqual(await second, { ok: false, why: 'the game is not in front' });
   assert.deepEqual(await sender.send(), { ok: false, why: 'the helper took too long' });
-  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send', 'send']);
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send', 'send', 'send']);
   sender.stop();
 });
 
@@ -1634,7 +1748,15 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
   const at = (s, from = 0) => { const i = helper.indexOf(s, from); assert.ok(i >= 0, s); return i; };
   const loop = at('while ($true)');
   assert.ok(at('InFront($id)', loop) < at('Chord(', loop));
-  assert.ok(at('InFront($id)', at('::V)', loop)) < at('Tap([SayKeys]::ENTER)', loop));
+  // Every Enter the helper presses (it SENDS, or opens the chat) comes
+  // straight after a fresh "is the game in front?".
+  let enters = 0;
+  for (let i = helper.indexOf('[SayKeys]::ENTER)', loop); i >= 0; i = helper.indexOf('[SayKeys]::ENTER)', i + 1)) {
+    enters++;
+    const guard = helper.lastIndexOf('InFront($id)', i);
+    assert.ok(guard > loop && i - guard < 700, 'an Enter with no guard just before it');
+  }
+  assert.ok(enters >= 3);
   assert.equal(DEFAULTS.sayHotkey, 'Control+Enter');
   assert.equal(DEFAULTS.replyLanguage, 'auto');
 });

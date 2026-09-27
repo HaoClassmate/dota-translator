@@ -149,6 +149,12 @@ export const DEFAULTS = {
   // exists only while Dota is the window in front. "" turns it all off,
   // and then the app sends the game no keys at all.
   sayHotkey: 'Control+Enter',
+  // Says the line in ALL chat instead of team chat (the default way only).
+  sayAllHotkey: 'Control+Shift+Enter',
+  // "close": the chat closes at once and the line is said when translated
+  // (the default, 2026-09-27). "open": the chat stays open while it is
+  // translated and the line is put back into it, as before.
+  sayMode: 'close',
   // What to translate it into. "auto" is whatever the others were last
   // seen typing in, Russian until anything has been seen; or a language by
   // name ("Russian", "Ukrainian", "Chinese").

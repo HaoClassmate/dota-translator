@@ -156,18 +156,24 @@ after the app heard it. A line somebody has said before costs no call.
 
 - `Alt+D` hides and shows the overlay.
 - `Alt+Shift+D` quits.
-- `Ctrl+Enter`, in Dota's chat, sends what you typed translated (below).
+- `Ctrl+Enter`, in Dota's chat, sends what you typed translated to your team;
+  `Ctrl+Shift+Enter` to all chat (below).
 
 ## Saying something back
 
-Open the game's chat as you always do (`Enter`, or `Shift+Enter` for all
-chat), type what you want to say in English, and press **`Ctrl+Enter`
-instead of `Enter`**. About a second later it is said, in their language.
-Plain `Enter` still sends exactly what you typed.
+Open the game's chat as you always do, type what you want to say in
+English, and press **`Ctrl+Enter` instead of `Enter`** - or
+**`Ctrl+Shift+Enter`** for all chat. The chat closes at once, so you have
+your hero back, and about a second later the line is said in their
+language. Plain `Enter` still sends exactly what you typed.
 
 - **How: the app presses keys for you, and you should know that it does.**
-  `Ctrl+A`, `Ctrl+C` to take what you typed; then, with the translation,
-  `Ctrl+A`, `Ctrl+V`, `Enter`. They go through Windows, as a keyboard's or
+  `Ctrl+A`, `Ctrl+C` to take what you typed, then `Backspace` and `Escape` to
+  close the chat; with the translation, `Enter` (or `Shift+Enter`) to open
+  it again, `Ctrl+V`, and `Enter`. If you are typing another line by then,
+  it waits for you; if it cannot say the line, it leaves it on your
+  clipboard and tells you. `"sayMode": "open"` keeps the chat open while
+  it translates instead, as before. They go through Windows, as a keyboard's or
   a macro key's do. It happens once, when you press the key, and never
   unless Dota is the window in front. Valve has said
   nothing about it either way: at your own risk.

@@ -83,3 +83,17 @@ export function ensureGsiConfig({ port, dotaDir = findDotaDir() } = {}) {
     return { state: 'failed', file, dotaDir, detail: String((err && err.message) || err) };
   }
 }
+
+/**
+ * The language Dota runs in, as Steam keeps it for the game
+ * (steamapps/appmanifest_570.acf, "language"). '' when it cannot be read.
+ */
+export function gameLanguage(dotaDir, { read = (f) => fs.readFileSync(f, 'utf8') } = {}) {
+  if (!dotaDir) return '';
+  try {
+    // <library>/steamapps/common/dota 2 beta/game/dota
+    const text = read(path.join(dotaDir, '..', '..', '..', '..', 'appmanifest_570.acf'));
+    const m = /"language"\s+"([a-z_]+)"/i.exec(text);
+    return m ? m[1].toLowerCase() : '';
+  } catch { return ''; }
+}

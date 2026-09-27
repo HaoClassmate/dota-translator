@@ -29,6 +29,33 @@ export const SURE = 0.8;
 // line showed Bounty Hunter, who was not even in the game).
 export const MARGIN = 0.15;
 
+// Which chat is open, from the bright columns of the chat input's first
+// words. MEASURED on the user's 1080p screenshots (2026-09-27): "To" 19 px,
+// "(Allies):" 60 px (3.2 x), "(All):" 39 px (2.1 x); letters at most 3 px apart,
+// words 6-8 (gaps counted between lit columns). Measured against "To", so the screen size does not matter.
+// Anything else - no text, a game in another language, the chat closed -
+// is null, and the key decides.
+export function channelFromRuns(runs, s = 1) {
+  if (!Array.isArray(runs) || !(s > 0)) return null;
+  const words = [];
+  for (const r of runs) {
+    if (!Array.isArray(r) || r.length !== 2 || !Number.isFinite(r[0]) || !Number.isFinite(r[1])) return null;
+    const last = words[words.length - 1];
+    if (last && r[0] - last[1] - 1 < 4.5 * s) last[1] = r[1];
+    else words.push([r[0], r[1]]);
+  }
+  // A speck (a lit pixel of the bar's edge, SEEN in the user's shot) is no word.
+  const real = words.filter(([a, b]) => b - a + 1 >= 4 * s);
+  words.length = 0; words.push(...real);
+  if (words.length < 2) return null;
+  const to = words[0][1] - words[0][0] + 1, label = words[1][1] - words[1][0] + 1;
+  if (to < 12 * s || to > 27 * s) return null;
+  const k = label / to;
+  if (k >= 2.75 && k <= 3.8) return 'team';
+  if (k >= 1.6 && k <= 2.55) return 'all';
+  return null;
+}
+
 /** The game's portraits as files, once per install. Returns the folder or null. */
 export function writeRefs(dotaDir, dir = path.join(os.tmpdir(), 'dota-translator-faces')) {
   try {
@@ -53,7 +80,7 @@ const DEBUG = Boolean(process.env.DT_DEBUG);
 
 export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = process.pid, timeoutMs = 700, restartMs = 5000, sure = SURE } = {}) {
   const folder = refs || (dotaDir ? writeRefs(dotaDir) : null);
-  if (!folder) return { identify: async () => null, stop() {} };
+  if (!folder) return { identify: async () => null, channel: async () => null, stop() {} };
 
   let child = null, ready = false, stopped = false, buffer = '', nextId = 1;
   const waiting = new Map();
@@ -76,6 +103,10 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
         let o = null;
         try { o = JSON.parse(p); } catch { continue; }
         if (o && o.t === 'ready') ready = o.refs > 0;
+        else if (o && o.t === 'chan') {
+          if (DEBUG) console.log(new Date().toISOString().slice(11, 23), 'chan', p);
+          settle(o.id, o.ok === 1 ? channelFromRuns(o.runs, o.s) : null);
+        }
         else if (o && o.t === 'row') {
           // DT_DEBUG: every answer as the helper gave it - a whole game went
           // by (2026-09-22) with no way to tell which lines had been looked at.
@@ -120,6 +151,8 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
       const top = await ask((id) => 'seat ' + id + ' ' + seat);
       return top ? { ...top, from: 'top' } : null;
     },
+    /** 'team' | 'all' | null: which chat the player has open. */
+    channel: () => ask((id) => 'chan ' + id),
     stop() {
       stopped = true;
       for (const id of [...waiting.keys()]) settle(id, null);

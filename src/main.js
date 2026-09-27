@@ -391,10 +391,16 @@ function learnedLine(out, typed) {
 // once and the line said when it is translated. Lines are said in the
 // order they were taken; each is translated as soon as it is taken.
 let sayChain = Promise.resolve();
-function sayClosing(channel) {
+function sayClosing(asked) {
   const into = targetLanguage(cfg.replyLanguage, spoken);
   const note = (s) => send('status', withFace(s));
-  const taken = takeLine({ keys, clipboard });
+  // Which chat was open, read off the screen BEFORE the chat is closed (the
+  // user, 2026-09-27: Ctrl+Enter in all chat went to the team). Not sure -
+  // no answer in 250ms, another language, the grab off - and the key decides.
+  // Ctrl+Shift+Enter says all chat whatever is open.
+  let channel = asked;
+  const seen = asked !== 'all' && watcher && watcher.channel ? Promise.race([watcher.channel().catch(() => null), new Promise((r) => setTimeout(() => r(null), 250))]) : Promise.resolve(null);
+  const taken = seen.then((c) => { if (c) channel = c; if (DEBUG) console.log('say channel', JSON.stringify({ asked, seen: c })); return takeLine({ keys, clipboard }); });
   const ARROW = String.fromCharCode(0x2192), DOTS = String.fromCharCode(0x2026);
   const translated = taken.then(async (t) => {
     if (!t.typed) return { t };

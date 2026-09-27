@@ -46,5 +46,5 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
     if (l) handlers.onLayout(l);
   };
   const focus = handlers.onFocus || handlers.onLayout ? watchFocus({ onFocus: handlers.onFocus || (() => {}), onWindow }) : null;
-  return { ...watcher, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
+  return { ...watcher, channel: rows ? () => rows.channel() : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
 }

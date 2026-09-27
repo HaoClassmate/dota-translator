@@ -48,9 +48,9 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
   const focus = handlers.onFocus || handlers.onLayout ? watchFocus({ onFocus: handlers.onFocus || (() => {}), onWindow }) : null;
   // Which chat is open is read off the chat input's label, which each game
   // language words differently (checked against Dota's own strings in 28
-  // languages, 2026-09-27). English and Russian are measured; in any other
+  // languages, 2026-09-27). English, Russian and Spanish are measured; in any other
   // a rule could guess WRONG, so it is not asked and the key decides.
   const lang = made.dotaDir ? language(made.dotaDir) : '';
-  const readsChat = rows && (lang === '' || lang === 'english' || lang === 'russian');
+  const readsChat = rows && ['', 'english', 'russian', 'spanish', 'latam'].includes(lang);
   return { ...watcher, channel: readsChat ? () => rows.channel().then((r) => (r ? channelFromRuns(r.runs, r.s, lang || 'english') : null)) : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
 }

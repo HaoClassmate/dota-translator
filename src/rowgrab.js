@@ -37,7 +37,8 @@ export const MARGIN = 0.15;
 // is null, and the key decides.
 // Russian Dota (the user's screenshots, 2026-09-27): no "To" - the label is
 // ONE word, "(Союзникам):" 111 px, "(Всем):" 56 px at 1080p, then the text.
-// Other languages word it differently again, and are not guessed at.
+// Spanish is measured too (below); other languages word it differently
+// again, and are not guessed at.
 export function channelFromRuns(runs, s = 1, lang = 'english') {
   if (!Array.isArray(runs) || !(s > 0)) return null;
   const words = [];
@@ -48,13 +49,26 @@ export function channelFromRuns(runs, s = 1, lang = 'english') {
     else words.push([r[0], r[1]]);
   }
   // A speck (a lit pixel of the bar's edge, SEEN in the user's shot) is no word.
-  const real = words.filter(([a, b]) => b - a + 1 >= 4 * s);
+  // And nothing that ends before the label begins (12-17 px in, measured):
+  // SEEN, a bright bit of the game's scenery at the strip's left edge.
+  const real = words.filter(([a, b]) => b - a + 1 >= 4 * s && b >= 11 * s);
   words.length = 0; words.push(...real);
   if (lang === 'russian') {
     if (!words.length) return null;
     const w = (words[0][1] - words[0][0] + 1) / s;
     if (w >= 95 && w <= 130) return 'team';
     if (w >= 45 && w <= 70) return 'all';
+    return null;
+  }
+  // Spanish Dota, both Spains (the user's screenshots, 2026-09-27): "A" 11
+  // px, then "(Aliados):" 76 px or "(Todos):" 66 px. Closer than the others,
+  // so the middle is left unsure.
+  if (lang === 'spanish' || lang === 'latam') {
+    if (words.length < 2) return null;
+    const a = (words[0][1] - words[0][0] + 1) / s, w = (words[1][1] - words[1][0] + 1) / s;
+    if (a < 6 || a > 17) return null;
+    if (w >= 72.5 && w <= 84) return 'team';
+    if (w >= 59 && w <= 69.5) return 'all';
     return null;
   }
   if (lang !== 'english' && lang !== '') return null;

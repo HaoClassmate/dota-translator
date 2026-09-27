@@ -1227,7 +1227,7 @@ ok('the landing page keeps the promises the project made about how it talks', ()
     // ONE sentence may say it (the user: 'u can only keep the one'): the catch's first item.
     assert.equal((words.match(/memory/gi) || []).length, page === 'index.html' ? 1 : 0, page + ' talks about memory');
   }
-  assert.match(text, /two small spots of your screen/);
+  assert.match(text, /three small spots of your screen/);
   assert.match(text, /Valve has not approved it/);
   assert.doesNotMatch(text, /Valve (approved|allows|permits) (it|this)/i);
   assert.match(text, /source-available rather than open source/);
@@ -2006,6 +2006,33 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     answer = { hero: 'axe', score: 0.9, from: 'top' };
     c2.payload(body([ev(2, 7, RU + RU), ev(1, 7, RU)])); await c2.idle();
     assert.deepEqual(two, ['luna', 'luna']);
+  });
+
+  await okAsync('which chat is open is read off the chat input\'s first words, at any screen size', async () => {
+    // The user, 2026-09-27: Ctrl+Enter in all chat went to the team. These
+    // are the bright columns of the chat input in the user's own 1080p
+    // screenshots (numbers only - no picture of the game is kept).
+    const { channelFromRuns } = await import('./src/rowgrab.js');
+    const team = [[2, 2], [12, 20], [23, 30], [37, 41], [43, 53], [56, 58], [61, 62], [66, 68], [71, 77], [80, 84], [87, 90], [94, 96], [105, 109], [112, 118], [121, 126], [128, 132]];
+    const all = [[15, 23], [26, 33], [40, 44], [46, 56], [59, 61], [64, 66], [69, 73], [76, 78], [87, 91], [94, 100], [103, 108], [110, 114]];
+    for (const s of [0.75, 1, 1.333, 2]) {
+      const at = (runs) => runs.map(([a, b]) => [Math.round(a * s), Math.round(b * s)]);
+      assert.equal(channelFromRuns(at(team), s), 'team', 'team at ' + s);
+      assert.equal(channelFromRuns(at(all), s), 'all', 'all at ' + s);
+    }
+    // Nothing there, one word, rubbish: not known, and the key decides.
+    assert.equal(channelFromRuns([], 1), null);
+    assert.equal(channelFromRuns([[10, 28]], 1), null);
+    assert.equal(channelFromRuns([[0, 200]], 1), null);
+    assert.equal(channelFromRuns('x', 1), null);
+    assert.equal(channelFromRuns([[1, 'a']], 1), null);
+    // Ctrl+Shift+Enter is all chat whatever the screen says; the grab is
+    // asked only for plain Ctrl+Enter, and only for 250ms.
+    const main = fs.readFileSync(path.join('src', 'main.js'), 'utf8');
+    assert.match(main, /asked !== 'all' && watcher && watcher\.channel/);
+    assert.match(main, /setTimeout\(\(\) => r\(null\), 250\)/);
+    const ps = fs.readFileSync(path.join('src', 'rowgrab.ps1'), 'utf8');
+    assert.ok(ps.indexOf('if (-not $isGame)') < ps.indexOf('[RowGrab]::Chan('), 'the front-window check comes before the grab');
   });
 
   await okAsync('a portrait only a little ahead of the next best names nobody', async () => {

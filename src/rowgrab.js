@@ -24,6 +24,10 @@ export const ROW_SCRIPT = path.join(HERE, 'rowgrab.ps1').replace('app.asar' + pa
 // MEASURED over a whole match and a replay: the right hero 0.89-0.93 beside
 // a chat row, the best wrong one 0.51-0.66, a grab of anything else < 0.73.
 export const SURE = 0.8;
+// And clearly ahead of the next best: every right answer measured won by
+// 0.22 or more. A near tie is a guess (the user, 2026-09-27: a teammate's
+// line showed Bounty Hunter, who was not even in the game).
+export const MARGIN = 0.15;
 
 /** The game's portraits as files, once per install. Returns the folder or null. */
 export function writeRefs(dotaDir, dir = path.join(os.tmpdir(), 'dota-translator-faces')) {
@@ -76,7 +80,8 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
           // DT_DEBUG: every answer as the helper gave it - a whole game went
           // by (2026-09-22) with no way to tell which lines had been looked at.
           if (DEBUG) console.log(new Date().toISOString().slice(11, 23), 'grab', p);
-          const good = o.ok === 1 && typeof o.hero === 'string' && /^[a-z_]+$/.test(o.hero) && o.score >= sure;
+          const clear = typeof o.score2 !== 'number' || o.score - o.score2 >= MARGIN;
+          const good = o.ok === 1 && typeof o.hero === 'string' && /^[a-z_]+$/.test(o.hero) && o.score >= sure && clear;
           settle(o.id, good ? { hero: o.hero, score: o.score } : null);
         }
       }

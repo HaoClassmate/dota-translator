@@ -2008,6 +2008,24 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.deepEqual(two, ['luna', 'luna']);
   });
 
+  await okAsync('a portrait only a little ahead of the next best names nobody', async () => {
+    // The user, 2026-09-27: a teammate's line showed Bounty Hunter, who was
+    // not even in the game. Every right answer measured won by 0.22 or more.
+    const child = new EventEmitter();
+    child.stdout = new EventEmitter(); child.stdout.setEncoding = () => {};
+    child.stdin = new EventEmitter(); child.stdin.write = () => {};
+    child.kill = () => {};
+    const g = startRowGrab({ refs: 'x', spawnImpl: () => child, timeoutMs: 50 });
+    child.stdout.emit('data', '{"t":"ready","refs":143}\n');
+    let p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":1,"ok":1,"hero":"bounty_hunter","score":0.84,"second":"lina","score2":0.78}\n');
+    assert.equal(await p, null);
+    p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":2,"ok":1,"hero":"lina","score":0.91,"second":"bounty_hunter","score2":0.6}\n');
+    assert.deepEqual(await p, { hero: 'lina', score: 0.91 });
+    g.stop();
+  });
+
   await okAsync('gsi row grab: the helper is asked a line at a time, only a sure answer counts, it never opens the game nor presses a key', async () => {
     const child = new EventEmitter();
     const wrote = [];
@@ -2169,6 +2187,22 @@ ok('gsi mode reads no memory: nothing of it opens the game, reads it, or starts 
     chat.payload(body('76561198000000001'));
     chat.payload(body('76561198000000001'));
     assert.deepEqual(heard, ['76561198000000001']);
+  });
+
+  ok('the player\'s own seat, name and hero come from the feed, and change with the match', () => {
+    // The user, 2026-09-27: their own line showed last game's Bounty Hunter
+    // while they played Lina - "who am I" was only ever learnt from a line.
+    const body = (matchid, hero) => JSON.stringify({ provider: {}, map: { matchid }, player: { name: 'me', team_name: 'dire', team_slot: 1 }, hero: { name: 'npc_dota_hero_' + hero }, events: [] });
+    const heard = [];
+    const chat = createGsiChat({ onSelf: (s) => heard.push(s && s.hero) });
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('2', 'lina'));
+    assert.deepEqual(heard, ['bounty_hunter', 'lina']);
+    assert.deepEqual(readGsiPayload(body('2', 'lina')).self, { slot: 6, name: 'me', hero: 'lina' });
+    // A spectator is nobody.
+    assert.equal(readGsiPayload(JSON.stringify({ provider: {}, player: { team2: { player0: { name: 'x' } } } })).self, null);
+    assert.match(fs.readFileSync(path.join('src', 'main.js'), 'utf8'), /onSelf: \(self\) => \{ me = /);
   });
 
   ok('hosted: the app only uses it with no key of the player\'s own, it is off until there is an address, and the server is not in this repository', () => {

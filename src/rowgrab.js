@@ -35,7 +35,10 @@ export const MARGIN = 0.15;
 // words 6-8 (gaps counted between lit columns). Measured against "To", so the screen size does not matter.
 // Anything else - no text, a game in another language, the chat closed -
 // is null, and the key decides.
-export function channelFromRuns(runs, s = 1) {
+// Russian Dota (the user's screenshots, 2026-09-27): no "To" - the label is
+// ONE word, "(Союзникам):" 111 px, "(Всем):" 56 px at 1080p, then the text.
+// Other languages word it differently again, and are not guessed at.
+export function channelFromRuns(runs, s = 1, lang = 'english') {
   if (!Array.isArray(runs) || !(s > 0)) return null;
   const words = [];
   for (const r of runs) {
@@ -47,6 +50,14 @@ export function channelFromRuns(runs, s = 1) {
   // A speck (a lit pixel of the bar's edge, SEEN in the user's shot) is no word.
   const real = words.filter(([a, b]) => b - a + 1 >= 4 * s);
   words.length = 0; words.push(...real);
+  if (lang === 'russian') {
+    if (!words.length) return null;
+    const w = (words[0][1] - words[0][0] + 1) / s;
+    if (w >= 95 && w <= 130) return 'team';
+    if (w >= 45 && w <= 70) return 'all';
+    return null;
+  }
+  if (lang !== 'english' && lang !== '') return null;
   if (words.length < 2) return null;
   const to = words[0][1] - words[0][0] + 1, label = words[1][1] - words[1][0] + 1;
   if (to < 12 * s || to > 27 * s) return null;
@@ -105,7 +116,8 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
         if (o && o.t === 'ready') ready = o.refs > 0;
         else if (o && o.t === 'chan') {
           if (DEBUG) console.log(new Date().toISOString().slice(11, 23), 'chan', p);
-          settle(o.id, o.ok === 1 ? channelFromRuns(o.runs, o.s) : null);
+          // Raw: which words mean which chat depends on the game's language.
+          settle(o.id, o.ok === 1 && Array.isArray(o.runs) ? { runs: o.runs, s: o.s } : null);
         }
         else if (o && o.t === 'row') {
           // DT_DEBUG: every answer as the helper gave it - a whole game went
@@ -151,7 +163,7 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
       const top = await ask((id) => 'seat ' + id + ' ' + seat);
       return top ? { ...top, from: 'top' } : null;
     },
-    /** 'team' | 'all' | null: which chat the player has open. */
+    /** {runs, s} | null: the chat input's bright columns (channelFromRuns reads them). */
     channel: () => ask((id) => 'chan ' + id),
     stop() {
       stopped = true;

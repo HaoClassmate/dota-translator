@@ -2020,6 +2020,20 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
       assert.equal(channelFromRuns(at(team), s), 'team', 'team at ' + s);
       assert.equal(channelFromRuns(at(all), s), 'all', 'all at ' + s);
     }
+    // Russian Dota (the user's screenshots): "(Союзникам): test" / "(Всем): test".
+    const ruTeam = [[17, 21], [24, 32], [35, 42], [45, 56], [59, 64], [67, 74], [77, 84], [87, 94], [97, 103], [106, 115], [118, 121], [125, 127], [136, 140], [143, 149], [152, 157], [159, 163]];
+    const ruAll = [[17, 21], [24, 31], [34, 39], [42, 48], [51, 60], [63, 67], [70, 72], [81, 85], [88, 94], [97, 102], [104, 108]];
+    for (const s of [0.75, 1, 1.333, 2]) {
+      const at = (runs) => runs.map(([a, b]) => [Math.round(a * s), Math.round(b * s)]);
+      assert.equal(channelFromRuns(at(ruTeam), s, 'russian'), 'team', 'ru team at ' + s);
+      assert.equal(channelFromRuns(at(ruAll), s, 'russian'), 'all', 'ru all at ' + s);
+      // Read with the wrong language's rule: never the WRONG chat.
+      for (const [runs, right] of [[team, 'team'], [all, 'all']]) assert.ok([null, right].includes(channelFromRuns(at(runs), s, 'russian')));
+      for (const [runs, right] of [[ruTeam, 'team'], [ruAll, 'all']]) assert.ok([null, right].includes(channelFromRuns(at(runs), s, 'english')));
+    }
+    // Any other game language: not guessed at.
+    assert.equal(channelFromRuns(team, 1, 'polish'), null);
+    assert.equal(channelFromRuns(ruTeam, 1, 'ukrainian'), null);
     // Nothing there, one word, rubbish: not known, and the key decides.
     assert.equal(channelFromRuns([], 1), null);
     assert.equal(channelFromRuns([[10, 28]], 1), null);
@@ -2035,7 +2049,7 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.ok(ps.indexOf('if (-not $isGame)') < ps.indexOf('[RowGrab]::Chan('), 'the front-window check comes before the grab');
   });
 
-  ok('the chat is read off the screen only when Dota runs in English; other languages leave it to the key', async () => {
+  ok('the chat is read off the screen only when Dota runs in English or Russian; other languages leave it to the key', async () => {
     const { gameLanguage } = await import('./src/gsiconfig.js');
     const acf = (lang) => '"AppState"\n{\n\t"appid"\t\t"570"\n\t"UserConfig"\n\t{\n\t\t"language"\t\t"' + lang + '"\n\t}\n}';
     const dir = path.join('lib', 'steamapps', 'common', 'dota 2 beta', 'game', 'dota');
@@ -2046,8 +2060,8 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.equal(gameLanguage(dir, { read: () => { throw new Error('no file'); } }), '');
     assert.equal(gameLanguage(null), '');
     const w = fs.readFileSync(path.join('src', 'gsiwatcher.js'), 'utf8');
-    assert.match(w, /readsChat = rows && \(lang === '' \|\| lang === 'english'\)/);
-    assert.match(w, /channel: readsChat \? \(\) => rows\.channel\(\) : async \(\) => null/);
+    assert.match(w, /readsChat = rows && \(lang === '' \|\| lang === 'english' \|\| lang === 'russian'\)/);
+    assert.match(w, /channel: readsChat \? \(\) => rows\.channel\(\)\.then\(\(r\) => \(r \? channelFromRuns\(r\.runs, r\.s, lang \|\| 'english'\) : null\)\)/);
   });
 
   await okAsync('a portrait only a little ahead of the next best names nobody', async () => {

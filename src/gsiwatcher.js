@@ -9,7 +9,7 @@ import { startWatchingMemory } from './memwatcher.js';
 import { startGsiSource, GSI_PORT } from './gsisource.js';
 import { ensureGsiConfig, gameLanguage } from './gsiconfig.js';
 import { startFocusWatch } from './focuswatch.js';
-import { startRowGrab } from './rowgrab.js';
+import { startRowGrab, channelFromRuns } from './rowgrab.js';
 import { layoutFromWindow } from './gsilayout.js';
 
 export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig, startSource = startGsiSource, watchFocus = startFocusWatch, grabRows = startRowGrab, language = gameLanguage } = {}) {
@@ -46,12 +46,11 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
     if (l) handlers.onLayout(l);
   };
   const focus = handlers.onFocus || handlers.onLayout ? watchFocus({ onFocus: handlers.onFocus || (() => {}), onWindow }) : null;
-  // Which chat is open is read off the ENGLISH label ("To (Allies):" /
-  // "To (All):"). Dota's other languages word it differently - Russian
-  // "(Союзникам):", Spanish "A (Aliados):" - and the English rule could
-  // guess wrong there, so it is not asked: the key decides (checked against
-  // Dota's own strings in 28 languages, 2026-09-27).
+  // Which chat is open is read off the chat input's label, which each game
+  // language words differently (checked against Dota's own strings in 28
+  // languages, 2026-09-27). English and Russian are measured; in any other
+  // a rule could guess WRONG, so it is not asked and the key decides.
   const lang = made.dotaDir ? language(made.dotaDir) : '';
-  const readsChat = rows && (lang === '' || lang === 'english');
-  return { ...watcher, channel: readsChat ? () => rows.channel() : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
+  const readsChat = rows && (lang === '' || lang === 'english' || lang === 'russian');
+  return { ...watcher, channel: readsChat ? () => rows.channel().then((r) => (r ? channelFromRuns(r.runs, r.s, lang || 'english') : null)) : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
 }

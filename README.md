@@ -166,8 +166,9 @@ after the app heard it. A line somebody has said before costs no call.
 
 Open the game's chat as you always do, type what you want to say in
 English, and press **`Ctrl+Enter` instead of `Enter`**. It goes to the
-chat you had open - team or all, read off the chat input on the screen; if
-that cannot be read (Dota in another language, say) it goes to the team,
+chat you had open - team or all, read off the chat input on the screen
+(Dota in English or Russian); if that cannot be read (Dota in another
+language, say) it goes to the team,
 and **`Ctrl+Shift+Enter`** always sends to all chat. The chat closes at once, so you have
 your hero back, and about a second later the line is said in their
 language. Plain `Enter` still sends exactly what you typed.

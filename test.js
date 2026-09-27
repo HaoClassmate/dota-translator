@@ -2008,6 +2008,24 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.deepEqual(two, ['luna', 'luna']);
   });
 
+  await okAsync('a portrait only a little ahead of the next best names nobody', async () => {
+    // The user, 2026-09-27: a teammate's line showed Bounty Hunter, who was
+    // not even in the game. Every right answer measured won by 0.22 or more.
+    const child = new EventEmitter();
+    child.stdout = new EventEmitter(); child.stdout.setEncoding = () => {};
+    child.stdin = new EventEmitter(); child.stdin.write = () => {};
+    child.kill = () => {};
+    const g = startRowGrab({ refs: 'x', spawnImpl: () => child, timeoutMs: 50 });
+    child.stdout.emit('data', '{"t":"ready","refs":143}\n');
+    let p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":1,"ok":1,"hero":"bounty_hunter","score":0.84,"second":"lina","score2":0.78}\n');
+    assert.equal(await p, null);
+    p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":2,"ok":1,"hero":"lina","score":0.91,"second":"bounty_hunter","score2":0.6}\n');
+    assert.deepEqual(await p, { hero: 'lina', score: 0.91 });
+    g.stop();
+  });
+
   await okAsync('gsi row grab: the helper is asked a line at a time, only a sure answer counts, it never opens the game nor presses a key', async () => {
     const child = new EventEmitter();
     const wrote = [];

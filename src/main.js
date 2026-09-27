@@ -229,6 +229,8 @@ async function start() {
     // No key of the player's own: the hosted translator does the asking.
     ...(hostedOn() ? { translate: (batch) => hosted.translate(batch) } : {}),
     onSteamId: (steamid) => { playerId = hashId('steam', steamid); },
+    // Who the player is, from the feed: replaces whatever an earlier game taught.
+    onSelf: (self) => { me = self && self.name ? { name: self.name, slot: self.slot, hero: self.hero } : null; },
     // GSI mode only: where the game's window is. The dark box is then placed
     // in IT, not on the screen (a windowed game had the box on the desktop).
     onWindow: (w) => {

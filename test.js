@@ -2171,6 +2171,22 @@ ok('gsi mode reads no memory: nothing of it opens the game, reads it, or starts 
     assert.deepEqual(heard, ['76561198000000001']);
   });
 
+  ok('the player\'s own seat, name and hero come from the feed, and change with the match', () => {
+    // The user, 2026-09-27: their own line showed last game's Bounty Hunter
+    // while they played Lina - "who am I" was only ever learnt from a line.
+    const body = (matchid, hero) => JSON.stringify({ provider: {}, map: { matchid }, player: { name: 'me', team_name: 'dire', team_slot: 1 }, hero: { name: 'npc_dota_hero_' + hero }, events: [] });
+    const heard = [];
+    const chat = createGsiChat({ onSelf: (s) => heard.push(s && s.hero) });
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('2', 'lina'));
+    assert.deepEqual(heard, ['bounty_hunter', 'lina']);
+    assert.deepEqual(readGsiPayload(body('2', 'lina')).self, { slot: 6, name: 'me', hero: 'lina' });
+    // A spectator is nobody.
+    assert.equal(readGsiPayload(JSON.stringify({ provider: {}, player: { team2: { player0: { name: 'x' } } } })).self, null);
+    assert.match(fs.readFileSync(path.join('src', 'main.js'), 'utf8'), /onSelf: \(self\) => \{ me = /);
+  });
+
   ok('hosted: the app only uses it with no key of the player\'s own, it is off until there is an address, and the server is not in this repository', () => {
     assert.ok(!fs.existsSync('server'), 'the server is a PRIVATE repository: it must not be in this one');
     const main = fs.readFileSync(path.join('src', 'main.js'), 'utf8');

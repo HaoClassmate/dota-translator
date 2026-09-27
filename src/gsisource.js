@@ -107,7 +107,10 @@ export function readGsiPayload(body) {
   const matchid = data && data.map && typeof data.map.matchid === 'string' ? data.map.matchid : '';
   // The local player's Steam id (a player's payload only; a spectator's has ten).
   const steamid = data && data.player && typeof data.player.steamid === 'string' && /^\d{5,20}$/.test(data.player.steamid) ? data.player.steamid : '';
-  return { matchid, roster: data ? readRoster(data) : new Map(), chat, steamid };
+  // The local player: their seat, name and hero, from the feed itself.
+  const seat = data && data.player && typeof data.player === 'object' ? ownSeat(data.player) : null;
+  const self = seat !== null && typeof data.player.name === 'string' ? { slot: seat, name: data.player.name, hero: shortHero(data.hero && data.hero.name) } : null;
+  return { matchid, roster: data ? readRoster(data) : new Map(), chat, steamid, self };
 }
 
 /**
@@ -116,8 +119,9 @@ export function readGsiPayload(body) {
  * said before the app was looking, and is remembered without being shown -
  * the same priming rule the memory reader follows.
  */
-export function createGsiChat({ scripts = ['cyrillic'], onMessage = () => {}, onUnknownChannel = () => {}, identify = null, onSteamId = () => {} } = {}) {
+export function createGsiChat({ scripts = ['cyrillic'], onMessage = () => {}, onUnknownChannel = () => {}, identify = null, onSteamId = () => {}, onSelf = () => {} } = {}) {
   let steamid = '';
+  let selfKey = '';
   let seen = new Set();
   let matchid = null;
   let primed = false;
@@ -180,6 +184,11 @@ export function createGsiChat({ scripts = ['cyrillic'], onMessage = () => {}, on
         if (matchid !== null) { seen = new Set(); roster.clear(); seatOf.clear(); hinted.clear(); }
         matchid = p.matchid;
       }
+      // Who the player is THIS game (the user, 2026-09-27: their own line
+      // showed last game's Bounty Hunter while they played Lina). Said on
+      // every change, and null when the feed stops naming them.
+      const key = p.self ? p.self.slot + '|' + p.self.name + '|' + p.self.hero : '';
+      if (key !== selfKey) { selfKey = key; onSelf(p.self); }
       for (const [slot, who] of p.roster) roster.set(slot, { ...roster.get(slot), ...who, hero: who.hero || (roster.get(slot) || {}).hero || null });
       const fresh = p.chat.filter((c) => !seen.has(c.gameTime + '|' + c.slot + '|' + c.channelType + '|' + c.text)).length;
       for (const c of p.chat) {
@@ -228,8 +237,9 @@ export function startGsiSource({
   createServer = http.createServer,
   identify = null,
   onSteamId = () => {},
+  onSelf = () => {},
 } = {}) {
-  const chat = createGsiChat({ scripts, onMessage, identify, onSteamId, onUnknownChannel: (n) => onUnknownTag('channel_type ' + n) });
+  const chat = createGsiChat({ scripts, onMessage, identify, onSteamId, onSelf, onUnknownChannel: (n) => onUnknownTag('channel_type ' + n) });
   let hearing = false;
   let quiet = null;
 

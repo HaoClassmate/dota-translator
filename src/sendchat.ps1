@@ -1,8 +1,15 @@
 # The keys behind "send it translated": the player types English into the
 # game's OWN chat field and presses the app's key instead of Enter.
 #
-#   copy   Ctrl+A, Ctrl+C    what they typed goes to the clipboard
-#   send   Ctrl+A, Ctrl+V, Enter    the translation replaces it and is said
+#   copy       Ctrl+A, Ctrl+C          what is in the chat field goes to the clipboard
+#   send       Ctrl+A, Ctrl+V, Enter   the translation replaces it and is said
+# and, for the default way (the chat closes at once, the line is said when
+# the translation is ready - the user, 2026-09-27):
+#   clear      Ctrl+A, Backspace, Escape   the field emptied and the chat closed
+#   open team  Enter          the team chat opened
+#   open all   Shift+Enter    the all chat opened
+#   paste      Ctrl+A, Ctrl+V
+#   enter      Enter
 #
 # The app does the clipboard and the translating in between; no text comes
 # through here at all.
@@ -39,7 +46,7 @@ public static class SayKeys {
   [DllImport("user32.dll")] static extern void keybd_event(byte vk, byte scan, uint flags, UIntPtr extra);
 
   const uint KEYUP = 2;
-  public const byte ENTER = 0x0D, SHIFT = 0x10, CTRL = 0x11, ALT = 0x12, A = 0x41, C = 0x43, V = 0x56;
+  public const byte BACK = 0x08, ESC = 0x1B, ENTER = 0x0D, SHIFT = 0x10, CTRL = 0x11, ALT = 0x12, A = 0x41, C = 0x43, V = 0x56;
 
   // The scan code goes with the virtual key: a game reading raw input
   // sees the scan code and would ignore a key that has none.
@@ -59,12 +66,25 @@ public static class SayKeys {
   /// Ctrl+key, which the game ignores: the user, 2026-09-27, "couldnt press
   /// a single button and had to quit dota". An extra key-up for a key that
   /// is already up does nothing.
-  public static void ReleaseAll() { Up(V); Up(C); Up(A); Up(ENTER); Up(CTRL); }
+  public static void ReleaseAll() { Up(V); Up(C); Up(A); Up(ENTER); Up(BACK); Up(ESC); Up(SHIFT); Up(CTRL); }
 
   static bool Held(byte vk) { return (GetAsyncKeyState(vk) & 0x8000) != 0; }
 
   /// The player's own Ctrl and Enter are still going up from the key that
   /// started this. Ours on top of theirs would be other keys.
+  /// No key of the keyboard held at all (mouse buttons aside): before the
+  /// app opens the chat by itself, so a Q held for a spell is not typed
+  /// into it.
+  public static bool WaitAllReleased(int ms) {
+    for (int t = 0; t < ms; t += 25) {
+      bool any = false;
+      for (int vk = 0x08; vk <= 0xFE && !any; vk++) if (Held((byte)vk)) any = true;
+      if (!any) return true;
+      Thread.Sleep(25);
+    }
+    return false;
+  }
+
   public static bool WaitReleased(int ms) {
     for (int t = 0; t < ms; t += 25) {
       if (!Held(CTRL) && !Held(SHIFT) && !Held(ALT) && !Held(ENTER)) return true;
@@ -85,13 +105,33 @@ Write-Output 'ready'
 while ($true) {
   $word = [Console]::In.ReadLine()
   if ($null -eq $word) { break }
-  if ($word -ne 'copy' -and $word -ne 'send') { continue }
+  if (@('copy', 'send', 'clear', 'open team', 'open all', 'paste', 'enter') -notcontains $word) { Write-Output 'NOT DONE: not a command'; continue }
   try {
     $id = GamePid
     if ($id -eq 0 -or -not [SayKeys]::InFront($id)) { Write-Output 'NOT DONE: the game is not in front'; continue }
     if (-not [SayKeys]::WaitReleased(1500)) { Write-Output 'NOT DONE: keys are still held'; continue }
     if (-not [SayKeys]::InFront($id)) { Write-Output 'NOT DONE: the game is not in front'; continue }
+    if ($word -eq 'open team' -or $word -eq 'open all' -or $word -eq 'paste' -or $word -eq 'enter') {
+      if (-not [SayKeys]::WaitAllReleased(3000)) { Write-Output 'NOT DONE: keys are still held'; continue }
+      if (-not [SayKeys]::InFront($id)) { Write-Output 'NOT DONE: the game is not in front'; continue }
+      if ($word -eq 'open team') { [SayKeys]::Tap([SayKeys]::ENTER) }
+      elseif ($word -eq 'open all') { [SayKeys]::Chord([SayKeys]::SHIFT, [SayKeys]::ENTER) }
+      elseif ($word -eq 'paste') { [SayKeys]::Chord([SayKeys]::CTRL, [SayKeys]::A); Start-Sleep -Milliseconds 40; [SayKeys]::Chord([SayKeys]::CTRL, [SayKeys]::V) }
+      else { [SayKeys]::Tap([SayKeys]::ENTER) }
+      Start-Sleep -Milliseconds 90
+      Write-Output 'done'
+      continue
+    }
     [SayKeys]::Chord([SayKeys]::CTRL, [SayKeys]::A)
+    if ($word -eq 'clear') {
+      Start-Sleep -Milliseconds 40
+      [SayKeys]::Tap([SayKeys]::BACK)
+      Start-Sleep -Milliseconds 40
+      [SayKeys]::Tap([SayKeys]::ESC)
+      Start-Sleep -Milliseconds 60
+      Write-Output 'done'
+      continue
+    }
     Start-Sleep -Milliseconds 60
     if ($word -eq 'copy') {
       [SayKeys]::Chord([SayKeys]::CTRL, [SayKeys]::C)

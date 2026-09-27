@@ -32,6 +32,8 @@
   "autoUpdate": true,
   "feedbackUrl": "",
   "sayHotkey": "Control+Enter",
+  "sayAllHotkey": "Control+Shift+Enter",
+  "sayMode": "close",
   "replyLanguage": "auto",
   "clickThrough": true,
   "learn": false

@@ -7,12 +7,12 @@
 import path from 'node:path';
 import { startWatchingMemory } from './memwatcher.js';
 import { startGsiSource, GSI_PORT } from './gsisource.js';
-import { ensureGsiConfig } from './gsiconfig.js';
+import { ensureGsiConfig, gameLanguage } from './gsiconfig.js';
 import { startFocusWatch } from './focuswatch.js';
 import { startRowGrab } from './rowgrab.js';
 import { layoutFromWindow } from './gsilayout.js';
 
-export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig, startSource = startGsiSource, watchFocus = startFocusWatch, grabRows = startRowGrab } = {}) {
+export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig, startSource = startGsiSource, watchFocus = startFocusWatch, grabRows = startRowGrab, language = gameLanguage } = {}) {
   const port = Number.isInteger(cfg.gsiPort) && cfg.gsiPort > 1023 && cfg.gsiPort < 65536 ? cfg.gsiPort : GSI_PORT;
   const onStatus = handlers.onStatus || (() => {});
   const made = ensure({ port });
@@ -46,5 +46,12 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
     if (l) handlers.onLayout(l);
   };
   const focus = handlers.onFocus || handlers.onLayout ? watchFocus({ onFocus: handlers.onFocus || (() => {}), onWindow }) : null;
-  return { ...watcher, channel: rows ? () => rows.channel() : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
+  // Which chat is open is read off the ENGLISH label ("To (Allies):" /
+  // "To (All):"). Dota's other languages word it differently - Russian
+  // "(Союзникам):", Spanish "A (Aliados):" - and the English rule could
+  // guess wrong there, so it is not asked: the key decides (checked against
+  // Dota's own strings in 28 languages, 2026-09-27).
+  const lang = made.dotaDir ? language(made.dotaDir) : '';
+  const readsChat = rows && (lang === '' || lang === 'english');
+  return { ...watcher, channel: readsChat ? () => rows.channel() : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
 }

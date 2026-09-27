@@ -2035,6 +2035,21 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.ok(ps.indexOf('if (-not $isGame)') < ps.indexOf('[RowGrab]::Chan('), 'the front-window check comes before the grab');
   });
 
+  ok('the chat is read off the screen only when Dota runs in English; other languages leave it to the key', async () => {
+    const { gameLanguage } = await import('./src/gsiconfig.js');
+    const acf = (lang) => '"AppState"\n{\n\t"appid"\t\t"570"\n\t"UserConfig"\n\t{\n\t\t"language"\t\t"' + lang + '"\n\t}\n}';
+    const dir = path.join('lib', 'steamapps', 'common', 'dota 2 beta', 'game', 'dota');
+    let asked = '';
+    assert.equal(gameLanguage(dir, { read: (f) => { asked = f; return acf('russian'); } }), 'russian');
+    assert.equal(asked, path.join('lib', 'steamapps', 'appmanifest_570.acf'));
+    assert.equal(gameLanguage(dir, { read: () => acf('english') }), 'english');
+    assert.equal(gameLanguage(dir, { read: () => { throw new Error('no file'); } }), '');
+    assert.equal(gameLanguage(null), '');
+    const w = fs.readFileSync(path.join('src', 'gsiwatcher.js'), 'utf8');
+    assert.match(w, /readsChat = rows && \(lang === '' \|\| lang === 'english'\)/);
+    assert.match(w, /channel: readsChat \? \(\) => rows\.channel\(\) : async \(\) => null/);
+  });
+
   await okAsync('a portrait only a little ahead of the next best names nobody', async () => {
     // The user, 2026-09-27: a teammate's line showed Bounty Hunter, who was
     // not even in the game. Every right answer measured won by 0.22 or more.

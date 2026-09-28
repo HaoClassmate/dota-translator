@@ -64,6 +64,9 @@
   .size { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
   .size input { flex: 1; accent-color: var(--accent); }
   .size output { font-family: var(--mono); font-size: 13px; color: var(--text); min-width: 44px; text-align: right; }
+  .keys { display: grid; grid-template-columns: 1fr auto auto; gap: 8px 10px; align-items: center; margin-top: 8px; font-size: 14px; color: var(--dim); }
+  .keys button.cap { font-family: var(--mono); font-size: 13px; min-width: 150px; padding: 6px 10px; border-radius: 7px; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; }
+  .keys button.cap.wait { border-color: var(--accent); color: var(--accent); }
   .files { border-top: 1px solid var(--line); padding-top: 12px; color: var(--faint); font-size: 12.5px; }
   #result { margin-top: 18px; border-radius: 10px; padding: 12px 14px; font-size: 14.5px; display: none; border: 1px solid var(--line-strong); border-left-width: 3px; }
   #result.ok { display: block; border-left-color: var(--good); background: rgba(123, 216, 143, 0.07); }
@@ -125,6 +128,14 @@
         <h3>Text size, in its own box</h3>
         <p class="hint">Above Dota's chat the text copies the game's size; this is for the separate box.</p>
         <div class="size"><input type="range" id="fontSize" min="11" max="28" step="1"><output id="fontSizeOut"></output></div>
+      </div>
+      <div>
+        <h3>The app's own keys</h3>
+        <p class="hint">A key used here is taken from Dota too - change it if you use it in the game (Alt+D is alt-cast for the D slot). Click, then press the keys.</p>
+        <div class="keys">
+          <span>Hide or show the translations</span><button class="cap" id="hideHotkey" type="button"></button><button class="link" type="button" data-none="hideHotkey">None</button>
+          <span>Quit the app</span><button class="cap" id="quitHotkey" type="button"></button><button class="link" type="button" data-none="quitHotkey">None</button>
+        </div>
       </div>
       <p class="files">There are more settings than these - timing, position, the model - in a file called <b>config.json</b>, for people who like that sort of thing. <button class="link" id="folder" type="button">Open its folder</button></p>
       <p class="hint note" id="moreNow" role="status"></p>

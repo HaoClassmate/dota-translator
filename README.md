@@ -159,6 +159,9 @@ after the app heard it. A line somebody has said before costs no call.
 
 - `Alt+D` hides and shows the overlay.
 - `Alt+Shift+D` quits.
+- Both can be changed or turned off in the settings window (More settings >
+  The app's own keys). A key the app uses is taken from Dota too: if you
+  use Alt+D in the game (alt-cast for the D slot), pick another.
 - `Ctrl+Enter`, in Dota's chat, sends what you typed translated, to the chat
   you had open; `Ctrl+Shift+Enter` always to all chat (below).
 

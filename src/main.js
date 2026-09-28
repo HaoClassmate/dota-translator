@@ -501,10 +501,26 @@ app.whenReady().then(() => {
   if (!onlyCopy) return;
   createWindow();
   checkForUpdates();
-  // Alt+D hides and shows it, for a screenshot or a clear view of a fight.
-  globalShortcut.register('Alt+D', toggleHidden);
   makeTray();
-  globalShortcut.register('Alt+Shift+D', quitApp);});
+  setAppKeys();
+});
+
+// The app's own keys: hide/show (Alt+D by default - a screenshot, a clear view
+// of a fight) and quit (Alt+Shift+D). The player's to change or turn off in
+// the settings window: a key registered here is taken from every program,
+// Dota included (a player, 2026-09-28: Alt+D is their alt-cast).
+const appKeys = new Map();
+function setAppKeys() {
+  const want = [[cfg.hideHotkey, toggleHidden], [cfg.quitHotkey, quitApp]];
+  for (const accel of appKeys.keys()) { try { globalShortcut.unregister(accel); } catch { /* not ours any more */ } }
+  appKeys.clear();
+  for (const [accel, fn] of want) {
+    if (!accel || typeof accel !== 'string') continue;
+    try { if (globalShortcut.register(accel, fn)) appKeys.set(accel, fn); } catch { /* not a key Electron knows: skipped */ }
+  }
+  if (tray) tray.setContextMenu(trayMenu());
+}
+const pretty = (accel) => String(accel || '').replace('Control', 'Ctrl');
 
 // ---- THE SETUP WINDOW ------------------------------------------------
 // Where a player gives the app its key without ever seeing config.json
@@ -599,19 +615,7 @@ function makeTray() {
   // and not ours to use.
   tray = new Tray(nativeImage.createFromPath(path.join(here, 'tray.png')).resize({ width: 16, height: 16 }));
   tray.setToolTip('Dota Translator ' + app.getVersion());
-  tray.setContextMenu(Menu.buildFromTemplate([
-    { label: 'Settings and key...', click: openSetup },
-    { label: 'Hide or show the translations (Alt+D)', click: toggleHidden },
-    ...(cfg.sayHotkey ? [{ label: cfg.sayHotkey.replace('Control', 'Ctrl') + ' in Dota\'s chat sends it translated', enabled: false }] : []),
-    ...(cfg.sayHotkey && cfg.sayAllHotkey ? [{ label: cfg.sayAllHotkey.replace('Control', 'Ctrl') + ' sends it to all chat', enabled: false }] : []),
-    // The way a player says anything back: one big box and an optional
-    // e-mail, no account needed. cfg.feedbackUrl (https only) overrides it.
-    { label: 'Send feedback, or report a bad translation...', click: () => shell.openExternal(String(cfg.feedbackUrl || '').startsWith('https://') ? cfg.feedbackUrl : FEEDBACK_URL) },
-    { label: 'Support the developer (Ko-fi)', click: () => shell.openExternal('https://ko-fi.com/sc0rebreaker') },
-    { label: 'Version ' + app.getVersion(), enabled: false },
-    { type: 'separator' },
-    { label: 'Quit', click: quitApp },
-  ]));
+  tray.setContextMenu(trayMenu());
   tray.on('click', openSetup);
   // With a key there is no window at all at startup, and Windows hides a
   // new tray icon behind the ^ arrow: say where the app went. A balloon
@@ -620,6 +624,22 @@ function makeTray() {
     tray.displayBalloon({ iconType: 'custom', icon: balloonIcon(), title: 'Dota Translator is running', content: 'It sits here by the clock (behind the ^ arrow) and shows translations above the chat in Dota. Click the icon for settings.' });
     tray.on('balloon-click', openSetup);
   }
+}
+
+function trayMenu() {
+  return Menu.buildFromTemplate([
+    { label: 'Settings and key...', click: openSetup },
+    { label: 'Hide or show the translations' + (cfg.hideHotkey ? ' (' + pretty(cfg.hideHotkey) + ')' : ''), click: toggleHidden },
+    ...(cfg.sayHotkey ? [{ label: cfg.sayHotkey.replace('Control', 'Ctrl') + ' in Dota\'s chat sends it translated', enabled: false }] : []),
+    ...(cfg.sayHotkey && cfg.sayAllHotkey ? [{ label: cfg.sayAllHotkey.replace('Control', 'Ctrl') + ' sends it to all chat', enabled: false }] : []),
+    // The way a player says anything back: one big box and an optional
+    // e-mail, no account needed. cfg.feedbackUrl (https only) overrides it.
+    { label: 'Send feedback, or report a bad translation...', click: () => shell.openExternal(String(cfg.feedbackUrl || '').startsWith('https://') ? cfg.feedbackUrl : FEEDBACK_URL) },
+    { label: 'Support the developer (Ko-fi)', click: () => shell.openExternal('https://ko-fi.com/sc0rebreaker') },
+    { label: 'Version ' + app.getVersion(), enabled: false },
+    { type: 'separator' },
+    { label: 'Quit' + (cfg.quitHotkey ? ' (' + pretty(cfg.quitHotkey) + ')' : ''), click: quitApp },
+  ]);
 }
 
 function toggleHidden() {
@@ -644,7 +664,9 @@ function applySettings(patch) {
   const languagesChanged = patch.scripts && JSON.stringify(patch.scripts) !== JSON.stringify(cfg.scripts);
   // Another reader altogether: the watcher starts again with it.
   const sourceChanged = Boolean(patch.source) && patch.source !== cfg.source;
+  const keysChanged = ('hideHotkey' in patch && patch.hideHotkey !== cfg.hideHotkey) || ('quitHotkey' in patch && patch.quitHotkey !== cfg.quitHotkey);
   Object.assign(cfg, patch);
+  if (keysChanged) setAppKeys();
   if (win && !win.isDestroyed()) win.reload();
   return languagesChanged || sourceChanged;
 }
@@ -688,7 +710,7 @@ ipcMain.handle('setup:save', async (_e, payload) => {
     traceSayInto('setup:save', true);
     applyDisplay(display);
     if (restart) restartWatcher();
-    return { ok: true, checked: false };
+    return { ok: true, checked: false, settings: uiSettings(cfg) };
   }
   const r = await checkKey(typed, { model: cfg.model });
   if (!r.ok) return r;

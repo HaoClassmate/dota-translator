@@ -148,6 +148,10 @@ export const DEFAULTS = {
   // as a keyboard sends them; nothing is written to the game. The key
   // exists only while Dota is the window in front. "" turns it all off,
   // and then the app sends the game no keys at all.
+  // The app's own keys (hide/show the overlay, quit): changeable in the
+  // settings window, '' for none. A key taken here is taken from Dota too.
+  hideHotkey: 'Alt+D',
+  quitHotkey: 'Alt+Shift+D',
   sayHotkey: 'Control+Enter',
   // Says the line in ALL chat instead of team chat (the default way only).
   sayAllHotkey: 'Control+Shift+Enter',

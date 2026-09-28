@@ -24,6 +24,47 @@ function fill(s) {
   if (into) into.checked = true;
   showTheirs(s.settings.theirLanguage);
   $('fontSize').value = s.settings.fontSize; $('fontSizeOut').textContent = s.settings.fontSize + 'px';
+  for (const id of ['hideHotkey', 'quitHotkey']) showKey(id, s.settings[id]);
+}
+// The app's own keys, as the player presses them.
+const keyNow = { hideHotkey: '', quitHotkey: '' };
+function showKey(id, accel) {
+  keyNow[id] = accel || '';
+  $(id).textContent = accel ? accel.replace('Control', 'Ctrl') : 'None';
+  $(id).classList.remove('wait');
+}
+function accelOf(e) {
+  let key = '';
+  if (/^Key[A-Z]$/.test(e.code)) key = e.code.slice(3);
+  else if (/^Digit\d$/.test(e.code)) key = e.code.slice(5);
+  else if (/^F\d{1,2}$/.test(e.code) || ['Home', 'End', 'PageUp', 'PageDown', 'Insert', 'Pause', 'ScrollLock'].includes(e.code)) key = e.code;
+  if (!key) return null;
+  return [e.ctrlKey && 'Control', e.altKey && 'Alt', e.shiftKey && 'Shift', key].filter(Boolean).join('+');
+}
+let capturing = null;
+for (const id of ['hideHotkey', 'quitHotkey']) {
+  $(id).addEventListener('click', () => { capturing = id; $(id).textContent = 'Press the keys...'; $(id).classList.add('wait'); });
+  $(id).addEventListener('blur', () => { if (capturing === id) { capturing = null; showKey(id, keyNow[id]); } });
+}
+document.addEventListener('keydown', async (e) => {
+  if (!capturing) return;
+  e.preventDefault();
+  if (e.code === 'Escape') { const id = capturing; capturing = null; showKey(id, keyNow[id]); return; }
+  const accel = accelOf(e);
+  if (!accel) return;   // a modifier on its own: wait for the key
+  const id = capturing; capturing = null;
+  await saveKey(id, accel);
+});
+for (const b of document.querySelectorAll('[data-none]')) b.addEventListener('click', () => saveKey(b.dataset.none, ''));
+async function saveKey(id, accel) {
+  const before = keyNow[id];
+  const display = document.querySelector('input[name=display]:checked').value;
+  const r = await window.setup.save({ display, settings: { ...settingsNow(), [id]: accel } });
+  const now = r && r.settings ? r.settings[id] : null;
+  if (now === undefined || now === null) { showKey(id, before); flash('moreNow', r && r.ok ? 'Saved.' : 'Not saved.', !(r && r.ok)); return; }
+  showKey(id, now);
+  if (now !== accel) flash('moreNow', 'Not that key: a letter needs Ctrl or Alt, and Enter and the other keys here are taken.', true);
+  else flash('moreNow', 'Saved.');
 }
 const settingsNow = () => ({
   scripts: [...LANGS.querySelectorAll('input:checked')].map((b) => b.value),

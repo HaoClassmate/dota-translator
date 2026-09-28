@@ -28,6 +28,37 @@ export const THEIRS = ['Russian', 'Spanish', 'Chinese'];
 const THEIR_SCRIPT = { Russian: 'cyrillic', Spanish: 'spanish', Chinese: 'han' };
 const isEnglish = (s) => String(s || '').trim().toLowerCase() === 'english';
 
+// The app's own keys - hide/show the overlay, quit - are the player's to
+// change or turn off (a player, 2026-09-28: Alt+D "eats the input, preventing
+// Dota from getting it" - Alt+key is alt-cast in Dota). A key registered for
+// the whole system is taken from every program, so: a letter or a digit only
+// with Ctrl or Alt; F1-F24 and a few others alone; never Enter (Ctrl+Enter is
+// the say key). Answers Electron's accelerator, '' for none, or null.
+const MODS = { ctrl: 'Control', control: 'Control', alt: 'Alt', shift: 'Shift' };
+const ALONE_OK = /^(F([1-9]|1\d|2[0-4])|Home|End|PageUp|PageDown|Insert|Pause|ScrollLock)$/;
+export function normalizeHotkey(text) {
+  const t = String(text == null ? '' : text).trim();
+  if (!t) return '';
+  const parts = t.split('+').map((p) => p.trim()).filter(Boolean);
+  if (!parts.length || parts.length > 4) return null;
+  const mods = new Set();
+  for (const p of parts.slice(0, -1)) {
+    const m = MODS[p.toLowerCase()];
+    if (!m || mods.has(m)) return null;
+    mods.add(m);
+  }
+  let key = parts[parts.length - 1];
+  if (/^[a-z0-9]$/i.test(key)) key = key.toUpperCase();
+  else if (/^f\d{1,2}$/i.test(key)) key = key.toUpperCase();
+  else key = { home: 'Home', end: 'End', pageup: 'PageUp', pagedown: 'PageDown', insert: 'Insert', pause: 'Pause', scrolllock: 'ScrollLock' }[key.toLowerCase()] || null;
+  if (!key || !(/^[A-Z0-9]$/.test(key) || ALONE_OK.test(key))) return null;
+  // A letter or digit with only Shift (or nothing) would take that character
+  // from every program on the PC.
+  if (/^[A-Z0-9]$/.test(key) && !mods.has('Control') && !mods.has('Alt')) return null;
+  return ['Control', 'Alt', 'Shift'].filter((m) => mods.has(m)).concat(key).join('+');
+}
+const keyOf = (v, fallback) => (typeof v === 'string' ? v : fallback);
+
 /** What the window is shown: only these, never the key. */
 export function uiSettings(cfg) {
   return {
@@ -39,6 +70,8 @@ export function uiSettings(cfg) {
     // Which way Ctrl+Enter in Dota's chat translates what the player typed.
     sayInto: isEnglish(cfg.replyLanguage) ? 'english' : 'theirs',
     theirLanguage: THEIRS.includes(cfg.theirLanguage) ? cfg.theirLanguage : 'Russian',
+    hideHotkey: keyOf(cfg.hideHotkey, 'Alt+D'),
+    quitHotkey: keyOf(cfg.quitHotkey, 'Alt+Shift+D'),
   };
 }
 
@@ -74,6 +107,17 @@ export function settingsPatch(raw, cfg = {}) {
   }
   if (raw.sayInto === 'english') patch.replyLanguage = 'English';
   else if (raw.sayInto === 'theirs' && isEnglish(cfg.replyLanguage)) patch.replyLanguage = 'auto';
+  // The app's own keys. A key the say keys or the other one already has is
+  // refused (both would fire, or neither).
+  const say = [cfg.sayHotkey, cfg.sayAllHotkey].filter(Boolean).map((k) => normalizeHotkey(k));
+  for (const [name, other] of [['hideHotkey', 'quitHotkey'], ['quitHotkey', 'hideHotkey']]) {
+    if (!(name in raw)) continue;
+    const k = normalizeHotkey(raw[name]);
+    if (k === null) continue;
+    const otherNow = other in raw ? normalizeHotkey(raw[other]) : keyOf(cfg[other], other === 'hideHotkey' ? 'Alt+D' : 'Alt+Shift+D');
+    if (k && (k === otherNow || say.includes(k))) continue;
+    patch[name] = k;
+  }
   const size = Number(raw.fontSize);
   if (Number.isFinite(size)) patch.fontSize = Math.min(28, Math.max(11, Math.round(size)));
   return patch;

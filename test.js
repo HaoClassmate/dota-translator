@@ -1073,6 +1073,30 @@ await okAsync('a key that fails says what to DO, in the two ways this project ha
   assert.equal((await checkKey('K'.repeat(30), { translate: async () => [] })).ok, false);
 });
 
+ok('the app\'s own keys can be changed or turned off, never to a key that eats typing or the say keys', async () => {
+  // A player, 2026-09-28: Alt+D "eats the input, preventing Dota from getting it".
+  const { normalizeHotkey, settingsPatch, uiSettings } = await import('./src/settings.js');
+  assert.equal(normalizeHotkey('ctrl+alt+d'), 'Control+Alt+D');
+  assert.equal(normalizeHotkey('Alt+Shift+9'), 'Alt+Shift+9');
+  assert.equal(normalizeHotkey('F9'), 'F9');
+  assert.equal(normalizeHotkey('Shift+F10'), 'Shift+F10');
+  assert.equal(normalizeHotkey(''), '');
+  for (const bad of ['D', 'Shift+D', 'Enter', 'Control+Enter', 'Alt+Alt+D', 'Win+D', 'Alt+', 'Control+Alt+Shift+D+E', 'Alt+Tab', '<script>']) assert.equal(normalizeHotkey(bad), null, bad);
+  const cfg = { hideHotkey: 'Alt+D', quitHotkey: 'Alt+Shift+D', sayHotkey: 'Control+Enter', sayAllHotkey: 'Control+Shift+Enter' };
+  assert.deepEqual(settingsPatch({ hideHotkey: 'Control+Alt+D' }, cfg), { hideHotkey: 'Control+Alt+D' });
+  assert.deepEqual(settingsPatch({ hideHotkey: '' }, cfg), { hideHotkey: '' });
+  assert.deepEqual(settingsPatch({ hideHotkey: 'D' }, cfg), {});
+  assert.deepEqual(settingsPatch({ hideHotkey: 'Alt+Shift+D' }, cfg), {}, 'the same key as quit');
+  assert.deepEqual(settingsPatch({ quitHotkey: 'F9', hideHotkey: 'F9' }, cfg), {}, 'both the same');
+  // Not in what the window sent: left as it was.
+  assert.deepEqual(settingsPatch({ showHeroes: true }, cfg), { showHeroes: true });
+  assert.equal(uiSettings({}).hideHotkey, 'Alt+D');
+  assert.equal(uiSettings({ hideHotkey: '' }).hideHotkey, '');
+  const main = fs.readFileSync(path.join('src', 'main.js'), 'utf8');
+  assert.doesNotMatch(main, /globalShortcut\.register\('Alt\+/, 'a hard-coded app key is back');
+  assert.match(main, /\[cfg\.hideHotkey, toggleHidden\], \[cfg\.quitHotkey, quitApp\]/);
+});
+
 ok('saving from the setup window leaves the rest of the player\'s config alone', () => {
   const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'dt-cfg-')), 'config.json');
   fs.writeFileSync(file, JSON.stringify({ fontSize: 20, myOwnNote: 'keep me', geminiApiKey: 'old' }));
@@ -1107,7 +1131,7 @@ ok('what the settings window sends back is made safe before it is saved', () => 
 
 ok('the window is shown the five settings and never the key', () => {
   const shown = uiSettings({ ...mergeConfig({}), geminiApiKey: 'secret', geminiApiKeyEnc: 'c2VjcmV0' });
-  assert.deepEqual(Object.keys(shown).sort(), ['autoUpdate', 'fontSize', 'sayInto', 'scripts', 'showHeroes', 'showOriginal', 'theirLanguage']);
+  assert.deepEqual(Object.keys(shown).sort(), ['autoUpdate', 'fontSize', 'hideHotkey', 'quitHotkey', 'sayInto', 'scripts', 'showHeroes', 'showOriginal', 'theirLanguage']);
   assert.ok(!JSON.stringify(shown).includes('secret'));
   // Which way Ctrl+Enter translates: two choices, and a language somebody
   // set by name in config.json is "theirs" and is not flattened by a save.

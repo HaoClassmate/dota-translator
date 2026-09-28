@@ -31,6 +31,8 @@
   "boxWidth": 520,
   "autoUpdate": true,
   "feedbackUrl": "",
+  "hideHotkey": "Alt+D",
+  "quitHotkey": "Alt+Shift+D",
   "sayHotkey": "Control+Enter",
   "sayAllHotkey": "Control+Shift+Enter",
   "sayMode": "close",

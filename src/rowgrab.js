@@ -24,6 +24,62 @@ export const ROW_SCRIPT = path.join(HERE, 'rowgrab.ps1').replace('app.asar' + pa
 // MEASURED over a whole match and a replay: the right hero 0.89-0.93 beside
 // a chat row, the best wrong one 0.51-0.66, a grab of anything else < 0.73.
 export const SURE = 0.8;
+// And clearly ahead of the next best: every right answer measured won by
+// 0.22 or more. A near tie is a guess (the user, 2026-09-27: a teammate's
+// line showed Bounty Hunter, who was not even in the game).
+export const MARGIN = 0.15;
+
+// Which chat is open, from the bright columns of the chat input's first
+// words. MEASURED on the user's 1080p screenshots (2026-09-27): "To" 19 px,
+// "(Allies):" 60 px (3.2 x), "(All):" 39 px (2.1 x); letters at most 3 px apart,
+// words 6-8 (gaps counted between lit columns). Measured against "To", so the screen size does not matter.
+// Anything else - no text, a game in another language, the chat closed -
+// is null, and the key decides.
+// Russian Dota (the user's screenshots, 2026-09-27): no "To" - the label is
+// ONE word, "(Союзникам):" 111 px, "(Всем):" 56 px at 1080p, then the text.
+// Spanish is measured too (below); other languages word it differently
+// again, and are not guessed at.
+export function channelFromRuns(runs, s = 1, lang = 'english') {
+  if (!Array.isArray(runs) || !(s > 0)) return null;
+  const words = [];
+  for (const r of runs) {
+    if (!Array.isArray(r) || r.length !== 2 || !Number.isFinite(r[0]) || !Number.isFinite(r[1])) return null;
+    const last = words[words.length - 1];
+    if (last && r[0] - last[1] - 1 < 4.5 * s) last[1] = r[1];
+    else words.push([r[0], r[1]]);
+  }
+  // A speck (a lit pixel of the bar's edge, SEEN in the user's shot) is no word.
+  // And nothing that ends before the label begins (12-17 px in, measured):
+  // SEEN, a bright bit of the game's scenery at the strip's left edge.
+  const real = words.filter(([a, b]) => b - a + 1 >= 4 * s && b >= 11 * s);
+  words.length = 0; words.push(...real);
+  if (lang === 'russian') {
+    if (!words.length) return null;
+    const w = (words[0][1] - words[0][0] + 1) / s;
+    if (w >= 95 && w <= 130) return 'team';
+    if (w >= 45 && w <= 70) return 'all';
+    return null;
+  }
+  // Spanish Dota, both Spains (the user's screenshots, 2026-09-27): "A" 11
+  // px, then "(Aliados):" 76 px or "(Todos):" 66 px. Closer than the others,
+  // so the middle is left unsure.
+  if (lang === 'spanish' || lang === 'latam') {
+    if (words.length < 2) return null;
+    const a = (words[0][1] - words[0][0] + 1) / s, w = (words[1][1] - words[1][0] + 1) / s;
+    if (a < 6 || a > 17) return null;
+    if (w >= 72.5 && w <= 84) return 'team';
+    if (w >= 59 && w <= 69.5) return 'all';
+    return null;
+  }
+  if (lang !== 'english' && lang !== '') return null;
+  if (words.length < 2) return null;
+  const to = words[0][1] - words[0][0] + 1, label = words[1][1] - words[1][0] + 1;
+  if (to < 12 * s || to > 27 * s) return null;
+  const k = label / to;
+  if (k >= 2.75 && k <= 3.8) return 'team';
+  if (k >= 1.6 && k <= 2.55) return 'all';
+  return null;
+}
 
 /** The game's portraits as files, once per install. Returns the folder or null. */
 export function writeRefs(dotaDir, dir = path.join(os.tmpdir(), 'dota-translator-faces')) {
@@ -49,7 +105,7 @@ const DEBUG = Boolean(process.env.DT_DEBUG);
 
 export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = process.pid, timeoutMs = 700, restartMs = 5000, sure = SURE } = {}) {
   const folder = refs || (dotaDir ? writeRefs(dotaDir) : null);
-  if (!folder) return { identify: async () => null, stop() {} };
+  if (!folder) return { identify: async () => null, channel: async () => null, stop() {} };
 
   let child = null, ready = false, stopped = false, buffer = '', nextId = 1;
   const waiting = new Map();
@@ -72,11 +128,17 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
         let o = null;
         try { o = JSON.parse(p); } catch { continue; }
         if (o && o.t === 'ready') ready = o.refs > 0;
+        else if (o && o.t === 'chan') {
+          if (DEBUG) console.log(new Date().toISOString().slice(11, 23), 'chan', p);
+          // Raw: which words mean which chat depends on the game's language.
+          settle(o.id, o.ok === 1 && Array.isArray(o.runs) ? { runs: o.runs, s: o.s } : null);
+        }
         else if (o && o.t === 'row') {
           // DT_DEBUG: every answer as the helper gave it - a whole game went
           // by (2026-09-22) with no way to tell which lines had been looked at.
           if (DEBUG) console.log(new Date().toISOString().slice(11, 23), 'grab', p);
-          const good = o.ok === 1 && typeof o.hero === 'string' && /^[a-z_]+$/.test(o.hero) && o.score >= sure;
+          const clear = typeof o.score2 !== 'number' || o.score - o.score2 >= MARGIN;
+          const good = o.ok === 1 && typeof o.hero === 'string' && /^[a-z_]+$/.test(o.hero) && o.score >= sure && clear;
           settle(o.id, good ? { hero: o.hero, score: o.score } : null);
         }
       }
@@ -115,6 +177,8 @@ export function startRowGrab({ dotaDir, refs, spawnImpl = spawn, parentPid = pro
       const top = await ask((id) => 'seat ' + id + ' ' + seat);
       return top ? { ...top, from: 'top' } : null;
     },
+    /** {runs, s} | null: the chat input's bright columns (channelFromRuns reads them). */
+    channel: () => ask((id) => 'chan ' + id),
     stop() {
       stopped = true;
       for (const id of [...waiting.keys()]) settle(id, null);

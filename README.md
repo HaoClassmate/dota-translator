@@ -29,15 +29,18 @@ What it does do, all of it:
   chat events to `127.0.0.1` - your own PC, nowhere else. Delete the file
   and the feed stops. Dota reads it only when it starts, so the first time
   you are asked to restart Dota once.
-- **Looks at two small spots of the game's picture.** The feed says which
+- **Looks at three small spots of the game's picture.** The feed says which
   SEAT spoke, not which hero. So when somebody new speaks, the app captures
   the portrait beside the newest chat line (about 56 x 40 pixels at 1080p)
   and, if that is not clear, that player's tile in the top bar, compares it
   with the hero portraits in your own Dota install, and throws it away.
-  Only while Dota is the window in front; nothing is saved or sent
+  And when you press Ctrl+Enter, it looks at the first words of the chat
+  input ("To (Allies):" or "To (All):") to send the line to the chat you
+  had open. Only while Dota is the window in front; nothing is saved or sent
   anywhere. It is one file, [`src/rowgrab.ps1`](src/rowgrab.ps1).
-  `"gsiRowGrab": false` turns it off: no capture at all, and other players
-  are then shown by their colour only.
+  `"gsiRowGrab": false` turns it off: no capture at all, other players are
+  then shown by their colour only, and Ctrl+Enter goes to team chat
+  (Ctrl+Shift+Enter to all).
 - **Asks Windows which window is in front**, and where the game's window
   is, so the text sits above the game's chat and hides when you alt-tab
   ([`src/focuswatch.ps1`](src/focuswatch.ps1)).
@@ -156,18 +159,30 @@ after the app heard it. A line somebody has said before costs no call.
 
 - `Alt+D` hides and shows the overlay.
 - `Alt+Shift+D` quits.
-- `Ctrl+Enter`, in Dota's chat, sends what you typed translated (below).
+- Both can be changed or turned off in the settings window (More settings >
+  The app's own keys). A key the app uses is taken from Dota too: if you
+  use Alt+D in the game (alt-cast for the D slot), pick another.
+- `Ctrl+Enter`, in Dota's chat, sends what you typed translated, to the chat
+  you had open; `Ctrl+Shift+Enter` always to all chat (below).
 
 ## Saying something back
 
-Open the game's chat as you always do (`Enter`, or `Shift+Enter` for all
-chat), type what you want to say in English, and press **`Ctrl+Enter`
-instead of `Enter`**. About a second later it is said, in their language.
-Plain `Enter` still sends exactly what you typed.
+Open the game's chat as you always do, type what you want to say in
+English, and press **`Ctrl+Enter` instead of `Enter`**. It goes to the
+chat you had open - team or all, read off the chat input on the screen
+(Dota in English, Russian or Spanish); if that cannot be read (Dota in another
+language, say) it goes to the team,
+and **`Ctrl+Shift+Enter`** always sends to all chat. The chat closes at once, so you have
+your hero back, and about a second later the line is said in their
+language. Plain `Enter` still sends exactly what you typed.
 
 - **How: the app presses keys for you, and you should know that it does.**
-  `Ctrl+A`, `Ctrl+C` to take what you typed; then, with the translation,
-  `Ctrl+A`, `Ctrl+V`, `Enter`. They go through Windows, as a keyboard's or
+  `Ctrl+A`, `Ctrl+C` to take what you typed, then `Backspace` and `Escape` to
+  close the chat; with the translation, `Enter` (or `Shift+Enter`) to open
+  it again, `Ctrl+V`, and `Enter`. If you are typing another line by then,
+  it waits for you; if it cannot say the line, it leaves it on your
+  clipboard and tells you. `"sayMode": "open"` keeps the chat open while
+  it translates instead, as before. They go through Windows, as a keyboard's or
   a macro key's do. It happens once, when you press the key, and never
   unless Dota is the window in front. Valve has said
   nothing about it either way: at your own risk.

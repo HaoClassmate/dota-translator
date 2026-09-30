@@ -18,7 +18,7 @@ import { explainModelError } from './memwatcher.js';
 import { startWatchingGsi } from './gsiwatcher.js';
 import { loadOffsets, bundledOffsets } from './offsets.js';
 import { createOutgoing, createLanguageTracker, targetLanguage } from './outgoing.js';
-import { createKeySender, sayTranslated } from './sendchat.js';
+import { createKeySender, sayTranslated, takeLine, sayLine } from './sendchat.js';
 import { createHosted, hashId } from './hosted.js';
 import crypto from 'node:crypto';
 
@@ -229,6 +229,8 @@ async function start() {
     // No key of the player's own: the hosted translator does the asking.
     ...(hostedOn() ? { translate: (batch) => hosted.translate(batch) } : {}),
     onSteamId: (steamid) => { playerId = hashId('steam', steamid); },
+    // Who the player is, from the feed: replaces whatever an earlier game taught.
+    onSelf: (self) => { me = self && self.name ? { name: self.name, slot: self.slot, hero: self.hero } : null; },
     // GSI mode only: where the game's window is. The dark box is then placed
     // in IT, not on the screen (a windowed game had the box on the desktop).
     onWindow: (w) => {
@@ -251,6 +253,8 @@ async function start() {
     // Up only while the game is the window in front.
     onFocus: (on) => {
       setSayHotkey(on);
+      // Enter is held only while Dota is in front, never over another program.
+      if (!on && enterHeld) { globalShortcut.unregister('Enter'); enterHeld = false; }
       inFront = on;
       heartbeat(on);
       if (!win || win.isDestroyed() || hidden) return;
@@ -338,6 +342,7 @@ const sayIt = createOutgoing({
 const keys = createKeySender();
 let sayKeyOn = false;
 let saying = false;
+let enterHeld = false;
 // WHO the player is, learnt from the game: a line that comes back out of
 // the chat with the words the app has just sent for them is THEIR line,
 // and carries their name, colour slot and hero. Known from their first
@@ -349,12 +354,20 @@ function itsMe(row) {
   me = { name: row.name, slot: row.slot, hero: row.hero };
 }
 
+// Ctrl+Enter says the line in team chat, Ctrl+Shift+Enter in all chat - as
+// Enter and Shift+Enter open them. The app cannot see which one the player
+// opened, so the key says it.
+const sayKeys = () => [[cfg.sayHotkey, 'team'], [cfg.sayAllHotkey, 'all']].filter(([k]) => k && typeof k === 'string');
 function setSayHotkey(on) {
   if (!cfg.sayHotkey || on === sayKeyOn) return;
-  try {
-    if (on) { sayKeyOn = globalShortcut.register(cfg.sayHotkey, sayKey); keys.warm(); }
-    else { globalShortcut.unregister(cfg.sayHotkey); sayKeyOn = false; }
-  } catch { sayKeyOn = false; /* not a key Electron knows: no hotkey, and nothing else breaks */ }
+  for (const [accel, channel] of sayKeys()) {
+    try {
+      if (on) globalShortcut.register(accel, () => sayKey(channel));
+      else globalShortcut.unregister(accel);
+    } catch { /* not a key Electron knows: that one is not there, and nothing else breaks */ }
+  }
+  sayKeyOn = on;
+  if (on) keys.warm();
 }
 
 // One key, and a SETTING for which way it goes (the user: "better with
@@ -363,23 +376,72 @@ function setSayHotkey(on) {
 // English whatever it was typed in - for the player on the other side of
 // the same problem, typing Russian to English speakers. Read at each press,
 // so changing it in the setup window needs no restart.
-async function sayKey() {
-  if (saying || (!hostedOn() && !cfg.geminiApiKey)) return;
+// What a line the app said for the player MEANS, handed to the reader
+// before the keys that say it (it finds the line in ~0.2s).
+function learnedLine(out, typed) {
+  // SEEN 2026-09-22: Russian pasted and sent with this key goes out
+  // unchanged, and "it means what was typed" then told the reader that
+  // Russian means Russian - the player's own line was never translated.
+  if (watcher && watcher.know && out.trim() !== typed.trim()) watcher.know(out, typed);
+  sentForMe.add(out);
+  if (sentForMe.size > 50) sentForMe.delete(sentForMe.values().next().value);
+}
+
+// THE DEFAULT (sayMode "close"; the user, 2026-09-27): the chat is closed at
+// once and the line said when it is translated. Lines are said in the
+// order they were taken; each is translated as soon as it is taken.
+let sayChain = Promise.resolve();
+function sayClosing(asked) {
+  const into = targetLanguage(cfg.replyLanguage, spoken);
+  const note = (s) => send('status', withFace(s));
+  // Which chat was open, read off the screen BEFORE the chat is closed (the
+  // user, 2026-09-27: Ctrl+Enter in all chat went to the team). Not sure -
+  // no answer in 250ms, another language, the grab off - and the key decides.
+  // Ctrl+Shift+Enter says all chat whatever is open.
+  let channel = asked;
+  const seen = asked !== 'all' && watcher && watcher.channel ? Promise.race([watcher.channel().catch(() => null), new Promise((r) => setTimeout(() => r(null), 250))]) : Promise.resolve(null);
+  const taken = seen.then((c) => { if (c) channel = c; if (DEBUG) console.log('say channel', JSON.stringify({ asked, seen: c })); return takeLine({ keys, clipboard }); });
+  const ARROW = String.fromCharCode(0x2192), DOTS = String.fromCharCode(0x2026);
+  const translated = taken.then(async (t) => {
+    if (!t.typed) return { t };
+    note({ kind: 'note', text: t.typed, more: ARROW + ' ' + into + DOTS, holdMs: 20000, ...(me && me.name ? { name: me.name, slot: me.slot, hero: me.hero } : {}) });
+    try { return { t, r: await sayIt(t.typed, into) }; } catch (err) { return { t, err }; }
+  });
+  sayChain = sayChain.then(async () => {
+    const { t, r, err } = await translated;
+    if (!t.typed) { if (DEBUG) console.log('say', JSON.stringify({ said: false, why: t.why })); return; }
+    if (err) {
+      const why = String((err && err.message) || err);
+      const said = explainModelError(why);
+      clipboard.writeText(t.typed);
+      note({ kind: 'error', text: (said === why ? 'Not translated (' + why + ').' : said.split(' Lines are shown')[0] + ' Not translated.') + ' Your line is on the clipboard - Ctrl+V pastes it.' });
+      if (DEBUG) console.log('say', JSON.stringify({ said: false, why }));
+      return;
+    }
+    try { learnedLine(r.out, t.typed); } catch { /* the line is still said */ }
+    const done = await sayLine({ keys, clipboard, out: r.out, channel, note });
+    if (done.said) note({ kind: 'note', text: '' });
+    if (DEBUG) console.log('say', JSON.stringify({ ...done, typed: t.typed, channel }));
+  }).catch(() => {});
+}
+
+async function sayKey(channel = 'team') {
+  if (!hostedOn() && !cfg.geminiApiKey) return;
+  if (cfg.sayMode !== 'open') { sayClosing(channel); return; }
+  if (saying) return;
   saying = true;
   try {
     const into = targetLanguage(cfg.replyLanguage, spoken);
     const r = await sayTranslated({
       keys, clipboard, into, explain: explainModelError,
       // The line comes back out of the chat within a moment: it means what was typed.
-      learned: (out, typed) => {
-        // SEEN 2026-09-22: Russian pasted and sent with this key goes out
-        // unchanged, and "it means what was typed" then told the reader that
-        // Russian means Russian - the player's own line was never translated.
-        if (watcher && watcher.know && out.trim() !== typed.trim()) watcher.know(out, typed);
-        sentForMe.add(out);
-        if (sentForMe.size > 50) sentForMe.delete(sentForMe.values().next().value);
-      },
+      learned: learnedLine,
       who: () => me,
+      // An Enter pressed while the line is away is swallowed, not sent.
+      hold: (on) => {
+        if (on) { try { enterHeld = globalShortcut.register('Enter', () => {}); } catch { enterHeld = false; } }
+        else if (enterHeld) { globalShortcut.unregister('Enter'); enterHeld = false; }
+      },
       translate: (typed) => sayIt(typed, into),
       note: (s) => send('status', withFace(s)),
     });
@@ -439,10 +501,26 @@ app.whenReady().then(() => {
   if (!onlyCopy) return;
   createWindow();
   checkForUpdates();
-  // Alt+D hides and shows it, for a screenshot or a clear view of a fight.
-  globalShortcut.register('Alt+D', toggleHidden);
   makeTray();
-  globalShortcut.register('Alt+Shift+D', quitApp);});
+  setAppKeys();
+});
+
+// The app's own keys: hide/show (Alt+D by default - a screenshot, a clear view
+// of a fight) and quit (Alt+Shift+D). The player's to change or turn off in
+// the settings window: a key registered here is taken from every program,
+// Dota included (a player, 2026-09-28: Alt+D is their alt-cast).
+const appKeys = new Map();
+function setAppKeys() {
+  const want = [[cfg.hideHotkey, toggleHidden], [cfg.quitHotkey, quitApp]];
+  for (const accel of appKeys.keys()) { try { globalShortcut.unregister(accel); } catch { /* not ours any more */ } }
+  appKeys.clear();
+  for (const [accel, fn] of want) {
+    if (!accel || typeof accel !== 'string') continue;
+    try { if (globalShortcut.register(accel, fn)) appKeys.set(accel, fn); } catch { /* not a key Electron knows: skipped */ }
+  }
+  if (tray) tray.setContextMenu(trayMenu());
+}
+const pretty = (accel) => String(accel || '').replace('Control', 'Ctrl');
 
 // ---- THE SETUP WINDOW ------------------------------------------------
 // Where a player gives the app its key without ever seeing config.json
@@ -537,18 +615,7 @@ function makeTray() {
   // and not ours to use.
   tray = new Tray(nativeImage.createFromPath(path.join(here, 'tray.png')).resize({ width: 16, height: 16 }));
   tray.setToolTip('Dota Translator ' + app.getVersion());
-  tray.setContextMenu(Menu.buildFromTemplate([
-    { label: 'Settings and key...', click: openSetup },
-    { label: 'Hide or show the translations (Alt+D)', click: toggleHidden },
-    ...(cfg.sayHotkey ? [{ label: cfg.sayHotkey.replace('Control', 'Ctrl') + ' in Dota\'s chat sends it translated', enabled: false }] : []),
-    // The way a player says anything back: one big box and an optional
-    // e-mail, no account needed. cfg.feedbackUrl (https only) overrides it.
-    { label: 'Send feedback, or report a bad translation...', click: () => shell.openExternal(String(cfg.feedbackUrl || '').startsWith('https://') ? cfg.feedbackUrl : FEEDBACK_URL) },
-    { label: 'Support the developer (Ko-fi)', click: () => shell.openExternal('https://ko-fi.com/sc0rebreaker') },
-    { label: 'Version ' + app.getVersion(), enabled: false },
-    { type: 'separator' },
-    { label: 'Quit', click: quitApp },
-  ]));
+  tray.setContextMenu(trayMenu());
   tray.on('click', openSetup);
   // With a key there is no window at all at startup, and Windows hides a
   // new tray icon behind the ^ arrow: say where the app went. A balloon
@@ -557,6 +624,22 @@ function makeTray() {
     tray.displayBalloon({ iconType: 'custom', icon: balloonIcon(), title: 'Dota Translator is running', content: 'It sits here by the clock (behind the ^ arrow) and shows translations above the chat in Dota. Click the icon for settings.' });
     tray.on('balloon-click', openSetup);
   }
+}
+
+function trayMenu() {
+  return Menu.buildFromTemplate([
+    { label: 'Settings and key...', click: openSetup },
+    { label: 'Hide or show the translations' + (cfg.hideHotkey ? ' (' + pretty(cfg.hideHotkey) + ')' : ''), click: toggleHidden },
+    ...(cfg.sayHotkey ? [{ label: cfg.sayHotkey.replace('Control', 'Ctrl') + ' in Dota\'s chat sends it translated', enabled: false }] : []),
+    ...(cfg.sayHotkey && cfg.sayAllHotkey ? [{ label: cfg.sayAllHotkey.replace('Control', 'Ctrl') + ' sends it to all chat', enabled: false }] : []),
+    // The way a player says anything back: one big box and an optional
+    // e-mail, no account needed. cfg.feedbackUrl (https only) overrides it.
+    { label: 'Send feedback, or report a bad translation...', click: () => shell.openExternal(String(cfg.feedbackUrl || '').startsWith('https://') ? cfg.feedbackUrl : FEEDBACK_URL) },
+    { label: 'Support the developer (Ko-fi)', click: () => shell.openExternal('https://ko-fi.com/sc0rebreaker') },
+    { label: 'Version ' + app.getVersion(), enabled: false },
+    { type: 'separator' },
+    { label: 'Quit' + (cfg.quitHotkey ? ' (' + pretty(cfg.quitHotkey) + ')' : ''), click: quitApp },
+  ]);
 }
 
 function toggleHidden() {
@@ -581,7 +664,9 @@ function applySettings(patch) {
   const languagesChanged = patch.scripts && JSON.stringify(patch.scripts) !== JSON.stringify(cfg.scripts);
   // Another reader altogether: the watcher starts again with it.
   const sourceChanged = Boolean(patch.source) && patch.source !== cfg.source;
+  const keysChanged = ('hideHotkey' in patch && patch.hideHotkey !== cfg.hideHotkey) || ('quitHotkey' in patch && patch.quitHotkey !== cfg.quitHotkey);
   Object.assign(cfg, patch);
+  if (keysChanged) setAppKeys();
   if (win && !win.isDestroyed()) win.reload();
   return languagesChanged || sourceChanged;
 }
@@ -625,7 +710,7 @@ ipcMain.handle('setup:save', async (_e, payload) => {
     traceSayInto('setup:save', true);
     applyDisplay(display);
     if (restart) restartWatcher();
-    return { ok: true, checked: false };
+    return { ok: true, checked: false, settings: uiSettings(cfg) };
   }
   const r = await checkKey(typed, { model: cfg.model });
   if (!r.ok) return r;

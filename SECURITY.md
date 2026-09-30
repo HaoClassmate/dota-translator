@@ -16,9 +16,10 @@ tell me if something is wrong.
   `game/dota/cfg/gamestate_integration/gamestate_integration_dotatranslator.cfg`.
   (Versions up to 0.3.7 read the chat from memory; that reader is not in
   the installer any more.)
-- **Captures two small spots of the game's picture** - the portrait beside
-  the newest chat line and one tile of the top bar - to tell which hero
-  spoke, only while Dota is the window in front. Compared with the
+- **Captures three small spots of the game's picture** - the portrait beside
+  the newest chat line and one tile of the top bar, to tell which hero
+  spoke, and on Ctrl+Enter the start of the chat input, to tell team chat
+  from all chat - only while Dota is the window in front. Compared with the
   portraits in your own Dota install and thrown away: nothing is saved or
   sent. One plain-text file: [`src/rowgrab.ps1`](src/rowgrab.ps1).
   `"gsiRowGrab": false` turns it off.

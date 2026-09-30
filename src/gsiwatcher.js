@@ -7,12 +7,12 @@
 import path from 'node:path';
 import { startWatchingMemory } from './memwatcher.js';
 import { startGsiSource, GSI_PORT } from './gsisource.js';
-import { ensureGsiConfig } from './gsiconfig.js';
+import { ensureGsiConfig, gameLanguage } from './gsiconfig.js';
 import { startFocusWatch } from './focuswatch.js';
-import { startRowGrab } from './rowgrab.js';
+import { startRowGrab, channelFromRuns } from './rowgrab.js';
 import { layoutFromWindow } from './gsilayout.js';
 
-export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig, startSource = startGsiSource, watchFocus = startFocusWatch, grabRows = startRowGrab } = {}) {
+export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig, startSource = startGsiSource, watchFocus = startFocusWatch, grabRows = startRowGrab, language = gameLanguage } = {}) {
   const port = Number.isInteger(cfg.gsiPort) && cfg.gsiPort > 1023 && cfg.gsiPort < 65536 ? cfg.gsiPort : GSI_PORT;
   const onStatus = handlers.onStatus || (() => {});
   const made = ensure({ port });
@@ -20,7 +20,7 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
   // the hero. A small screen grab, only with the game in front; gsiRowGrab:
   // false never captures anything.
   const rows = cfg.gsiRowGrab !== false && made.dotaDir ? grabRows({ dotaDir: made.dotaDir }) : null;
-  const watcher = startWatchingMemory(cfg, { ...handlers, startSource: (o) => startSource({ ...o, port, identify: rows ? rows.identify : null, onSteamId: handlers.onSteamId || (() => {}) }) });
+  const watcher = startWatchingMemory(cfg, { ...handlers, startSource: (o) => startSource({ ...o, port, identify: rows ? rows.identify : null, onSteamId: handlers.onSteamId || (() => {}), onSelf: handlers.onSelf || (() => {}) }) });
   if (made.state === 'written') {
     onStatus({ kind: 'error', text: 'Dota Translator has set up Dota\'s chat feed. Restart Dota once - it only reads that setting when it starts.' });
   } else if (made.state === 'notfound') {
@@ -46,5 +46,11 @@ export function startWatchingGsi(cfg, handlers = {}, { ensure = ensureGsiConfig,
     if (l) handlers.onLayout(l);
   };
   const focus = handlers.onFocus || handlers.onLayout ? watchFocus({ onFocus: handlers.onFocus || (() => {}), onWindow }) : null;
-  return { ...watcher, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
+  // Which chat is open is read off the chat input's label, which each game
+  // language words differently (checked against Dota's own strings in 28
+  // languages, 2026-09-27). English, Russian and Spanish are measured; in any other
+  // a rule could guess WRONG, so it is not asked and the key decides.
+  const lang = made.dotaDir ? language(made.dotaDir) : '';
+  const readsChat = rows && ['', 'english', 'russian', 'spanish', 'latam'].includes(lang);
+  return { ...watcher, channel: readsChat ? () => rows.channel().then((r) => (r ? channelFromRuns(r.runs, r.s, lang || 'english') : null)) : async () => null, stop() { if (focus) focus.stop(); if (rows) rows.stop(); watcher.stop(); } };
 }

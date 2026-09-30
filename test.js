@@ -1073,6 +1073,30 @@ await okAsync('a key that fails says what to DO, in the two ways this project ha
   assert.equal((await checkKey('K'.repeat(30), { translate: async () => [] })).ok, false);
 });
 
+ok('the app\'s own keys can be changed or turned off, never to a key that eats typing or the say keys', async () => {
+  // A player, 2026-09-28: Alt+D "eats the input, preventing Dota from getting it".
+  const { normalizeHotkey, settingsPatch, uiSettings } = await import('./src/settings.js');
+  assert.equal(normalizeHotkey('ctrl+alt+d'), 'Control+Alt+D');
+  assert.equal(normalizeHotkey('Alt+Shift+9'), 'Alt+Shift+9');
+  assert.equal(normalizeHotkey('F9'), 'F9');
+  assert.equal(normalizeHotkey('Shift+F10'), 'Shift+F10');
+  assert.equal(normalizeHotkey(''), '');
+  for (const bad of ['D', 'Shift+D', 'Enter', 'Control+Enter', 'Alt+Alt+D', 'Win+D', 'Alt+', 'Control+Alt+Shift+D+E', 'Alt+Tab', '<script>']) assert.equal(normalizeHotkey(bad), null, bad);
+  const cfg = { hideHotkey: 'Alt+D', quitHotkey: 'Alt+Shift+D', sayHotkey: 'Control+Enter', sayAllHotkey: 'Control+Shift+Enter' };
+  assert.deepEqual(settingsPatch({ hideHotkey: 'Control+Alt+D' }, cfg), { hideHotkey: 'Control+Alt+D' });
+  assert.deepEqual(settingsPatch({ hideHotkey: '' }, cfg), { hideHotkey: '' });
+  assert.deepEqual(settingsPatch({ hideHotkey: 'D' }, cfg), {});
+  assert.deepEqual(settingsPatch({ hideHotkey: 'Alt+Shift+D' }, cfg), {}, 'the same key as quit');
+  assert.deepEqual(settingsPatch({ quitHotkey: 'F9', hideHotkey: 'F9' }, cfg), {}, 'both the same');
+  // Not in what the window sent: left as it was.
+  assert.deepEqual(settingsPatch({ showHeroes: true }, cfg), { showHeroes: true });
+  assert.equal(uiSettings({}).hideHotkey, 'Alt+D');
+  assert.equal(uiSettings({ hideHotkey: '' }).hideHotkey, '');
+  const main = fs.readFileSync(path.join('src', 'main.js'), 'utf8');
+  assert.doesNotMatch(main, /globalShortcut\.register\('Alt\+/, 'a hard-coded app key is back');
+  assert.match(main, /\[cfg\.hideHotkey, toggleHidden\], \[cfg\.quitHotkey, quitApp\]/);
+});
+
 ok('saving from the setup window leaves the rest of the player\'s config alone', () => {
   const file = path.join(fs.mkdtempSync(path.join(os.tmpdir(), 'dt-cfg-')), 'config.json');
   fs.writeFileSync(file, JSON.stringify({ fontSize: 20, myOwnNote: 'keep me', geminiApiKey: 'old' }));
@@ -1107,7 +1131,7 @@ ok('what the settings window sends back is made safe before it is saved', () => 
 
 ok('the window is shown the five settings and never the key', () => {
   const shown = uiSettings({ ...mergeConfig({}), geminiApiKey: 'secret', geminiApiKeyEnc: 'c2VjcmV0' });
-  assert.deepEqual(Object.keys(shown).sort(), ['autoUpdate', 'fontSize', 'sayInto', 'scripts', 'showHeroes', 'showOriginal', 'theirLanguage']);
+  assert.deepEqual(Object.keys(shown).sort(), ['autoUpdate', 'fontSize', 'hideHotkey', 'quitHotkey', 'sayInto', 'scripts', 'showHeroes', 'showOriginal', 'theirLanguage']);
   assert.ok(!JSON.stringify(shown).includes('secret'));
   // Which way Ctrl+Enter translates: two choices, and a language somebody
   // set by name in config.json is "theirs" and is not flattened by a save.
@@ -1229,7 +1253,7 @@ ok('the landing page keeps the promises the project made about how it talks', ()
     // ONE sentence may say it (the user: 'u can only keep the one'): the catch's first item.
     assert.equal((words.match(/memory/gi) || []).length, page === 'index.html' ? 1 : 0, page + ' talks about memory');
   }
-  assert.match(text, /two small spots of your screen/);
+  assert.match(text, /three small spots of your screen/);
   assert.match(text, /Valve has not approved it/);
   assert.doesNotMatch(text, /Valve (approved|allows|permits) (it|this)/i);
   assert.match(text, /source-available rather than open source/);
@@ -1515,7 +1539,7 @@ await okAsync('what is typed in the chat is taken, translated, said - and the cl
   const r = await sayTranslated({ keys, clipboard: board, translate: async (t) => ({ out: 'RU:' + t }), note: (n) => notes.push(n), wait: noWait });
   assert.deepEqual(r, { said: true, typed: 'go rosh', out: 'RU:go rosh' });
   assert.equal(keys.said, 'RU:go rosh');
-  assert.deepEqual(keys.log, ['copy', 'send']);
+  assert.deepEqual(keys.log, ['copy', 'copy', 'send']);
   assert.equal(board.text, 'something of the player\'s own');
   // Shown as the player's own line while it is away, and taken down when it is said.
   assert.deepEqual([notes[0].kind, notes[0].text], ['note', 'go rosh']);
@@ -1537,8 +1561,114 @@ await okAsync('what the line MEANS is handed over BEFORE the keys that say it', 
   const b2 = fakeBoard('mine');
   const k2 = fakeKeys(b2, 'gg');
   const r = await sayTranslated({ keys: k2, clipboard: b2, translate: async () => ({ out: 'RU' }), learned: () => { throw new Error('x'); }, wait: noWait });
-  assert.deepEqual(k2.log, ['copy', 'send']);
+  assert.deepEqual(k2.log, ['copy', 'copy', 'send']);
   assert.equal(typeof r.said, 'boolean');
+});
+
+await okAsync('a chat sent or closed while the line was away is NOT sent into; Enter is held meanwhile', async () => {
+  // The user, 2026-09-27: Enter pressed while waiting sent the English and
+  // closed the chat; the app's Ctrl+A, Ctrl+V, Enter then opened an empty
+  // chat that took the keyboard.
+  const board = fakeBoard('mine');
+  const keys = fakeKeys(board, 'stop feeding');
+  const held = []; const notes = [];
+  let field = 'stop feeding';
+  keys.copy = async () => { keys.log.push('copy'); if (field) board.writeText(field); return { ok: true }; };
+  const r = await sayTranslated({ keys, clipboard: board, hold: (on) => held.push(on), translate: async () => { field = ''; return { out: 'RU' }; }, note: (n) => notes.push(n), wait: noWait });
+  assert.equal(r.said, false);
+  assert.deepEqual(keys.log, ['copy', 'copy']);
+  assert.equal(board.text, 'RU', 'the translation is left to paste');
+  assert.match(notes.at(-1).more, /not sent/);
+  assert.deepEqual(held, [true, false]);
+  // A failed translation lets go of Enter too.
+  const h2 = [];
+  const b2 = fakeBoard('mine');
+  await sayTranslated({ keys: fakeKeys(b2, 'gg'), clipboard: b2, hold: (on) => h2.push(on), translate: async () => { throw new Error('x'); }, wait: noWait });
+  assert.deepEqual(h2, [true, false]);
+});
+
+// A stand-in for Dota's chat, for the default way: open or closed, the field,
+// and what was SENT. Enter opens a closed chat, and sends (or, empty, just
+// closes) an open one - as the game does.
+const fakeChat = (board, { open = false, field = '', channel = 'team' } = {}) => {
+  const g = { open, field, channel, sent: [], log: [] };
+  const ok = async () => ({ ok: true });
+  const enter = (ch) => { if (!g.open) { g.open = true; g.channel = ch; g.field = ''; } else { if (g.field) g.sent.push([g.channel, g.field]); g.open = false; g.field = ''; } };
+  g.keys = {
+    copy: async () => { g.log.push('copy'); if (g.open && g.field) board.writeText(g.field); return { ok: true }; },
+    clear: async () => { g.log.push('clear'); g.field = ''; g.open = false; return { ok: true }; },
+    open: async (ch) => { g.log.push('open ' + ch); enter(ch); return { ok: true }; },
+    paste: async () => { g.log.push('paste'); if (g.open) g.field = board.readText(); return { ok: true }; },
+    enter: async () => { g.log.push('enter'); enter(g.channel); return { ok: true }; },
+  };
+  return g;
+};
+const { takeLine, sayLine } = await import('./src/sendchat.js');
+
+await okAsync('the default way: the line is taken and the chat closed at once, then said in the chat the key named', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: 'stop feeding' });
+  const t = await takeLine({ keys: g.keys, clipboard: board });
+  assert.deepEqual(t, { typed: 'stop feeding' });
+  assert.equal(g.open, false, 'the chat is closed at once');
+  assert.equal(board.text, 'mine', 'the clipboard is given back');
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'хватит фидить', channel: 'all', wait: noWait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['all', 'хватит фидить']]);
+  assert.equal(g.open, false);
+  assert.equal(board.text, 'mine');
+  // Nothing typed: nothing cleared, nothing sent.
+  const g2 = fakeChat(board);
+  assert.deepEqual(await takeLine({ keys: g2.keys, clipboard: board }), { why: 'nothing typed' });
+  assert.deepEqual(g2.log, ['copy']);
+});
+
+await okAsync('the default way: the player typing a new line is waited for, never sent or overwritten', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: 'half a line' });
+  let waits = 0;
+  const wait = async () => { if (++waits === 3) { g.sent.push([g.channel, g.field]); g.open = false; g.field = ''; } };
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', channel: 'team', wait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['team', 'half a line'], ['team', 'RU']], 'theirs went first, by their own Enter');
+  // They never finish: the line is left to paste, and nothing of theirs is touched.
+  let clock = 0;
+  const g2 = fakeChat(board, { open: true, field: 'still typing' });
+  const r2 = await sayLine({ keys: g2.keys, clipboard: board, out: 'RU', wait: async () => { clock += 400; }, now: () => clock, patienceMs: 2000 });
+  assert.equal(r2.said, false);
+  assert.deepEqual(g2.sent, []);
+  assert.equal(g2.field, 'still typing');
+  assert.equal(board.text, 'RU');
+});
+
+await okAsync('the default way: an EMPTY open chat is closed by the first Enter and opened by the second - one line said', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board, { open: true, field: '' });
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', channel: 'team', wait: noWait });
+  assert.equal(r.said, true);
+  assert.deepEqual(g.sent, [['team', 'RU']]);
+});
+
+await okAsync('the default way: something else in the chat after the paste is NEVER sent', async () => {
+  const board = fakeBoard('mine');
+  const g = fakeChat(board);
+  g.keys.paste = async () => { g.log.push('paste'); g.field = 'not ours'; return { ok: true }; };
+  const r = await sayLine({ keys: g.keys, clipboard: board, out: 'RU', wait: noWait });
+  assert.equal(r.said, false);
+  assert.deepEqual(g.sent, []);
+  assert.equal(board.text, 'RU');
+  // A game field that keeps only the start of a long line: still said.
+  const g2 = fakeChat(board);
+  g2.keys.paste = async () => { if (g2.open) g2.field = board.readText().slice(0, 5); return { ok: true }; };
+  assert.equal((await sayLine({ keys: g2.keys, clipboard: board, out: 'RU long line', wait: noWait })).said, true);
+});
+
+await okAsync('the default way is the default, and both keys are there', () => {
+  assert.equal(DEFAULTS.sayMode, 'close');
+  assert.equal(DEFAULTS.sayHotkey, 'Control+Enter');
+  assert.equal(DEFAULTS.sayAllHotkey, 'Control+Shift+Enter');
+  const ps = fs.readFileSync(path.join('src', 'sendchat.ps1'), 'utf8');
+  for (const w of ['clear', 'open team', 'open all', 'paste', 'enter']) assert.ok(ps.includes("'" + w + "'"), w);
 });
 
 await okAsync('the row shown while a line is away is the player\'s OWN row once the app knows who they are', async () => {
@@ -1601,15 +1731,23 @@ await okAsync('the key helper is asked one word at a time and its answers are re
   child.stdin.end = () => {};
   const sender = createKeySender({ spawnImpl: () => child, timeoutMs: 200 });
   const first = sender.copy();
-  assert.deepEqual(await sender.send(), { ok: false, why: 'busy' });
+  // A second word waits for the first, in order - never refused, never both at once.
+  const queued = sender.send();
+  await new Promise((r) => setImmediate(r));
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy']);
   child.stdout.emit('data', 'ready\r\ncop');
   child.stdout.emit('data', 'ied\r\n');
   assert.deepEqual(await first, { ok: true });
+  await new Promise((r) => setImmediate(r));
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send']);
+  child.stdout.emit('data', 'done\r\n');
+  assert.deepEqual(await queued, { ok: true });
   const second = sender.send();
+  await new Promise((r) => setImmediate(r));
   child.stdout.emit('data', 'NOT DONE: the game is not in front\r\n');
   assert.deepEqual(await second, { ok: false, why: 'the game is not in front' });
   assert.deepEqual(await sender.send(), { ok: false, why: 'the helper took too long' });
-  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send', 'send']);
+  assert.deepEqual(wrote.map((w) => w.trim()), ['copy', 'send', 'send', 'send']);
   sender.stop();
 });
 
@@ -1636,7 +1774,15 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
   const at = (s, from = 0) => { const i = helper.indexOf(s, from); assert.ok(i >= 0, s); return i; };
   const loop = at('while ($true)');
   assert.ok(at('InFront($id)', loop) < at('Chord(', loop));
-  assert.ok(at('InFront($id)', at('::V)', loop)) < at('Tap([SayKeys]::ENTER)', loop));
+  // Every Enter the helper presses (it SENDS, or opens the chat) comes
+  // straight after a fresh "is the game in front?".
+  let enters = 0;
+  for (let i = helper.indexOf('[SayKeys]::ENTER)', loop); i >= 0; i = helper.indexOf('[SayKeys]::ENTER)', i + 1)) {
+    enters++;
+    const guard = helper.lastIndexOf('InFront($id)', i);
+    assert.ok(guard > loop && i - guard < 700, 'an Enter with no guard just before it');
+  }
+  assert.ok(enters >= 3);
   assert.equal(DEFAULTS.sayHotkey, 'Control+Enter');
   assert.equal(DEFAULTS.replyLanguage, 'auto');
 });
@@ -1888,6 +2034,98 @@ ok('keys are sent from ONE place, only with the game in front, and nothing anywh
     assert.deepEqual(two, ['luna', 'luna']);
   });
 
+  await okAsync('which chat is open is read off the chat input\'s first words, at any screen size', async () => {
+    // The user, 2026-09-27: Ctrl+Enter in all chat went to the team. These
+    // are the bright columns of the chat input in the user's own 1080p
+    // screenshots (numbers only - no picture of the game is kept).
+    const { channelFromRuns } = await import('./src/rowgrab.js');
+    const team = [[2, 2], [12, 20], [23, 30], [37, 41], [43, 53], [56, 58], [61, 62], [66, 68], [71, 77], [80, 84], [87, 90], [94, 96], [105, 109], [112, 118], [121, 126], [128, 132]];
+    const all = [[15, 23], [26, 33], [40, 44], [46, 56], [59, 61], [64, 66], [69, 73], [76, 78], [87, 91], [94, 100], [103, 108], [110, 114]];
+    for (const s of [0.75, 1, 1.333, 2]) {
+      const at = (runs) => runs.map(([a, b]) => [Math.round(a * s), Math.round(b * s)]);
+      assert.equal(channelFromRuns(at(team), s), 'team', 'team at ' + s);
+      assert.equal(channelFromRuns(at(all), s), 'all', 'all at ' + s);
+    }
+    // Russian Dota (the user's screenshots): "(Союзникам): test" / "(Всем): test".
+    const ruTeam = [[17, 21], [24, 32], [35, 42], [45, 56], [59, 64], [67, 74], [77, 84], [87, 94], [97, 103], [106, 115], [118, 121], [125, 127], [136, 140], [143, 149], [152, 157], [159, 163]];
+    const ruAll = [[17, 21], [24, 31], [34, 39], [42, 48], [51, 60], [63, 67], [70, 72], [81, 85], [88, 94], [97, 102], [104, 108]];
+    for (const s of [0.75, 1, 1.333, 2]) {
+      const at = (runs) => runs.map(([a, b]) => [Math.round(a * s), Math.round(b * s)]);
+      assert.equal(channelFromRuns(at(ruTeam), s, 'russian'), 'team', 'ru team at ' + s);
+      assert.equal(channelFromRuns(at(ruAll), s, 'russian'), 'all', 'ru all at ' + s);
+      // Read with the wrong language's rule: never the WRONG chat.
+      for (const [runs, right] of [[team, 'team'], [all, 'all']]) assert.ok([null, right].includes(channelFromRuns(at(runs), s, 'russian')));
+      for (const [runs, right] of [[ruTeam, 'team'], [ruAll, 'all']]) assert.ok([null, right].includes(channelFromRuns(at(runs), s, 'english')));
+    }
+    // Spanish Dota (the user's screenshots): "A (Aliados): test" / "A (Todos): all",
+    // the second with a bright bit of scenery at the strip's left edge.
+    const esTeam = [[16, 26], [33, 37], [39, 49], [52, 53], [57, 59], [62, 68], [71, 78], [82, 89], [92, 97], [99, 103], [106, 108], [117, 121], [124, 130], [133, 138], [140, 144]];
+    const esAll = [[0, 8], [16, 26], [33, 37], [40, 48], [51, 58], [61, 68], [72, 79], [82, 86], [89, 92], [96, 98], [107, 113], [116, 118], [121, 123]];
+    for (const s of [0.75, 1, 1.333, 2]) {
+      const at = (runs) => runs.map(([a, b]) => [Math.round(a * s), Math.round(b * s)]);
+      for (const lang of ['spanish', 'latam']) {
+        assert.equal(channelFromRuns(at(esTeam), s, lang), 'team', 'es team at ' + s);
+        assert.equal(channelFromRuns(at(esAll), s, lang), 'all', 'es all at ' + s);
+      }
+      // Every language's screenshots read with every other's rule: never the WRONG chat.
+      const sets = { english: [team, all], russian: [ruTeam, ruAll], spanish: [esTeam, esAll] };
+      for (const rule of Object.keys(sets)) for (const [src, [t2, a2]] of Object.entries(sets)) {
+        if (rule === src) continue;
+        assert.ok([null, 'team'].includes(channelFromRuns(at(t2), s, rule)), rule + ' on ' + src);
+        assert.ok([null, 'all'].includes(channelFromRuns(at(a2), s, rule)), rule + ' on ' + src);
+      }
+    }
+    // Any other game language: not guessed at.
+    assert.equal(channelFromRuns(team, 1, 'polish'), null);
+    assert.equal(channelFromRuns(ruTeam, 1, 'ukrainian'), null);
+    // Nothing there, one word, rubbish: not known, and the key decides.
+    assert.equal(channelFromRuns([], 1), null);
+    assert.equal(channelFromRuns([[10, 28]], 1), null);
+    assert.equal(channelFromRuns([[0, 200]], 1), null);
+    assert.equal(channelFromRuns('x', 1), null);
+    assert.equal(channelFromRuns([[1, 'a']], 1), null);
+    // Ctrl+Shift+Enter is all chat whatever the screen says; the grab is
+    // asked only for plain Ctrl+Enter, and only for 250ms.
+    const main = fs.readFileSync(path.join('src', 'main.js'), 'utf8');
+    assert.match(main, /asked !== 'all' && watcher && watcher\.channel/);
+    assert.match(main, /setTimeout\(\(\) => r\(null\), 250\)/);
+    const ps = fs.readFileSync(path.join('src', 'rowgrab.ps1'), 'utf8');
+    assert.ok(ps.indexOf('if (-not $isGame)') < ps.indexOf('[RowGrab]::Chan('), 'the front-window check comes before the grab');
+  });
+
+  ok('the chat is read off the screen only when Dota runs in English, Russian or Spanish; other languages leave it to the key', async () => {
+    const { gameLanguage } = await import('./src/gsiconfig.js');
+    const acf = (lang) => '"AppState"\n{\n\t"appid"\t\t"570"\n\t"UserConfig"\n\t{\n\t\t"language"\t\t"' + lang + '"\n\t}\n}';
+    const dir = path.join('lib', 'steamapps', 'common', 'dota 2 beta', 'game', 'dota');
+    let asked = '';
+    assert.equal(gameLanguage(dir, { read: (f) => { asked = f; return acf('russian'); } }), 'russian');
+    assert.equal(asked, path.join('lib', 'steamapps', 'appmanifest_570.acf'));
+    assert.equal(gameLanguage(dir, { read: () => acf('english') }), 'english');
+    assert.equal(gameLanguage(dir, { read: () => { throw new Error('no file'); } }), '');
+    assert.equal(gameLanguage(null), '');
+    const w = fs.readFileSync(path.join('src', 'gsiwatcher.js'), 'utf8');
+    assert.match(w, /readsChat = rows && \['', 'english', 'russian', 'spanish', 'latam'\]\.includes\(lang\)/);
+    assert.match(w, /channel: readsChat \? \(\) => rows\.channel\(\)\.then\(\(r\) => \(r \? channelFromRuns\(r\.runs, r\.s, lang \|\| 'english'\) : null\)\)/);
+  });
+
+  await okAsync('a portrait only a little ahead of the next best names nobody', async () => {
+    // The user, 2026-09-27: a teammate's line showed Bounty Hunter, who was
+    // not even in the game. Every right answer measured won by 0.22 or more.
+    const child = new EventEmitter();
+    child.stdout = new EventEmitter(); child.stdout.setEncoding = () => {};
+    child.stdin = new EventEmitter(); child.stdin.write = () => {};
+    child.kill = () => {};
+    const g = startRowGrab({ refs: 'x', spawnImpl: () => child, timeoutMs: 50 });
+    child.stdout.emit('data', '{"t":"ready","refs":143}\n');
+    let p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":1,"ok":1,"hero":"bounty_hunter","score":0.84,"second":"lina","score2":0.78}\n');
+    assert.equal(await p, null);
+    p = g.identify();
+    child.stdout.emit('data', '{"t":"row","id":2,"ok":1,"hero":"lina","score":0.91,"second":"bounty_hunter","score2":0.6}\n');
+    assert.deepEqual(await p, { hero: 'lina', score: 0.91 });
+    g.stop();
+  });
+
   await okAsync('gsi row grab: the helper is asked a line at a time, only a sure answer counts, it never opens the game nor presses a key', async () => {
     const child = new EventEmitter();
     const wrote = [];
@@ -2049,6 +2287,22 @@ ok('gsi mode reads no memory: nothing of it opens the game, reads it, or starts 
     chat.payload(body('76561198000000001'));
     chat.payload(body('76561198000000001'));
     assert.deepEqual(heard, ['76561198000000001']);
+  });
+
+  ok('the player\'s own seat, name and hero come from the feed, and change with the match', () => {
+    // The user, 2026-09-27: their own line showed last game's Bounty Hunter
+    // while they played Lina - "who am I" was only ever learnt from a line.
+    const body = (matchid, hero) => JSON.stringify({ provider: {}, map: { matchid }, player: { name: 'me', team_name: 'dire', team_slot: 1 }, hero: { name: 'npc_dota_hero_' + hero }, events: [] });
+    const heard = [];
+    const chat = createGsiChat({ onSelf: (s) => heard.push(s && s.hero) });
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('1', 'bounty_hunter'));
+    chat.payload(body('2', 'lina'));
+    assert.deepEqual(heard, ['bounty_hunter', 'lina']);
+    assert.deepEqual(readGsiPayload(body('2', 'lina')).self, { slot: 6, name: 'me', hero: 'lina' });
+    // A spectator is nobody.
+    assert.equal(readGsiPayload(JSON.stringify({ provider: {}, player: { team2: { player0: { name: 'x' } } } })).self, null);
+    assert.match(fs.readFileSync(path.join('src', 'main.js'), 'utf8'), /onSelf: \(self\) => \{ me = /);
   });
 
   ok('hosted: the app only uses it with no key of the player\'s own, it is off until there is an address, and the server is not in this repository', () => {

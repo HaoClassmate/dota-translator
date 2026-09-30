@@ -5,6 +5,10 @@
 #
 #   row <id>          the portrait beside the newest chat row
 #   seat <id> <0-9>   the fallback: that seat's tile of the top bar
+#   chan <id>         which chat is open: the bright columns of the chat
+#                     input's first words ("To (Allies):" or "To (All):"),
+#                     answered as {"t":"chan","id":7,"ok":1,"s":1.0,"runs":[[a,b],...]}
+#                     - src/rowgrab.js reads the words out of them
 #
 # and answers one JSON line:
 #
@@ -134,6 +138,41 @@ public static class RowGrab {
     }
   }
 
+  // Which chat is open (the user, 2026-09-27: Ctrl+Enter sent a line meant
+  // for all chat to the team). MEASURED on the user's 1080p screenshots: the
+  // chat input's text is 766-781 down, starting 399 left of centre. A strip
+  // round it is grabbed and its BRIGHT columns (the cream text on the dark
+  // bar) given back as runs, in the strip's pixels; the caller finds the
+  // words and compares "(Allies):" / "(All):" with "To" - a ratio, so any
+  // screen size.
+  public static string Chan(int gx, int gy, int gw, int gh) {
+    double s = gh / 1080.0;
+    int bx = (int)Math.Floor(gx + gw / 2.0 - 410 * s), by = (int)Math.Floor(gy + 760 * s);
+    int bw = (int)Math.Ceiling(260 * s), bh = (int)Math.Ceiling(27 * s);
+    using (var bmp = new Bitmap(bw, bh)) {
+      using (var g = Graphics.FromImage(bmp)) g.CopyFromScreen(bx, by, 0, 0, bmp.Size);
+      return Runs(bmp, s);
+    }
+  }
+
+  public static string Runs(Bitmap bmp, double s) {
+    var sb = new System.Text.StringBuilder();
+    int start = -1, n = 0;
+    for (int x = 0; x <= bmp.Width; x++) {
+      bool lit = false;
+      if (x < bmp.Width) for (int y = 0; y < bmp.Height && !lit; y++) {
+        Color c = bmp.GetPixel(x, y);
+        if (Math.Max(c.R, Math.Max(c.G, c.B)) > 200) lit = true;
+      }
+      if (lit && start < 0) start = x;
+      if (!lit && start >= 0) {
+        if (n < 60) sb.Append(n++ == 0 ? "" : ",").Append("[" + start + "," + (x - 1) + "]");
+        start = -1;
+      }
+    }
+    return "\"ok\":1,\"s\":" + s.ToString("F4", System.Globalization.CultureInfo.InvariantCulture) + ",\"runs\":[" + sb + "]";
+  }
+
   // The same question of a saved picture (tools/rowcheck.mjs): the tile at
   // ox,oy in the file's own pixels.
   public static string MatchFile(string file, double ox, double oy, double tw, double th, int slack, bool top) {
@@ -193,7 +232,7 @@ while ($true) {
     $inv = [System.Globalization.CultureInfo]::InvariantCulture
     try { $answer = [RowGrab]::MatchFile($p[6], [double]::Parse($p[2], $inv), [double]::Parse($p[3], $inv), [double]::Parse($p[4], $inv), [double]::Parse($p[5], $inv), $(if ($p[0] -eq 'topfile') { 6 } else { $Slack }), ($p[0] -eq 'topfile')) }
     catch { $answer = '"ok":0,"why":"could not read the picture"' }
-  } elseif ($p[0] -ne 'row' -and -not ($p[0] -eq 'seat' -and $p.Length -eq 3 -and $p[2] -match '^[0-9]$')) { continue }
+  } elseif ($p[0] -ne 'row' -and $p[0] -ne 'chan' -and -not ($p[0] -eq 'seat' -and $p.Length -eq 3 -and $p[2] -match '^[0-9]$')) { continue }
   else { try {
     $x = 0; $y = 0; $w = 0; $h = 0
     $owner = [RowGrab]::Front([ref]$x, [ref]$y, [ref]$w, [ref]$h)
@@ -206,11 +245,13 @@ while ($true) {
     }
     if (-not $isGame) { $answer = '"ok":0,"why":"the game is not in front"' }
     elseif ($h -lt 400 -or $w -lt 600) { $answer = '"ok":0,"why":"the game window is too small"' }
+    elseif ($p[0] -eq 'chan') { $answer = [RowGrab]::Chan($x, $y, $w, $h) }
     elseif ($p[0] -eq 'seat') { $answer = [RowGrab]::MatchSeat($x, $y, $w, $h, [int]$p[2], 6) }
     else { $answer = [RowGrab]::Match($x, $y, $w, $h, $Slack) }
   } catch {
     $answer = '"ok":0,"why":"grab failed"'
   } }
-  [Console]::Out.WriteLine('{"t":"row","id":' + $p[1] + ',' + $answer + '}')
+  $t = $(if ($p[0] -eq 'chan') { 'chan' } else { 'row' })
+  [Console]::Out.WriteLine('{"t":"' + $t + '","id":' + $p[1] + ',' + $answer + '}')
   [Console]::Out.Flush()
 }

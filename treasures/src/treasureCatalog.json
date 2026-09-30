@@ -1,0 +1,6001 @@
+[
+  {
+    "id": 13780,
+    "name": "Immortal Treasure I 2020",
+    "year": "2020",
+    "releaseDate": "2020-05-25",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/ti10_immortal_treasure_1",
+    "ordinary": [
+      {
+        "id": 13777,
+        "name": "Arcanic Resonance Beam",
+        "hero": "Tinker",
+        "heroCode": "tinker",
+        "previewKind": "hero",
+        "image": "econ/items/tinker/tinker_ti10_immortal_laser/tinker_ti10_immortal_laser",
+        "pieces": [
+          "Arcanic Resonance Beam"
+        ]
+      },
+      {
+        "id": 13776,
+        "name": "Shadow of the Dark Age",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/items/nightstalker/ns_ti10_immortal_arms/ns_ti10_immortal_arms",
+        "pieces": [
+          "Shadow of the Dark Age"
+        ]
+      },
+      {
+        "id": 13809,
+        "name": "Warden of the Hellborn",
+        "hero": "Warlock",
+        "heroCode": "warlock",
+        "previewKind": "hero",
+        "image": "econ/items/warlock/warlock_ti10_immortal_head/warlock_ti10_immortal_head",
+        "pieces": [
+          "Warden of the Hellborn"
+        ]
+      },
+      {
+        "id": 13787,
+        "name": "Dark Maw Inhibitor",
+        "hero": "Life Stealer",
+        "heroCode": "life_stealer",
+        "previewKind": "hero",
+        "image": "econ/items/lifestealer/ls_ti10_immortal_head/ls_ti10_immortal_head",
+        "pieces": [
+          "Dark Maw Inhibitor"
+        ]
+      },
+      {
+        "id": 13773,
+        "name": "Prominence",
+        "hero": "Keeper Of The Light",
+        "heroCode": "keeper_of_the_light",
+        "previewKind": "hero",
+        "image": "econ/items/keeper_of_the_light/kotl_ti10_immortal_weapon/kotl_ti10_immortal_weapon",
+        "pieces": [
+          "Prominence"
+        ]
+      },
+      {
+        "id": 13778,
+        "name": "Fate of Hydrophiinae",
+        "hero": "Medusa",
+        "heroCode": "medusa",
+        "previewKind": "hero",
+        "image": "econ/items/medusa/medusa_ti10_immortal_tail/medusa_ti10_immortal_tail",
+        "pieces": [
+          "Fate of Hydrophiinae"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 13767,
+        "name": "Blossom of the Merry Wanderer",
+        "hero": "Puck",
+        "heroCode": "puck",
+        "previewKind": "hero",
+        "image": "econ/items/puck/puck_ti10_immortal_wings/puck_ti10_immortal_wings",
+        "pieces": [
+          "Blossom of the Merry Wanderer"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 13813,
+        "name": "Golden Shadow of the Dark Age",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/items/nightstalker/ns_ti10_immortal_arms/ns_ti10_immortal_arms1",
+        "pieces": [
+          "Golden Shadow of the Dark Age"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 13818,
+        "name": "Golden Dark Maw Inhibitor",
+        "hero": "Life Stealer",
+        "heroCode": "life_stealer",
+        "previewKind": "hero",
+        "image": "econ/items/lifestealer/ls_ti10_immortal_head/ls_ti10_immortal_head_gold",
+        "pieces": [
+          "Golden Dark Maw Inhibitor"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 21426,
+        "name": "The Abscesserator Bundle",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Abscesserator_Bundle",
+        "pieces": [
+          "Pudge's Bare Arm",
+          "The Abscesserator"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 13815,
+        "name": "Emblem of Divinity",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti10_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 13792,
+    "name": "Wintry Treasure 2022",
+    "year": "2022",
+    "releaseDate": "2022-11-11",
+    "kind": "TREASURE",
+    "icon": "econ/tools/plus_winter_2022_treasure",
+    "ordinary": [
+      {
+        "id": 23450,
+        "name": "Obsidian Atrocity",
+        "hero": "Life Stealer",
+        "heroCode": "life_stealer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Lava_Stealer",
+        "pieces": [
+          "Obsidian Atrocity - Head",
+          "Obsidian Atrocity - Back",
+          "Obsidian Atrocity - Arms",
+          "Obsidian Atrocity - Belt"
+        ]
+      },
+      {
+        "id": 26887,
+        "name": "Whirls of the Winter Wind",
+        "hero": "Storm Spirit",
+        "heroCode": "storm_spirit",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/frozen_whirlwind_frozen_whirlwinds_loadingscreen",
+        "pieces": [
+          "Whirls of the Winter Wind - Loading Screen",
+          "Whirls of the Winter Wind - Armor",
+          "Whirls of the Winter Wind - Arms",
+          "Whirls of the Winter Wind - Head"
+        ]
+      },
+      {
+        "id": 26901,
+        "name": "Downfall of the Howling Hearth",
+        "hero": "Vengefulspirit",
+        "heroCode": "vengefulspirit",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/vengeful_valkyrie_loading_screen",
+        "pieces": [
+          "Downfall of the Howling Hearth - Legs",
+          "Downfall of the Howling Hearth - Shoulders",
+          "Downfall of the Howling Hearth - Weapon",
+          "Downfall of the Howling Hearth - Head",
+          "Downfall of the Howling Hearth - Loading Screen"
+        ]
+      },
+      {
+        "id": 26886,
+        "name": "Truculent Tidings",
+        "hero": "Spirit Breaker",
+        "heroCode": "spirit_breaker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/krampus_scourge_of_frostivus_loadingscreen",
+        "pieces": [
+          "Truculent Tidings - Weapon",
+          "Truculent Tidings - Belt",
+          "Truculent Tidings - Loading Screen",
+          "Truculent Tidings - Arms",
+          "Truculent Tidings - Tail",
+          "Truculent Tidings - Shoulder",
+          "Truculent Tidings - Head"
+        ]
+      },
+      {
+        "id": 26917,
+        "name": "Spoils of the Shattered Fates",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Three_Eyes_Raven_set__Frostivus_2018",
+        "pieces": [
+          "Spoils of the Shattered Fates - Weapon",
+          "Spoils of the Shattered Fates - Head",
+          "Spoils of the Shattered Fates - Back",
+          "Spoils of the Shattered Fates - Armor"
+        ]
+      },
+      {
+        "id": 21715,
+        "name": "Frightful Revelries",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Frightstalker",
+        "pieces": [
+          "Frightful Revelries Tail",
+          "Frightful Revelries Legs",
+          "Frightful Revelries Hood",
+          "Frightful Revelries Wings",
+          "Frightful Revelries Bracers"
+        ]
+      },
+      {
+        "id": 26924,
+        "name": "Blades of the Terraforge",
+        "hero": "Elder Titan",
+        "heroCode": "elder_titan",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/frostivus_2018forgemaster_loading",
+        "pieces": [
+          "Blades of the Terraforge - Back",
+          "Blades of the Terraforge - Arms",
+          "Blades of the Terraforge - Loading Screen",
+          "Blades of the Terraforge - Weapon",
+          "Blades of the Terraforge - Shoulder",
+          "Blades of the Terraforge - Head"
+        ]
+      },
+      {
+        "id": 26931,
+        "name": "Sorrows of the Sunken City",
+        "hero": "Sven",
+        "heroCode": "sven",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Legacy_of_the_Forgotten_Knight",
+        "pieces": [
+          "Sorrows of the Sunken City - Weapon",
+          "Sorrows of the Sunken City - Shoulder",
+          "Sorrows of the Sunken City - Head",
+          "Sorrows of the Sunken City - Belt",
+          "Sorrows of the Sunken City - Arms",
+          "Sorrows of the Sunken City - Back"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 18411,
+        "name": "Frosty the Seadragon",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/items/courier/frosty_the_courier/frosty_the_courier",
+        "pieces": [],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      }
+    ]
+  },
+  {
+    "id": 13795,
+    "name": "Immortal Treasure II 2020",
+    "year": "2020",
+    "releaseDate": "2020-07-24",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/ti10_immortal_treasure_2",
+    "ordinary": [
+      {
+        "id": 13811,
+        "name": "Vigil Odyssey",
+        "hero": "Sven",
+        "heroCode": "sven",
+        "previewKind": "hero",
+        "image": "econ/items/sven/sven_ti10_immortal_head/sven_ti10_immortal_head",
+        "pieces": [
+          "Vigil Odyssey"
+        ]
+      },
+      {
+        "id": 14295,
+        "name": "Eyes of Ardenok",
+        "hero": "Magnataur",
+        "heroCode": "magnataur",
+        "previewKind": "hero",
+        "image": "econ/items/magnataur/magnus_ti10_immortal_head/magnus_ti10_immortal_head",
+        "pieces": [
+          "Eyes of Ardenok"
+        ]
+      },
+      {
+        "id": 13814,
+        "name": "Fin of the First Spear",
+        "hero": "Slardar",
+        "heroCode": "slardar",
+        "previewKind": "hero",
+        "image": "econ/items/slardar/slardar_ti10_immortal_head/slardar_ti10_immortal_head",
+        "pieces": [
+          "Fin of the First Spear"
+        ]
+      },
+      {
+        "id": 14296,
+        "name": "Scale of Bitter Spoil",
+        "hero": "Troll Warlord",
+        "heroCode": "troll_warlord",
+        "previewKind": "hero",
+        "image": "econ/items/troll_warlord/troll_ti10_immortal_shoulder/troll_ti10_immortal_shoulder",
+        "pieces": [
+          "Scale of Bitter Spoil"
+        ]
+      },
+      {
+        "id": 13819,
+        "name": "Awaleb's Trundleweed",
+        "hero": "Witch Doctor",
+        "heroCode": "witch_doctor",
+        "previewKind": "hero",
+        "image": "econ/items/witchdoctor/wd_ti10_immortal_weapon/wd_ti10_immortal_weapon",
+        "pieces": [
+          "Awaleb's Trundleweed"
+        ]
+      },
+      {
+        "id": 14962,
+        "name": "Aspect of Oscilla",
+        "hero": "Silencer",
+        "heroCode": "silencer",
+        "previewKind": "hero",
+        "image": "econ/items/silencer/silencer_ti10_immortal_shield/silencer_ti10_immortal_shield",
+        "pieces": [
+          "Aspect of Oscilla"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 14949,
+        "name": "Pyrexaec Forge",
+        "hero": "Jakiro",
+        "heroCode": "jakiro",
+        "previewKind": "hero",
+        "image": "econ/items/jakiro/jakiro_ti10_immortal_wings/jakiro_ti10_immortal_wings",
+        "pieces": [
+          "Pyrexaec Forge"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 14975,
+        "name": "Golden Awaleb's Trundleweed",
+        "hero": "Witch Doctor",
+        "heroCode": "witch_doctor",
+        "previewKind": "hero",
+        "image": "econ/items/witchdoctor/wd_ti10_immortal_weapon/wd_ti10_immortal_weapon1",
+        "pieces": [
+          "Golden Awaleb's Trundleweed"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 14974,
+        "name": "Golden Fin of the First Spear",
+        "hero": "Slardar",
+        "heroCode": "slardar",
+        "previewKind": "hero",
+        "image": "econ/items/slardar/slardar_ti10_immortal_head/slardar_ti10_immortal_head1",
+        "pieces": [
+          "Golden Fin of the First Spear"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 21655,
+        "name": "Dipper the Destroyer Bundle",
+        "hero": "Ursa",
+        "heroCode": "ursa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Ursa_TI10_Bundle",
+        "pieces": [
+          "Taunt: Not Just Your Average Bear",
+          "Dipper the Destroyer"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 13815,
+        "name": "Emblem of Divinity",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti10_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 13796,
+    "name": "Immortal Treasure III 2020",
+    "year": "2020",
+    "releaseDate": "2020-09-15",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/ti10_immortal_treasure_3",
+    "ordinary": [
+      {
+        "id": 14998,
+        "name": "Perversions of the Bloodwhorl",
+        "hero": "Lich",
+        "heroCode": "lich",
+        "previewKind": "hero",
+        "image": "econ/items/lich/lich_ti10_immortal_head/lich_ti10_immortal_head",
+        "pieces": [
+          "Perversions of the Bloodwhorl"
+        ]
+      },
+      {
+        "id": 14954,
+        "name": "Sagas of the Cymurrin Sage",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/items/oracle/oracle_ti10_immortal_head/oracle_ti10_immortal_head",
+        "pieces": [
+          "Sagas of the Cymurrin Sage"
+        ]
+      },
+      {
+        "id": 14992,
+        "name": "Rabid Watchcog",
+        "hero": "Rattletrap",
+        "heroCode": "rattletrap",
+        "previewKind": "hero",
+        "image": "econ/items/rattletrap/clockwerk_ti10_immortal_weapon/clockwerk_ti10_immortal_weapon",
+        "pieces": [
+          "Rabid Watchcog"
+        ]
+      },
+      {
+        "id": 14965,
+        "name": "Eye of Ix'yxa",
+        "hero": "Pugna",
+        "heroCode": "pugna",
+        "previewKind": "hero",
+        "image": "econ/items/pugna/pugna_ti10_immortal_head/pugna_ti10_immortal_head",
+        "pieces": [
+          "Eye of Ix'yxa"
+        ]
+      },
+      {
+        "id": 14991,
+        "name": "Stuntwood Symbiont",
+        "hero": "Treant",
+        "heroCode": "treant",
+        "previewKind": "hero",
+        "image": "econ/items/treant/treant_ti10_immortal_head/treant_ti10_immortal_head",
+        "pieces": [
+          "Stuntwood Symbiont"
+        ]
+      },
+      {
+        "id": 14967,
+        "name": "B.U.S.T.E.R",
+        "hero": "Gyrocopter",
+        "heroCode": "gyrocopter",
+        "previewKind": "hero",
+        "image": "econ/items/gyrocopter/gyro_ti10_immortal_missile/gyro_ti10_immortal_missile",
+        "pieces": [
+          "B.U.S.T.E.R"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 17665,
+        "name": "The International 10 - 50 Battle Pass Levels",
+        "hero": "Tool",
+        "heroCode": null,
+        "previewKind": "icon",
+        "image": "econ/tools/battle_points_ti10_levels_24",
+        "pieces": [],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 13755,
+        "name": "Golden Eye of Ix'yxa",
+        "hero": "Pugna",
+        "heroCode": "pugna",
+        "previewKind": "hero",
+        "image": "econ/items/pugna/pugna_ti10_immortal_head/pugna_ti10_immortal_head1",
+        "pieces": [
+          "Golden Eye of Ix'yxa"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 14993,
+        "name": "Solar Gyre",
+        "hero": "Phoenix",
+        "heroCode": "phoenix",
+        "previewKind": "hero",
+        "image": "econ/items/phoenix/phoenix_ti10_immortal_back/phoenix_ti10_immortal_back",
+        "pieces": [
+          "Solar Gyre"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 13815,
+        "name": "Emblem of Divinity",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti10_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 23228,
+    "name": "Chest of Endless Days",
+    "year": "2022",
+    "releaseDate": "2022-05-03",
+    "kind": "TREASURE CHEST",
+    "icon": "econ/tools/treasure_chest_hallowed2022",
+    "ordinary": [
+      {
+        "id": 21454,
+        "name": "Madness of the Amaranth Orb",
+        "hero": "Luna",
+        "heroCode": "luna",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Madness_of_the_Amaranth_Orb",
+        "pieces": [
+          "Madness of the Amaranth Orb Head",
+          "Madness of the Amaranth Orb Shoulder",
+          "Madness of the Amaranth Orb Mount",
+          "Madness of the Amaranth Orb Off-Hand",
+          "Madness of the Amaranth Orb Weapon"
+        ]
+      },
+      {
+        "id": 21485,
+        "name": "Faceless Destiny",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Faceless_Destiny",
+        "pieces": [
+          "Faceless Destiny Weapon",
+          "Faceless Destiny Head",
+          "Faceless Destiny Shoulder",
+          "Faceless Destiny Armor"
+        ]
+      },
+      {
+        "id": 21714,
+        "name": "Vespoid Stalker",
+        "hero": "Weaver",
+        "heroCode": "weaver",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vespoid_Stalker",
+        "pieces": [
+          "Vespoid Stalker Back",
+          "Vespoid Stalker Head",
+          "Vespoid Stalker Arms",
+          "Vespoid Stalker Legs",
+          "Vespoid Stalker Misc"
+        ]
+      },
+      {
+        "id": 21498,
+        "name": "Prolific Planter",
+        "hero": "Nature's Prophet",
+        "heroCode": "furion",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Prolific_Planter",
+        "pieces": [
+          "Prolific Planter Back",
+          "Prolific Planter Neck",
+          "Prolific Planter Weapon",
+          "Prolific Planter Treants",
+          "Prolific Planter Shoulder",
+          "Prolific Planter Head",
+          "Prolific Planter Arms"
+        ]
+      },
+      {
+        "id": 21892,
+        "name": "Toll of the Netherblight",
+        "hero": "Viper",
+        "heroCode": "viper",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Toll_of_the_Netherblight",
+        "pieces": [
+          "Toll of the Netherblight Tail",
+          "Toll of the Netherblight Head",
+          "Toll of the Netherblight Back"
+        ]
+      },
+      {
+        "id": 21461,
+        "name": "Discipline of the Dark Star",
+        "hero": "Drow Ranger",
+        "heroCode": "drow_ranger",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Discipline_of_the_Dark_Star",
+        "pieces": [
+          "Discipline of the Dark Star Arms",
+          "Discipline of the Dark Star Back",
+          "Discipline of the Dark Star Head",
+          "Discipline of the Dark Star Legs",
+          "Discipline of the Dark Star Misc",
+          "Discipline of the Dark Star Shoulder",
+          "Discipline of the Dark Star Weapon"
+        ]
+      },
+      {
+        "id": 21833,
+        "name": "Unholy Harvest",
+        "hero": "Skeleton King",
+        "heroCode": "skeleton_king",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/cruel_heart_ls",
+        "pieces": [
+          "Unholy Harvest Armor",
+          "Unholy Harvest Arms",
+          "Unholy Harvest Back",
+          "Unholy Harvest Head",
+          "Unholy Harvest Loading screen",
+          "Unholy Harvest Shoulder",
+          "Unholy Harvest Weapon"
+        ]
+      },
+      {
+        "id": 21927,
+        "name": "Foxtail Libertine",
+        "hero": "Pangolier",
+        "heroCode": "pangolier",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/lord_fox_lord_fox_loading",
+        "pieces": [
+          "Foxtail Libertine Armor",
+          "Foxtail Libertine Head",
+          "Foxtail Libertine Loading Screen",
+          "Foxtail Libertine Off-Hand",
+          "Foxtail Libertine Weapon"
+        ]
+      },
+      {
+        "id": 21590,
+        "name": "Polar Night",
+        "hero": "Winter Wyvern",
+        "heroCode": "winter_wyvern",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Polar_Night",
+        "pieces": [
+          "Polar Night Head",
+          "Polar Night Back"
+        ]
+      },
+      {
+        "id": 21599,
+        "name": "Requiem for Red Wolf Clan",
+        "hero": "Lycan",
+        "heroCode": "lycan",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/_werewolf_samurai_ls",
+        "pieces": [
+          "Requiem for Red Wolf Clan Loading Screen",
+          "Requiem for Red Wolf Clan Wolf Form",
+          "Requiem for Red Wolf Clan Wolves",
+          "Requiem for Red Wolf Clan Weapon",
+          "Requiem for Red Wolf Clan Shoulders",
+          "Requiem for Red Wolf Clan Head",
+          "Requiem for Red Wolf Clan Belt",
+          "Requiem for Red Wolf Clan Armor"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21930,
+        "name": "Servant of the Sightless Shamans",
+        "hero": "Witch Doctor",
+        "heroCode": "witch_doctor",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Servant_of_the_Sightless_Shamans",
+        "pieces": [
+          "Servant of the Sightless Shamans Weapon",
+          "Servant of the Sightless Shamans Shoulder",
+          "Servant of the Sightless Shamans Ward",
+          "Servant of the Sightless Shamans Head",
+          "Servant of the Sightless Shamans Belt",
+          "Servant of the Sightless Shamans Back"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 23256,
+        "name": "Scourge of the Skyrangers",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_scourge_of_the_skyrangers",
+        "pieces": [
+          "Scourge of the Skyrangers Weapon",
+          "Scourge of the Skyrangers Tail",
+          "Scourge of the Skyrangers Back",
+          "Scourge of the Skyrangers Armor"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 23257,
+        "name": "Heir of Menace",
+        "hero": "Invoker",
+        "heroCode": "invoker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/the_little_king_ls",
+        "pieces": [
+          "Heir of Menace Shoulder",
+          "Heir of Menace Loading Screen",
+          "Heir of Menace Head",
+          "Heir of Menace Back",
+          "Heir of Menace Arms",
+          "Heir of Menace Armor",
+          "Acolyte of the Lost Arts"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 23662,
+    "name": "Immortal Treasure I 2022",
+    "year": "2022",
+    "releaseDate": "2022-06-29",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/bp_2022_treasure_1",
+    "ordinary": [
+      {
+        "id": 23127,
+        "name": "Infernal Cavalcade",
+        "hero": "Centaur",
+        "heroCode": "centaur",
+        "previewKind": "hero",
+        "image": "econ/items/centaur/cent_2022_immortal_horn/cent_2022_immortal_horn",
+        "pieces": [
+          "Infernal Cavalcade"
+        ]
+      },
+      {
+        "id": 23682,
+        "name": "Flutterstep",
+        "hero": "Enchantress",
+        "heroCode": "enchantress",
+        "previewKind": "hero",
+        "image": "econ/items/enchantress/ench_2022_immortal/ench_2022_immortal",
+        "pieces": [
+          "Flutterstep"
+        ]
+      },
+      {
+        "id": 23715,
+        "name": "Seclusions of the Void",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/items/lanaya/ta_2022_immortal/ta_2022_immortal",
+        "pieces": [
+          "Seclusions of the Void"
+        ]
+      },
+      {
+        "id": 23716,
+        "name": "Aktok's Glory",
+        "hero": "Venomancer",
+        "heroCode": "venomancer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Aktoks_Glory",
+        "pieces": [
+          "The Orb of Aktok",
+          "Avatars of Aktok"
+        ]
+      },
+      {
+        "id": 14241,
+        "name": "Everglyph Goggles",
+        "hero": "Meepo",
+        "heroCode": "meepo",
+        "previewKind": "hero",
+        "image": "econ/items/meepo/meepo_2021_immortal/meepo_2021_immortal",
+        "pieces": [
+          "Everglyph Goggles"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 23842,
+        "name": "Blastmitt Berserker Bundle",
+        "hero": "Bristleback",
+        "heroCode": "bristleback",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Blastmitt_Berserker_Bundle",
+        "pieces": [
+          "Blastmitt Boreblade",
+          "Savager's Serum",
+          "Blastmitt Berserker"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 23836,
+        "name": "Golden Seclusions of the Void",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/items/lanaya/ta_2022_immortal/ta_2022_immortal1",
+        "pieces": [
+          "Golden Seclusions of the Void"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 23837,
+        "name": "Golden Infernal Cavalcade",
+        "hero": "Centaur",
+        "heroCode": "centaur",
+        "previewKind": "hero",
+        "image": "econ/items/centaur/cent_2022_immortal_horn/cent_2022_immortal_horn1",
+        "pieces": [
+          "Golden Infernal Cavalcade"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 24051,
+        "name": "The Strings of Suradan Bundle",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_strings_of_suradan",
+        "pieces": [
+          "The Strings of Suradan",
+          "Taunt: In It for the Lute"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 23238,
+        "name": "Battle Pass 2022 Emblem",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti11_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 23663,
+    "name": "Immortal Treasure II 2022",
+    "year": "2022",
+    "releaseDate": "2022-06-29",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/bp_2022_treasure_2",
+    "ordinary": [
+      {
+        "id": 23344,
+        "name": "Limbs of Lycosidae",
+        "hero": "Broodmother",
+        "heroCode": "broodmother",
+        "previewKind": "hero",
+        "image": "econ/items/broodmother/bm_2022_immortal_legs/bm_2022_immortal_legs",
+        "pieces": [
+          "Limbs of Lycosidae"
+        ]
+      },
+      {
+        "id": 22716,
+        "name": "Draca Mane",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/items/huskar/husk_2022_immortal/husk_2022_immortal",
+        "pieces": [
+          "Draca Mane"
+        ]
+      },
+      {
+        "id": 23717,
+        "name": "Sullen Sanctum",
+        "hero": "Necrophos",
+        "heroCode": "necrolyte",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Sullen_Sanctum",
+        "pieces": [
+          "Sullen Shrine",
+          "Sullen Strands"
+        ]
+      },
+      {
+        "id": 23191,
+        "name": "Insight of Forlorn Precipice",
+        "hero": "Dark Seer",
+        "heroCode": "dark_seer",
+        "previewKind": "hero",
+        "image": "econ/items/dark_seer/ds_2022_immortal_head/ds_2022_immortal_head",
+        "pieces": [
+          "Insight of Forlorn Precipice"
+        ]
+      },
+      {
+        "id": 23628,
+        "name": "Draconic Divide",
+        "hero": "Dragon Knight",
+        "heroCode": "dragon_knight",
+        "previewKind": "hero",
+        "image": "econ/items/dragon_knight/dk_2022_immortal_shield/dk_2022_immortal_shield",
+        "pieces": [
+          "Draconic Divide"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 23655,
+        "name": "Tremors of the Tandem Storm",
+        "hero": "Disruptor",
+        "heroCode": "disruptor",
+        "previewKind": "hero",
+        "image": "econ/items/disruptor/dis_2022_immortal_mount/dis_2022_immortal_mount",
+        "pieces": [
+          "Tremors of the Tandem Storm"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 24877,
+        "name": "Golden Draca Mane",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/items/huskar/husk_2022_immortal/husk_2022_immortal1",
+        "pieces": [
+          "Golden Draca Mane"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 24880,
+        "name": "Golden Sullen Sanctum",
+        "hero": "Necrophos",
+        "heroCode": "necrolyte",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Golden_Sullen_Sanctum",
+        "pieces": [
+          "Golden Sullen Shrine",
+          "Golden Sullen Strands"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 24101,
+        "name": "Bloodfeather Finery",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_qop_2022_immortal_bundle",
+        "pieces": [
+          "Bloodfeather Boots",
+          "Taunt: Dancing Queen",
+          "Bloodfeather Frock"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 23238,
+        "name": "Battle Pass 2022 Emblem",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti11_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 23664,
+    "name": "The Battle Pass Collection 2022",
+    "year": "2022",
+    "releaseDate": "2022-06-29",
+    "kind": "TREASURE",
+    "icon": "econ/tools/ti11_battle_pass_collection",
+    "ordinary": [
+      {
+        "id": 22707,
+        "name": "Hides of Hostility",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Ironbound_Hunter",
+        "pieces": [
+          "Hides of Hostility - Weapon",
+          "Hides of Hostility - Head",
+          "Hides of Hostility - Shoulder",
+          "Hides of Hostility - Off-Hand",
+          "Hides of Hostility - Arms"
+        ]
+      },
+      {
+        "id": 21453,
+        "name": "Heat of the Sixth Hell",
+        "hero": "Doom Bringer",
+        "heroCode": "doom_bringer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_The_Smoldering_Tyrant",
+        "pieces": [
+          "Heat of the Sixth Hell - Shoulder",
+          "Heat of the Sixth Hell - Weapon",
+          "Heat of the Sixth Hell - Back",
+          "Heat of the Sixth Hell - Head",
+          "Heat of the Sixth Hell - Arms",
+          "Heat of the Sixth Hell - Tail",
+          "Heat of the Sixth Hell - Belt"
+        ]
+      },
+      {
+        "id": 21643,
+        "name": "Nefarious Fixations",
+        "hero": "Lion",
+        "heroCode": "lion",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Lion_Greedy_King",
+        "pieces": [
+          "Nefarious Fixations - Arms",
+          "Nefarious Fixations - Back",
+          "Nefarious Fixations - Head",
+          "Nefarious Fixations - Shoulder",
+          "Nefarious Fixations - Weapon"
+        ]
+      },
+      {
+        "id": 21577,
+        "name": "Distinguished Forgemaster",
+        "hero": "Rattletrap",
+        "heroCode": "rattletrap",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Clockwerk_Furnator",
+        "pieces": [
+          "Distinguished Forgemaster - Head",
+          "Distinguished Forgemaster - Misc",
+          "Distinguished Forgemaster - Weapon",
+          "Distinguished Forgemaster - Armor",
+          "Distinguished Forgemaster - Forge"
+        ]
+      },
+      {
+        "id": 23654,
+        "name": "Volcanic Sanctuary",
+        "hero": "Broodmother",
+        "heroCode": "broodmother",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_FireMother_Set",
+        "pieces": [
+          "Volcanic Sanctuary - Spiderling",
+          "Volcanic Sanctuary - Misc",
+          "Volcanic Sanctuary - Legs",
+          "Volcanic Sanctuary - Head",
+          "Volcanic Sanctuary - Back"
+        ]
+      },
+      {
+        "id": 23450,
+        "name": "Obsidian Atrocity",
+        "hero": "Life Stealer",
+        "heroCode": "life_stealer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Lava_Stealer",
+        "pieces": [
+          "Obsidian Atrocity - Head",
+          "Obsidian Atrocity - Back",
+          "Obsidian Atrocity - Arms",
+          "Obsidian Atrocity - Belt"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21895,
+        "name": "Charms of the Firefiend",
+        "hero": "Batrider",
+        "heroCode": "batrider",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Sacred__fire",
+        "pieces": [
+          "Charms of the Firefiend - Belt",
+          "Charms of the Firefiend - Head",
+          "Charms of the Firefiend - Mount",
+          "Charms of the Firefiend - Shoulder",
+          "Charms of the Firefiend Loading Screen"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 21557,
+        "name": "Molten Bore",
+        "hero": "Mars",
+        "heroCode": "mars",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Mars_Divine_soldier",
+        "pieces": [
+          "Molten Bore - Armor",
+          "Molten Bore - Legs",
+          "Molten Bore - Off-Hand",
+          "Molten Bore - Weapon"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 23238,
+        "name": "Battle Pass 2022 Emblem",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti11_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 23686,
+    "name": "Ageless Heirlooms 2022",
+    "year": "2022",
+    "releaseDate": "2022-06-27",
+    "kind": "IMMORTAL TREASURE",
+    "icon": "econ/tools/International_2022_ageless_heirlooms_treasure",
+    "ordinary": [
+      {
+        "id": 23642,
+        "name": "Howls of the Northmarch",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Northern_Veteran",
+        "pieces": [
+          "Howls of the Northmarch - Offhand",
+          "Howls of the Northmarch - Mainhand",
+          "Howls of the Northmarch - Hair",
+          "Howls of the Northmarch - Armor",
+          "Howls of the Northmarch - Shoulders",
+          "Howls of the Northmarch - Belt",
+          "Howls of the Northmarch - Bracers"
+        ]
+      },
+      {
+        "id": 21972,
+        "name": "Faction of the Feather",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Death_Bearing_Wings",
+        "pieces": [
+          "Faction of the Feather - Armor",
+          "Faction of the Feather - Head",
+          "Faction of the Feather Loading Screen",
+          "Faction of the Feather - Shoulder",
+          "Faction of the Feather - Weapon"
+        ]
+      },
+      {
+        "id": 21907,
+        "name": "Melange of the Firelord",
+        "hero": "Chaos Knight",
+        "heroCode": "chaos_knight",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/majestic_firelord_ls",
+        "pieces": [
+          "Melange of the Firelord - Weapon",
+          "Melange of the Firelord - Shoulder",
+          "Melange of the Firelord - Off-Hand",
+          "Melange of the Firelord - Mount",
+          "Melange of the Firelord Loading Screen",
+          "Melange of the Firelord - Head"
+        ]
+      },
+      {
+        "id": 21605,
+        "name": "Heinous Exultation",
+        "hero": "Razor",
+        "heroCode": "razor",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Razor_Silver_Revenant",
+        "pieces": [
+          "Heinous Exultation - Armor",
+          "Heinous Exultation - Belt",
+          "Heinous Exultation - Arms",
+          "Heinous Exultation - Head",
+          "Heinous Exultation - Weapon"
+        ]
+      },
+      {
+        "id": 23707,
+        "name": "Tangled Tropics",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Path_of_the_Jungle",
+        "pieces": [
+          "Tangled Tropics - Head",
+          "Tangled Tropics - Shoulder",
+          "Tangled Tropics - Armor",
+          "Tangled Tropics - Weapon"
+        ]
+      },
+      {
+        "id": 21452,
+        "name": "Fury of the Thunderhawk",
+        "hero": "Zeus",
+        "heroCode": "zuus",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/thunder_hawk_thunder_hawk",
+        "pieces": [
+          "Fury of the Thunderhawk - Head",
+          "Fury of the Thunderhawk - Belt",
+          "Fury of the Thunderhawk - Back",
+          "Fury of the Thunderhawk - Arms",
+          "Fury of the Thunderhawk Loading Screen"
+        ]
+      },
+      {
+        "id": 21601,
+        "name": "Oaths of the Beloved",
+        "hero": "Death Prophet",
+        "heroCode": "death_prophet",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_DP_bloody_bride",
+        "pieces": [
+          "Oaths of the Beloved - Head",
+          "Oaths of the Beloved - Armor",
+          "Oaths of the Beloved - Belt",
+          "Oaths of the Beloved - Misc",
+          "Oaths of the Beloved - Legs",
+          "Oaths of the Beloved - Ghosts",
+          "Oaths of the Beloved Loading Screen"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21576,
+        "name": "Twilight Legions",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_NS_Twilight_Manticore",
+        "pieces": [
+          "Twilight Legions - Tail",
+          "Twilight Legions - Wings",
+          "Twilight Legions - Legs",
+          "Twilight Legions - Arms",
+          "Twilight Legions - Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 21765,
+        "name": "Jewels of Anamnessa",
+        "hero": "Medusa",
+        "heroCode": "medusa",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/jewelled_splendor_ls",
+        "pieces": [
+          "Jewels of Anamnessa - Armor",
+          "Jewels of Anamnessa - Arms",
+          "Jewels of Anamnessa - Head",
+          "Jewels of Anamnessa Loading Screen",
+          "Jewels of Anamnessa - Tail",
+          "Jewels of Anamnessa - Weapon"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 23711,
+        "name": "Wings of Imperium",
+        "hero": "Mars",
+        "heroCode": "mars",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Imperial_Envoy",
+        "pieces": [
+          "Wings of Imperium - Off-Hand",
+          "Wings of Imperium - Weapon",
+          "Wings of Imperium - Legs",
+          "Wings of Imperium - Armor"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 23238,
+        "name": "Battle Pass 2022 Emblem",
+        "hero": "Emblem",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/tools/ti11_emblem",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 23741,
+    "name": "Autumnal Treasure 2022",
+    "year": "2022",
+    "releaseDate": "2022-07-21",
+    "kind": "TREASURE",
+    "icon": "econ/tools/plus_fall_2022_treasure",
+    "ordinary": [
+      {
+        "id": 23740,
+        "name": "Amethyst Influx",
+        "hero": "Razor",
+        "heroCode": "razor",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/fulminous_punisher_screen",
+        "pieces": [
+          "Amethyst Influx - Armor",
+          "Amethyst Influx - Weapon",
+          "Amethyst Influx Loading Screen",
+          "Amethyst Influx - Head",
+          "Amethyst Influx - Belt",
+          "Amethyst Influx - Arms"
+        ]
+      },
+      {
+        "id": 23520,
+        "name": "Golden Monarch",
+        "hero": "Naga Siren",
+        "heroCode": "naga_siren",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_feathers_of_the_queen_of_the_deep",
+        "pieces": [
+          "Golden Monarch - Off-Hand",
+          "Golden Monarch - Crown",
+          "Golden Monarch - Armor",
+          "Golden Monarch - Legs",
+          "Golden Monarch - Weapon"
+        ]
+      },
+      {
+        "id": 22505,
+        "name": "Baubles of the Preening King",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/return_of_the_monkey_king_loading",
+        "pieces": [
+          "Baubles of the Preening King - Shoulder",
+          "Baubles of the Preening King Loading Screen",
+          "Baubles of the Preening King - Weapon",
+          "Baubles of the Preening King - Crown",
+          "Baubles of the Preening King - Armor"
+        ]
+      },
+      {
+        "id": 23518,
+        "name": "Riftstalker",
+        "hero": "Disruptor",
+        "heroCode": "disruptor",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/thunder_rage_thunder_rage_loadingscreen",
+        "pieces": [
+          "Riftstalker Loading Screen",
+          "Riftstalker - Weapon",
+          "Riftstalker - Head",
+          "Riftstalker - Shoulder",
+          "Riftstalker - Back",
+          "Riftstalker - Arms",
+          "Riftstalker - Mount"
+        ]
+      },
+      {
+        "id": 22506,
+        "name": "Omens of Empire",
+        "hero": "Obsidian Destroyer",
+        "heroCode": "obsidian_destroyer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Omen_of_Osiris",
+        "pieces": [
+          "Omens of Empire - Armor",
+          "Omens of Empire - Head",
+          "Omens of Empire - Weapon",
+          "Omens of Empire - Wings"
+        ]
+      },
+      {
+        "id": 23750,
+        "name": "Piercing Grace",
+        "hero": "Medusa",
+        "heroCode": "medusa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Snake_And_Scorpion",
+        "pieces": [
+          "Piercing Grace - Head",
+          "Piercing Grace - Armor",
+          "Piercing Grace - Arms",
+          "Piercing Grace - Weapon",
+          "Piercing Grace - Tail"
+        ]
+      },
+      {
+        "id": 23800,
+        "name": "Disquiet Solitude",
+        "hero": "Phantom Lancer",
+        "heroCode": "phantom_lancer",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/winning_buddha_loading",
+        "pieces": [
+          "Disquiet Solitude Loading Screen",
+          "Disquiet Solitude - Belt",
+          "Disquiet Solitude - Weapon",
+          "Disquiet Solitude - Head",
+          "Disquiet Solitude - Shoulder",
+          "Disquiet Solitude - Arms"
+        ]
+      },
+      {
+        "id": 23783,
+        "name": "The Stars of Seraphus",
+        "hero": "Skywrath Mage",
+        "heroCode": "skywrath_mage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Seraphic_Apotheosis",
+        "pieces": [
+          "The Stars of Seraphus - Shining Helm",
+          "The Stars of Seraphus - Wings",
+          "The Stars of Seraphus - Weapon",
+          "The Stars of Seraphus - Shoulder",
+          "The Stars of Seraphus - Belt",
+          "The Stars of Seraphus - Bracer"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 23519,
+        "name": "Eager Drocsnozzle",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/items/courier/loco_the_crocodile_courier/loco_the_crocodile_courier",
+        "pieces": [],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      }
+    ]
+  },
+  {
+    "id": 24147,
+    "name": "Summer Treasure 2023",
+    "year": "2023",
+    "releaseDate": "2023-06-01",
+    "kind": "TREASURE",
+    "icon": "econ/tools/plus_summer_2023_treasure",
+    "ordinary": [
+      {
+        "id": 24196,
+        "name": "Sire's Pride",
+        "hero": "Zeus",
+        "heroCode": "zuus",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/pride_of_olympus_loading_screen",
+        "pieces": [
+          "Sire's Pride - Hephaestus' Masterpiece",
+          "Sire's Pride - Hermes' Gift",
+          "Sire's Pride - Loading Screen",
+          "Sire's Pride - Ares' Valor",
+          "Sire's Pride - Athena's Respect"
+        ]
+      },
+      {
+        "id": 24190,
+        "name": "Fangs of the Firelord",
+        "hero": "Ember Spirit",
+        "heroCode": "ember_spirit",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/ember_spirit_loadingscreen_of_the_yanlong_general",
+        "pieces": [
+          "Fangs of the Firelord - Shoulder",
+          "Fangs of the Firelord - Arms",
+          "Fangs of the Firelord - Loading Screen",
+          "Fangs of the Firelord - Belt",
+          "Fangs of the Firelord - Head",
+          "Fangs of the Firelord - Offhand",
+          "Fangs of the Firelord - Weapon"
+        ]
+      },
+      {
+        "id": 24181,
+        "name": "Crimson Crests",
+        "hero": "Axe",
+        "heroCode": "axe",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/call_of_battlefield_loading_screen",
+        "pieces": [
+          "Crimson Crests - Head",
+          "Crimson Crests - Armor",
+          "Crimson Crests - Belt",
+          "Crimson Crests - Weapon",
+          "Crimson Crests - Back",
+          "Crimson Crests - Loading Screen"
+        ]
+      },
+      {
+        "id": 24172,
+        "name": "Spoils of the Nomad King",
+        "hero": "Troll Warlord",
+        "heroCode": "troll_warlord",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spoils_of_the_Nomad_King",
+        "pieces": [
+          "Spoils of the Nomad King - Weapons",
+          "Spoils of the Nomad King - Armor",
+          "Spoils of the Nomad King - Head"
+        ]
+      },
+      {
+        "id": 24193,
+        "name": "Blossoms of the Wispwood",
+        "hero": "Treant",
+        "heroCode": "treant",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/serenity_of_the_old_master_loading_screen",
+        "pieces": [
+          "Blossoms of the Wispwood - Arms",
+          "Blossoms of the Wispwood - Legs",
+          "Blossoms of the Wispwood - Loading Screen",
+          "Blossoms of the Wispwood - Head",
+          "Blossoms of the Wispwood - Shoulder"
+        ]
+      },
+      {
+        "id": 24153,
+        "name": "Celestial Sight",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Celestial_Sight",
+        "pieces": [
+          "Celestial Sight - Head",
+          "Celestial Sight - Weapon",
+          "Celestial Sight - Armor",
+          "Celestial Sight - Back"
+        ]
+      },
+      {
+        "id": 24199,
+        "name": "Swarm of the Killer Queen",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/queen_of_pain_loadingscreen",
+        "pieces": [
+          "Swarm of the Killer Queen - Head",
+          "Swarm of the Killer Queen - Armor",
+          "Swarm of the Killer Queen - Dagger",
+          "Swarm of the Killer Queen - Loading Screen",
+          "Swarm of the Killer Queen - Wings"
+        ]
+      },
+      {
+        "id": 24160,
+        "name": "Dark Dune Symbiote",
+        "hero": "Sand King",
+        "heroCode": "sand_king",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/sandking_jungle_symbiosis_loading_screen",
+        "pieces": [
+          "Dark Dune Symbiote - Head",
+          "Dark Dune Symbiote - Arms",
+          "Dark Dune Symbiote - Legs",
+          "Dark Dune Symbiote - Shoulders",
+          "Dark Dune Symbiote - Back",
+          "Dark Dune Symbiote - Loading Screen"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28113,
+        "name": "Moil the Fettered",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/items/courier/rayth_the_roaming_shade/rayth_the_roaming_shade",
+        "pieces": [],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      }
+    ]
+  },
+  {
+    "id": 24613,
+    "name": "August 2023 Collector's Cache",
+    "year": "2023",
+    "releaseDate": "2023-07-07",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/loadout_armory_2023_treasure",
+    "ordinary": [
+      {
+        "id": 26802,
+        "name": "Primeval Abomination",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/pb_unchained_calamity_loading_screen",
+        "pieces": [
+          "Primeval Abomination Loading Screen",
+          "Primeval Abomination Arms",
+          "Primeval Abomination Legs",
+          "Primeval Abomination Head",
+          "Primeval Abomination Back"
+        ]
+      },
+      {
+        "id": 25455,
+        "name": "Astral Herald",
+        "hero": "Dawnbreaker",
+        "heroCode": "dawnbreaker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dawnbreaker_Astral_Angel",
+        "pieces": [
+          "Astral Herald Armor",
+          "Astral Herald Arms",
+          "Astral Herald Head",
+          "Astral Herald Weapon"
+        ]
+      },
+      {
+        "id": 29117,
+        "name": "Spectral Shadow",
+        "hero": "Abaddon",
+        "heroCode": "abaddon",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Abaddon_Curse_of_Demonic_Crown",
+        "pieces": [
+          "Spectral Shadow Mount",
+          "Spectral Shadow Weapon",
+          "Spectral Shadow Back",
+          "Spectral Shadow Shoulder",
+          "Spectral Shadow Head"
+        ]
+      },
+      {
+        "id": 25594,
+        "name": "Taur Rider",
+        "hero": "Alchemist",
+        "heroCode": "alchemist",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/alchemist_minotaur_champion_ls_regal",
+        "pieces": [
+          "Taur Rider Armor",
+          "Taur Rider Arms",
+          "Taur Rider Back",
+          "Taur Rider Offhand",
+          "Taur Rider Head",
+          "Taur Rider Shoulders",
+          "Taur Rider Weapons",
+          "Taur Rider Loading Screen"
+        ]
+      },
+      {
+        "id": 26301,
+        "name": "Crescent Huntress",
+        "hero": "Spectre",
+        "heroCode": "spectre",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spectre_Crescent_Huntress",
+        "pieces": [
+          "Crescent Huntress Arms",
+          "Crescent Huntress Belt",
+          "Crescent Huntress Head",
+          "Crescent Huntress Shoulder",
+          "Crescent Huntress Weapon"
+        ]
+      },
+      {
+        "id": 29143,
+        "name": "Tyrant of the Veil",
+        "hero": "Skeleton King",
+        "heroCode": "skeleton_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Wraith_King_Darkfeather_Tyrant",
+        "pieces": [
+          "Tyrant of the Veil Weapon",
+          "Tyrant of the Veil Shoulder",
+          "Tyrant of the Veil Helm",
+          "Tyrant of the Veil Back",
+          "Tyrant of the Veil Armor",
+          "Tyrant of the Veil Arms"
+        ]
+      },
+      {
+        "id": 29290,
+        "name": "Tomo'kan Footsoldier",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Hoodwink_Tribal_Elves",
+        "pieces": [
+          "Tomo'kan Footsoldier Weapon",
+          "Tomo'kan Footsoldier Tail",
+          "Tomo'kan Footsoldier Back",
+          "Tomo'kan Footsoldier Armor"
+        ]
+      },
+      {
+        "id": 29017,
+        "name": "Darkwood Eulogy",
+        "hero": "Death Prophet",
+        "heroCode": "death_prophet",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Death_Prophet_Darkwood_Eulogy",
+        "pieces": [
+          "Darkwood Eulogy Legs",
+          "Darkwood Eulogy Belt",
+          "Darkwood Eulogy Armor",
+          "Darkwood Eulogy Head",
+          "Darkwood Eulogy Spirit"
+        ]
+      },
+      {
+        "id": 29122,
+        "name": "Sea Spirit",
+        "hero": "Kunkka",
+        "heroCode": "kunkka",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Kunkka_Admirals_Revenge",
+        "pieces": [
+          "Sea Spirit Weapon",
+          "Sea Spirit Neck",
+          "Sea Spirit Legs",
+          "Sea Spirit Gloves",
+          "Sea Spirit Belt",
+          "Sea Spirit Back",
+          "Sea Spirit Shoulder",
+          "Sea Spirit Head"
+        ]
+      },
+      {
+        "id": 29291,
+        "name": "Triumph of the Imperatrix",
+        "hero": "Legion Commander",
+        "heroCode": "legion_commander",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Triumph_of_the_Imperatrix",
+        "pieces": [
+          "Triumph of the Imperatrix Weapon",
+          "Triumph of the Imperatrix Shoulder",
+          "Triumph of the Imperatrix Legs",
+          "Triumph of the Imperatrix Head",
+          "Triumph of the Imperatrix Back",
+          "Triumph of the Imperatrix Arms"
+        ]
+      },
+      {
+        "id": 27049,
+        "name": "Beast of Thunder",
+        "hero": "Storm Spirit",
+        "heroCode": "storm_spirit",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Beast_of_Thunder__Storm_Spirit",
+        "pieces": [
+          "Beast of Thunder Arms",
+          "Beast of Thunder Armor",
+          "Beast of Thunder Head"
+        ]
+      },
+      {
+        "id": 29124,
+        "name": "Ancestral Heritage",
+        "hero": "Jakiro",
+        "heroCode": "jakiro",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Jakiro_Ancestral_heritage",
+        "pieces": [
+          "Ancestral Heritage Back",
+          "Ancestral Heritage Tail",
+          "Ancestral Heritage Fire Head",
+          "Ancestral Heritage Ice Head"
+        ]
+      },
+      {
+        "id": 29286,
+        "name": "Dezun Viper",
+        "hero": "Dazzle",
+        "heroCode": "dazzle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dazzle_Death_Venom",
+        "pieces": [
+          "Dezun Viper Weapon",
+          "Dezun Viper Shoulders",
+          "Dezun Viper Legs",
+          "Dezun Viper Back",
+          "Dezun Viper Arms"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 25349,
+        "name": "Brightfist",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Marci_Lotus_Keeper",
+        "pieces": [
+          "Brightfist Armor",
+          "Brightfist Back",
+          "Brightfist Shoulder",
+          "Brightfist Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 26532,
+        "name": "Snailfire",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Snapfire_Snailfire",
+        "pieces": [
+          "Snailfire Armor",
+          "Snailfire Costume",
+          "Snailfire Head",
+          "Snailfire Morty",
+          "Snailfire Weapon"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 29296,
+        "name": "Turstarkuri Pilgrim",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Anti_Mage_Nemesis_Slayer",
+        "pieces": [
+          "Turstarkuri Pilgrim Weapon",
+          "Turstarkuri Pilgrim Head",
+          "Turstarkuri Pilgrim Armor",
+          "Turstarkuri Pilgrim Offhand Weapon",
+          "The Disciple's Path"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 26880,
+    "name": "Diretide 2022 Collector's Cache",
+    "year": "2022",
+    "releaseDate": "2022-11-10",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/ti11_collectors_cache",
+    "ordinary": [
+      {
+        "id": 26797,
+        "name": "Shadowleaf Insurgent",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Shadowleaf_Insurgent",
+        "pieces": [
+          "Shadowleaf Insurgent - Weapon",
+          "Shadowleaf Insurgent - Tail",
+          "Shadowleaf Insurgent - Back",
+          "Shadowleaf Insurgent - Armor"
+        ]
+      },
+      {
+        "id": 26812,
+        "name": "Scarlet Subversion",
+        "hero": "Riki",
+        "heroCode": "riki",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Scarlet_Subversion",
+        "pieces": [
+          "Scarlet Subversion - Weapon",
+          "Scarlet Subversion - Tail",
+          "Scarlet Subversion - Shoulder",
+          "Scarlet Subversion - Offhand Weapon",
+          "Scarlet Subversion - Head",
+          "Scarlet Subversion - Arms"
+        ]
+      },
+      {
+        "id": 26540,
+        "name": "Whippersnapper",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Whippersnapper",
+        "pieces": [
+          "Whippersnapper - Armor",
+          "Whippersnapper - Weapon",
+          "Whippersnapper - Mount",
+          "Whippersnapper - Head",
+          "Whippersnapper - Costume"
+        ]
+      },
+      {
+        "id": 26815,
+        "name": "Hounds of Obsession",
+        "hero": "Chen",
+        "heroCode": "chen",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Chen_Infernal_psychic",
+        "pieces": [
+          "Hounds of Obsession - Arms",
+          "Hounds of Obsession - Head",
+          "Hounds of Obsession - Mount",
+          "Hounds of Obsession - Shoulder",
+          "Hounds of Obsession - Weapon"
+        ]
+      },
+      {
+        "id": 25779,
+        "name": "Seadog's Stash",
+        "hero": "Rattletrap",
+        "heroCode": "rattletrap",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Pirates_chess_pawn",
+        "pieces": [
+          "Seadog's Stash - Armor",
+          "Seadog's Stash - Head",
+          "Seadog's Stash - Rocket",
+          "Seadog's Stash - Weapon",
+          "Seadog's Stash - Power Cogs"
+        ]
+      },
+      {
+        "id": 25714,
+        "name": "Starlorn Adjudicator",
+        "hero": "Dawnbreaker",
+        "heroCode": "dawnbreaker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Starlorn_Adjudicator",
+        "pieces": [
+          "Starlorn Adjudicator - Head",
+          "Starlorn Adjudicator - Arms",
+          "Starlorn Adjudicator - Armor",
+          "Starlorn Adjudicator - Weapon"
+        ]
+      },
+      {
+        "id": 26295,
+        "name": "Spoils of the Shadowveil",
+        "hero": "Spectre",
+        "heroCode": "spectre",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spoils_of_the_Shadowveil",
+        "pieces": [
+          "Spoils of the Shadowveil - Belt",
+          "Spoils of the Shadowveil - Head",
+          "Spoils of the Shadowveil - Misc",
+          "Spoils of the Shadowveil - Shoulder",
+          "Spoils of the Shadowveil - Weapon"
+        ]
+      },
+      {
+        "id": 25704,
+        "name": "Chines of the Inquisitor",
+        "hero": "Faceless Void",
+        "heroCode": "faceless_void",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/fv_ti11_cc_contrib_loading_screen",
+        "pieces": [
+          "Chines of the Inquisitor - Weapon",
+          "Chines of the Inquisitor - Shoulder",
+          "Chines of the Inquisitor - Belt",
+          "Chines of the Inquisitor - Body Head",
+          "Chines of the Inquisitor - Arms",
+          "Chines of the Inquisitor - Loading Screen"
+        ]
+      },
+      {
+        "id": 26534,
+        "name": "Trophies of the Hallowed Hunt",
+        "hero": "Ursa",
+        "heroCode": "ursa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Trophies_of_the_Hallowed_Hunt",
+        "pieces": [
+          "Trophies of the Hallowed Hunt - Back",
+          "Trophies of the Hallowed Hunt - Belt",
+          "Trophies of the Hallowed Hunt - Head",
+          "Trophies of the Hallowed Hunt - Weapon",
+          "Trophies of the Hallowed Hunt - Arms"
+        ]
+      },
+      {
+        "id": 25973,
+        "name": "Crimson Dawn",
+        "hero": "Phoenix",
+        "heroCode": "phoenix",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Phoenix_Crimson_Dawn",
+        "pieces": [
+          "Crimson Dawn - Head",
+          "Crimson Dawn - Back",
+          "Crimson Dawn - Supernova"
+        ]
+      },
+      {
+        "id": 26541,
+        "name": "Forgotten Station",
+        "hero": "Terrorblade",
+        "heroCode": "terrorblade",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Forgotten_Station",
+        "pieces": [
+          "Forgotten Station - Back",
+          "Forgotten Station - Weapon",
+          "Forgotten Station - Head",
+          "Forgotten Station - Armor",
+          "Forgotten Station - Demon"
+        ]
+      },
+      {
+        "id": 26529,
+        "name": "Dirge Amplifier",
+        "hero": "Undying",
+        "heroCode": "undying",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dirge_Amplifier",
+        "pieces": [
+          "Dirge Amplifier - Arms",
+          "Dirge Amplifier - Armor",
+          "Dirge Amplifier - Flesh Golem",
+          "Dirge Amplifier - Head"
+        ]
+      },
+      {
+        "id": 25021,
+        "name": "Champion of the Fire Lotus",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Champion_of_the_Fire_Lotus",
+        "pieces": [
+          "Champion of the Fire Lotus - Head",
+          "Champion of the Fire Lotus - Armor",
+          "Champion of the Fire Lotus - Shoulder",
+          "Champion of the Fire Lotus - Weapon"
+        ]
+      },
+      {
+        "id": 26620,
+        "name": "Deathstitch Shaman",
+        "hero": "Witch Doctor",
+        "heroCode": "witch_doctor",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Deathstitch_Shaman",
+        "pieces": [
+          "Deathstitch Shaman - Shoulder",
+          "Deathstitch Shaman - Weapon",
+          "Deathstitch Shaman - Death Ward",
+          "Deathstitch Shaman - Belt",
+          "Deathstitch Shaman - Back",
+          "Deathstitch Shaman - Head"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 25112,
+        "name": "Blue Horizons",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/marci_boundless_potential_loading_screen",
+        "pieces": [
+          "Blue Horizons - Head",
+          "Blue Horizons - Shoulder",
+          "Blue Horizons - Back",
+          "Blue Horizons - Armor",
+          "Blue Horizons - Loading Screen"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 25513,
+        "name": "Angel of Vex",
+        "hero": "Invoker",
+        "heroCode": "invoker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Angel_of_Vex",
+        "pieces": [
+          "Angel of Vex - Armor",
+          "Angel of Vex - Arms",
+          "Angel of Vex - Head",
+          "Angel of Vex - Shoulder",
+          "Angel of Vex - Back",
+          "Acolyte of the Lost Arts"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 26805,
+        "name": "Dark Behemoth",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/pb_dark_behemoth_loading_screen",
+        "pieces": [
+          "Dark Behemoth - Arms",
+          "Dark Behemoth - Loading Screen",
+          "Dark Behemoth - Legs",
+          "Dark Behemoth - Head",
+          "Dark Behemoth - Back"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 26798,
+        "name": "Astral Origins",
+        "hero": "Tiny",
+        "heroCode": "tiny",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/tiny_astral_order_loading_screen",
+        "pieces": [
+          "Astral Origins - Loading Screen",
+          "Astral Origins - Back",
+          "Astral Origins - Neck",
+          "Astral Origins - Belt",
+          "Astral Origins - Shoulder",
+          "Astral Origins - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 26932,
+    "name": "Diretide 2022 Collector's Cache II",
+    "year": "2022",
+    "releaseDate": "2022-11-28",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/ti11_collectors_cache_2",
+    "ordinary": [
+      {
+        "id": 25757,
+        "name": "Bird of Prey",
+        "hero": "Legion Commander",
+        "heroCode": "legion_commander",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Bird_of_Prey",
+        "pieces": [
+          "Bird of Prey - Arms",
+          "Bird of Prey - Back",
+          "Bird of Prey - Legs",
+          "Bird of Prey - Shoulder",
+          "Bird of Prey - Weapon",
+          "Bird of Prey - Head"
+        ]
+      },
+      {
+        "id": 26314,
+        "name": "Grand Suppressor",
+        "hero": "Silencer",
+        "heroCode": "silencer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Grand_Suppressor",
+        "pieces": [
+          "Grand Suppressor - Head",
+          "Grand Suppressor - Shoulder",
+          "Grand Suppressor - Arms",
+          "Grand Suppressor - Belt",
+          "Grand Suppressor - Weapon",
+          "Grand Suppressor - Off-Hand Weapon"
+        ]
+      },
+      {
+        "id": 21724,
+        "name": "Darkbrew's Transgression",
+        "hero": "Alchemist",
+        "heroCode": "alchemist",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Darkbrews_Transgression",
+        "pieces": [
+          "Darkbrew's Transgression - Weapon",
+          "Darkbrew's Transgression - Armor",
+          "Darkbrew's Transgression - Neck",
+          "Darkbrew's Transgression - Shoulder",
+          "Darkbrew's Transgression - Arms",
+          "Darkbrew's Transgression - Back",
+          "Darkbrew's Transgression - Off-Hand"
+        ]
+      },
+      {
+        "id": 22023,
+        "name": "Transcendent Path",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/saint_bodhisattva_ls",
+        "pieces": [
+          "Transcendent Path - Weapon",
+          "Transcendent Path - Head",
+          "Transcendent Path - Back",
+          "Transcendent Path - Armor",
+          "Transcendent Path - Loading Screen"
+        ]
+      },
+      {
+        "id": 25531,
+        "name": "The Wilding Tiger",
+        "hero": "Brewmaster",
+        "heroCode": "brewmaster",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/brewmaster_hujiang_ls",
+        "pieces": [
+          "The Wilding Tiger - Loading Screen",
+          "The Wilding Tiger - Arms",
+          "The Wilding Tiger - Back",
+          "The Wilding Tiger - Head",
+          "The Wilding Tiger - Shoulder",
+          "The Wilding Tiger - Weapon",
+          "The Wilding Tiger - Off-Hand Weapon"
+        ]
+      },
+      {
+        "id": 25144,
+        "name": "Dawn of a Darkness Foretold",
+        "hero": "Doom Bringer",
+        "heroCode": "doom_bringer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dawn_of_a_Darkness_Foretold",
+        "pieces": [
+          "Dawn of a Darkness Foretold - Arms",
+          "Dawn of a Darkness Foretold - Back",
+          "Dawn of a Darkness Foretold - Belt",
+          "Dawn of a Darkness Foretold - Head",
+          "Dawn of a Darkness Foretold - Shoulder",
+          "Dawn of a Darkness Foretold - Tail",
+          "Dawn of a Darkness Foretold - Weapon"
+        ]
+      },
+      {
+        "id": 26080,
+        "name": "Cursed Cryptbreaker",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Cursed_Cryptbreaker",
+        "pieces": [
+          "Cursed Cryptbreaker - Back",
+          "Cursed Cryptbreaker - Arms",
+          "Cursed Cryptbreaker - Belt",
+          "Cursed Cryptbreaker - Head",
+          "Cursed Cryptbreaker - Off-Hand Weapon",
+          "Cursed Cryptbreaker - Shoulder",
+          "Cursed Cryptbreaker - Weapon"
+        ]
+      },
+      {
+        "id": 24994,
+        "name": "Feasts of Forever",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Feasts_of_Forever",
+        "pieces": [
+          "Feasts of Forever - Arms",
+          "Feasts of Forever - Back",
+          "Feasts of Forever - Head",
+          "Feasts of Forever - Legs",
+          "Feasts of Forever - Tail"
+        ]
+      },
+      {
+        "id": 21725,
+        "name": "Darkfeather Factioneer",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Darkfeather_Factioneer",
+        "pieces": [
+          "Darkfeather Factioneer - Back",
+          "Darkfeather Factioneer - Belt",
+          "Darkfeather Factioneer - Head",
+          "Darkfeather Factioneer - Shoulder",
+          "Darkfeather Factioneer - Weapon"
+        ]
+      },
+      {
+        "id": 21588,
+        "name": "Withering Pain",
+        "hero": "Clinkz",
+        "heroCode": "clinkz",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/clinkz_the_faith_of_avengers_ls",
+        "pieces": [
+          "Withering Pain - Back",
+          "Withering Pain - Gloves",
+          "Withering Pain - Head",
+          "Withering Pain - Loading Screen",
+          "Withering Pain - Shoulder",
+          "Withering Pain - Summon",
+          "Withering Pain - Weapon"
+        ]
+      },
+      {
+        "id": 21872,
+        "name": "Freeboot Fortunes",
+        "hero": "Ogre Magi",
+        "heroCode": "ogre_magi",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Freeboot_Fortunes",
+        "pieces": [
+          "Freeboot Fortunes - Arms",
+          "Freeboot Fortunes - Back",
+          "Freeboot Fortunes - Belt",
+          "Freeboot Fortunes - Head",
+          "Freeboot Fortunes - Weapon"
+        ]
+      },
+      {
+        "id": 21243,
+        "name": "Acrimonies of Obsession",
+        "hero": "Vengefulspirit",
+        "heroCode": "vengefulspirit",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Acrimonies_of_Obsession",
+        "pieces": [
+          "Acrimonies of Obsession - Head",
+          "Acrimonies of Obsession - Legs",
+          "Acrimonies of Obsession - Shoulder",
+          "Acrimonies of Obsession - Weapon"
+        ]
+      },
+      {
+        "id": 26816,
+        "name": "Sacred Chamber Guardian",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Sacred_Chamber_Guardian",
+        "pieces": [
+          "Sacred Chamber Guardian - Arms",
+          "Sacred Chamber Guardian - Head",
+          "Sacred Chamber Guardian - Off-Hand Weapon",
+          "Sacred Chamber Guardian - Shoulder",
+          "Sacred Chamber Guardian - Weapon"
+        ]
+      },
+      {
+        "id": 26537,
+        "name": "War Rig Eradicators",
+        "hero": "Techies",
+        "heroCode": "techies",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/techies_mad_tex_loading_screen",
+        "pieces": [
+          "War Rig Eradicators - Arms",
+          "War Rig Eradicators - Back",
+          "War Rig Eradicators - Belt",
+          "War Rig Eradicators - Head",
+          "War Rig Eradicators - Loading Screen",
+          "War Rig Eradicators - Rig",
+          "War Rig Eradicators - Proximity",
+          "War Rig Eradicators - Shoulder",
+          "War Rig Eradicators - Weapon"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21772,
+        "name": "Grudges of the Gallows Tree",
+        "hero": "Treant",
+        "heroCode": "treant",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Grudges_of_the_Gallows_Tree",
+        "pieces": [
+          "Grudges of the Gallows Tree - Arms",
+          "Grudges of the Gallows Tree - Head",
+          "Grudges of the Gallows Tree - Legs",
+          "Grudges of the Gallows Tree - Shoulder"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 24920,
+        "name": "Brands of the Reaper",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Brands_of_the_Reaper",
+        "pieces": [
+          "Brands of the Reaper - Armor",
+          "Brands of the Reaper - Arms",
+          "Brands of the Reaper - Belt",
+          "Brands of the Reaper - Head",
+          "Brands of the Reaper - Shoulders",
+          "Brands of the Reaper - Weapon",
+          "Brands of the Reaper - Off-Hand Weapon"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 26593,
+        "name": "Sublime Equilibrium",
+        "hero": "Void Spirit",
+        "heroCode": "void_spirit",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Sublime_Equilibrium",
+        "pieces": [
+          "Sublime Equilibrium - Head",
+          "Sublime Equilibrium - Weapon",
+          "Sublime Equilibrium - Belt",
+          "Sublime Equilibrium - Armor"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 21754,
+        "name": "Unities of Discord",
+        "hero": "Chaos Knight",
+        "heroCode": "chaos_knight",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Unities_of_Discord",
+        "pieces": [
+          "Unities of Discord - Head",
+          "Unities of Discord - Mount",
+          "Unities of Discord - Off-Hand",
+          "Unities of Discord - Shoulder",
+          "Unities of Discord - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 27046,
+    "name": "Dragon's Hoard",
+    "year": "2024",
+    "releaseDate": "2024-01-04",
+    "kind": "HOARD",
+    "icon": "econ/tools/new_bloom_2024_treasure",
+    "ordinary": [
+      {
+        "id": 26544,
+        "name": "Whisper at the Temple Gates",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Whisper_at_the_Temple_Gates",
+        "pieces": [
+          "Whisper at the Temple Gates - Weapon",
+          "Whisper at the Temple Gates - Head",
+          "Whisper at the Temple Gates - Armor",
+          "Whisper at the Temple Gates - Shoulder"
+        ]
+      },
+      {
+        "id": 25719,
+        "name": "Herald of Frost and Flame",
+        "hero": "Jakiro",
+        "heroCode": "jakiro",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Herald_of_Frost_and_Flame",
+        "pieces": [
+          "Herald of Frost and Flame - Tail",
+          "Herald of Frost and Flame - Back",
+          "Herald of Frost and Flame - Frost Head",
+          "Herald of Frost and Flame - Flame Head"
+        ]
+      },
+      {
+        "id": 28164,
+        "name": "Vile Behemoth",
+        "hero": "Mars",
+        "heroCode": "mars",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vile_Behemoth",
+        "pieces": [
+          "Vile Behemoth - Shield",
+          "Vile Behemoth - Spear",
+          "Vile Behemoth - Legs",
+          "Vile Behemoth - Armor"
+        ]
+      },
+      {
+        "id": 25005,
+        "name": "Reflection of the Surging Stream",
+        "hero": "Morphling",
+        "heroCode": "morphling",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Reflection_of_the_Surging_Stream",
+        "pieces": [
+          "Reflection of the Surging Stream - Back",
+          "Reflection of the Surging Stream - Arms",
+          "Reflection of the Surging Stream - Head",
+          "Reflection of the Surging Stream - Misc",
+          "Reflection of the Surging Stream - Shoulder"
+        ]
+      },
+      {
+        "id": 21912,
+        "name": "Rout of the Emerald Marauder",
+        "hero": "Centaur",
+        "heroCode": "centaur",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Rout_of_the_Emerald_Marauder",
+        "pieces": [
+          "Rout of the Emerald Marauder - Weapon",
+          "Rout of the Emerald Marauder - Tail",
+          "Rout of the Emerald Marauder - Shoulder",
+          "Rout of the Emerald Marauder - Loading Screen",
+          "Rout of the Emerald Marauder - Head",
+          "Rout of the Emerald Marauder - Belt",
+          "Rout of the Emerald Marauder - Back",
+          "Rout of the Emerald Marauder - Arms"
+        ]
+      },
+      {
+        "id": 28163,
+        "name": "Master of the Mystic Phoenix",
+        "hero": "Invoker",
+        "heroCode": "invoker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Master_of_the_Mystic_Phoenix",
+        "pieces": [
+          "Master of the Mystic Phoenix - Loading Screen",
+          "Master of the Mystic Phoenix - Back",
+          "Master of the Mystic Phoenix - Shoulder",
+          "Master of the Mystic Phoenix - Head",
+          "Master of the Mystic Phoenix - Belt",
+          "Master of the Mystic Phoenix - Arms"
+        ]
+      },
+      {
+        "id": 26796,
+        "name": "Havoc of the Hydra's Scorn",
+        "hero": "Medusa",
+        "heroCode": "medusa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Havoc_of_the_Hydras_Scorn",
+        "pieces": [
+          "Havoc of the Hydra's Scorn - Weapon",
+          "Havoc of the Hydra's Scorn - Tail",
+          "Havoc of the Hydra's Scorn - Arms",
+          "Havoc of the Hydra's Scorn - Armor",
+          "Havoc of the Hydra's Scorn - Head"
+        ]
+      },
+      {
+        "id": 28151,
+        "name": "Victorious Fighting Scoundrel",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Victorious_Fighting_Scoundrel",
+        "pieces": [
+          "Victorious Fighting Scoundrel - Head",
+          "Victorious Fighting Scoundrel - Shoulder",
+          "Victorious Fighting Scoundrel - Armor",
+          "Victorious Fighting Scoundrel - Staff"
+        ]
+      },
+      {
+        "id": 28154,
+        "name": "Attunements of the Ornate",
+        "hero": "Phoenix",
+        "heroCode": "phoenix",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Attunements_of_the_Ornate",
+        "pieces": [
+          "Attunements of the Ornate - Supernova",
+          "Attunements of the Ornate - Head",
+          "Attunements of the Ornate - Back"
+        ]
+      },
+      {
+        "id": 25944,
+        "name": "Oni Magi",
+        "hero": "Ogre Magi",
+        "heroCode": "ogre_magi",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Oni_Magi",
+        "pieces": [
+          "Oni Magi - Weapon",
+          "Oni Magi - Belt",
+          "Oni Magi - Head",
+          "Oni Magi - Arms",
+          "Oni Magi - Back"
+        ]
+      },
+      {
+        "id": 22018,
+        "name": "Vanishing Pearl",
+        "hero": "Puck",
+        "heroCode": "puck",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vanishing_Pearl",
+        "pieces": [
+          "Vanishing Pearl - Tail",
+          "Vanishing Pearl - Head",
+          "Vanishing Pearl - Back"
+        ]
+      },
+      {
+        "id": 21651,
+        "name": "Fortified Brew",
+        "hero": "Brewmaster",
+        "heroCode": "brewmaster",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/newbloom_2024_brew_master",
+        "pieces": [
+          "Fortified Brew - Weapon",
+          "Fortified Brew - Shoulder",
+          "Fortified Brew - Off-Hand",
+          "Fortified Brew - Head",
+          "Fortified Brew - Back",
+          "Fortified Brew - Arms",
+          "Fortified Brew Loading Screen"
+        ]
+      },
+      {
+        "id": 28997,
+        "name": "Bloomjewel Brawler",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/newbloom_2024_marci",
+        "pieces": [
+          "Bloomjewel Brawler - Back",
+          "Bloomjewel Brawler - Armor",
+          "Bloomjewel Brawler - Shoulder",
+          "Bloomjewel Brawler - Head",
+          "Bloomjewel Brawler Loading Screen"
+        ]
+      },
+      {
+        "id": 28235,
+        "name": "Song of the Shadow Dragon",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Lunar_Dragon_PA_set",
+        "pieces": [
+          "Song of the Shadow Dragon - Belt",
+          "Song of the Shadow Dragon - Head",
+          "Song of the Shadow Dragon - Shoulders",
+          "Song of the Shadow Dragon - Back",
+          "Song of the Shadow Dragon - Blade"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28140,
+        "name": "Spirit of the Frozen Flow",
+        "hero": "Crystal Maiden",
+        "heroCode": "crystal_maiden",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spirit_of_the_Frozen_Flow",
+        "pieces": [
+          "Conduit of the Blueheart",
+          "Blueheart Familiar",
+          "Spirit of the Frozen Flow - Armor",
+          "Spirit of the Frozen Flow - Tail",
+          "Spirit of the Frozen Flow - Head",
+          "Spirit of the Frozen Flow - Orbs",
+          "Spirit of the Frozen Flow Loading Screen"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 29116,
+        "name": "Dreadmist Dragoon",
+        "hero": "Abaddon",
+        "heroCode": "abaddon",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/newbloom_2024_abaddon",
+        "pieces": [
+          "Dreadmist Dragoon - Weapon",
+          "Dreadmist Dragoon - Shoulder",
+          "Dreadmist Dragoon - Mount",
+          "Dreadmist Dragoon - Head",
+          "Dreadmist Dragoon - Back",
+          "Dreadmist Dragoon Loading Screen"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 26942,
+        "name": "Temple Guardian",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/newbloom_2024_primalbeast",
+        "pieces": [
+          "Temple Guardian - Legs",
+          "Temple Guardian - Back",
+          "Temple Guardian - Arms",
+          "Temple Guardian - Head",
+          "Temple Guardian Loading Screen"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 24119,
+        "name": "Ancient Dragon King",
+        "hero": "Special Reward",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/props_gameplay/new_bloom_dragon/new_bloom_dragon",
+        "pieces": [
+          "Ancient Dragon King"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 27435,
+    "name": "Spring Treasure 2024",
+    "year": "2024",
+    "releaseDate": "2024-02-12",
+    "kind": "TREASURE",
+    "icon": "econ/tools/plus_spring_2024_treasure",
+    "ordinary": [
+      {
+        "id": 27434,
+        "name": "Fallen Kin",
+        "hero": "Disruptor",
+        "heroCode": "disruptor",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/the_chief_of_thunderbird_tribe_set_loading",
+        "pieces": [
+          "Fallen Kin - Loading Screen",
+          "Fallen Kin - Arms",
+          "Fallen Kin - Mount",
+          "Fallen Kin - Shoulder",
+          "Fallen Kin - Weapon",
+          "Fallen Kin - Head",
+          "Fallen Kin - Back"
+        ]
+      },
+      {
+        "id": 21604,
+        "name": "Iron Thornling",
+        "hero": "Dark Willow",
+        "heroCode": "dark_willow",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Dark_Willow_Iron_Thorn",
+        "pieces": [
+          "Iron Thornling - Head",
+          "Iron Thornling - Armor",
+          "Iron Thornling - Back",
+          "Iron Thornling - Off-Hand",
+          "Iron Thornling - Belt"
+        ]
+      },
+      {
+        "id": 27442,
+        "name": "Shadow Weaver",
+        "hero": "Spectre",
+        "heroCode": "spectre",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/lolths_frozen_kiss_loading",
+        "pieces": [
+          "Shadow Weaver - Weapon",
+          "Shadow Weaver - Accessory",
+          "Shadow Weaver - Belt",
+          "Shadow Weaver - Loading Screen",
+          "Shadow Weaver - Shoulder",
+          "Shadow Weaver - Head"
+        ]
+      },
+      {
+        "id": 21528,
+        "name": "Bedlam's Bloom",
+        "hero": "Chaos Knight",
+        "heroCode": "chaos_knight",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/rose_and_the_beast_ls",
+        "pieces": [
+          "Bedlam's Bloom - Head",
+          "Bedlam's Bloom - Loading Screen",
+          "Bedlam's Bloom - Mount",
+          "Bedlam's Bloom - Off-Hand",
+          "Bedlam's Bloom - Shoulder",
+          "Bedlam's Bloom - Weapon"
+        ]
+      },
+      {
+        "id": 27451,
+        "name": "Hells Raider",
+        "hero": "Doom Bringer",
+        "heroCode": "doom_bringer",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/sinister_prime_loadingscreen",
+        "pieces": [
+          "Hells Raider - Head",
+          "Hells Raider - Loading Screen",
+          "Hells Raider - Back",
+          "Hells Raider - Arms",
+          "Hells Raider - Shoulder",
+          "Hells Raider - Tail",
+          "Hells Raider - Belt",
+          "Hells Raider - Weapon"
+        ]
+      },
+      {
+        "id": 27461,
+        "name": "Black Tortoise",
+        "hero": "Earth Spirit",
+        "heroCode": "earth_spirit",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/earth_spirit_loadingscreen_of_the_xuanwu_warriror",
+        "pieces": [
+          "Black Tortoise - Head",
+          "Black Tortoise - Belt",
+          "Black Tortoise - Arms",
+          "Black Tortoise - Loading Screen",
+          "Black Tortoise - Weapon",
+          "Black Tortoise - Neck",
+          "Black Tortoise - Remnant of Power"
+        ]
+      },
+      {
+        "id": 27466,
+        "name": "Abyssal Trenchlord",
+        "hero": "Abyssal Underlord",
+        "heroCode": "abyssal_underlord",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/lord_of_the_deep_loadingscreen",
+        "pieces": [
+          "Abyssal Trenchlord - Loading Screen",
+          "Abyssal Trenchlord - Weapon",
+          "Abyssal Trenchlord - Armor",
+          "Abyssal Trenchlord - Head"
+        ]
+      },
+      {
+        "id": 21511,
+        "name": "Starhive Inhibitor",
+        "hero": "Nyx Assassin",
+        "heroCode": "nyx_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Emerald_Mechanism",
+        "pieces": [
+          "Starhive Inhibitor - Head",
+          "Starhive Inhibitor - Back",
+          "Starhive Inhibitor - Weapon",
+          "Starhive Inhibitor - Abdomen"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 27467,
+        "name": "Sir Molestach Irondrill - Courier",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/loading_screens/sir_molestach_irondrill_loading_screen",
+        "pieces": [],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      }
+    ]
+  },
+  {
+    "id": 29639,
+    "name": "Crownfall 2024 Collector's Cache",
+    "year": "2024",
+    "releaseDate": "2024-07-09",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/crownfall_2024_collectors_cache",
+    "ordinary": [
+      {
+        "id": 29158,
+        "name": "Darkblade Adept",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Darkblade_Adept",
+        "pieces": [
+          "Darkblade Adept - Weapon",
+          "Darkblade Adept - Shoulder",
+          "Darkblade Adept - Head",
+          "Darkblade Adept - Armor"
+        ]
+      },
+      {
+        "id": 31081,
+        "name": "Phantom's Facade",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Phantoms_Facade",
+        "pieces": [
+          "Phantom's Facade - Weapon",
+          "Phantom's Facade - Legs",
+          "Phantom's Facade - Head",
+          "Phantom's Facade - Armor",
+          "Exile Unveiled"
+        ]
+      },
+      {
+        "id": 28277,
+        "name": "Lotus of the Mountain Bear Clan",
+        "hero": "Meepo",
+        "heroCode": "meepo",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_loong_recluse",
+        "pieces": [
+          "Lotus of the Mountain Bear Clan - Weapon",
+          "Lotus of the Mountain Bear Clan - Tail",
+          "Lotus of the Mountain Bear Clan - Shoulder",
+          "Lotus of the Mountain Bear Clan - Back",
+          "Lotus of the Mountain Bear Clan - Head",
+          "Lotus of the Mountain Bear Clan - Arms"
+        ]
+      },
+      {
+        "id": 28273,
+        "name": "Martyrdom of the Brineborn",
+        "hero": "Naga Siren",
+        "heroCode": "naga_siren",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Martyrdom_of_the_Brineborn",
+        "pieces": [
+          "Martyrdom of the Brineborn - Offhand",
+          "Martyrdom of the Brineborn - Weapon",
+          "Martyrdom of the Brineborn - Tail",
+          "Martyrdom of the Brineborn - Armor",
+          "Martyrdom of the Brineborn - Head"
+        ]
+      },
+      {
+        "id": 28272,
+        "name": "Elegy of the Reaper",
+        "hero": "Grimstroke",
+        "heroCode": "grimstroke",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Grimreaver",
+        "pieces": [
+          "Elegy of the Reaper - Weapon",
+          "Elegy of the Reaper - Head",
+          "Elegy of the Reaper - Belt",
+          "Elegy of the Reaper - Armor"
+        ]
+      },
+      {
+        "id": 28335,
+        "name": "Mecha Nyx",
+        "hero": "Nyx Assassin",
+        "heroCode": "nyx_assassin",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/2023the_one_loading",
+        "pieces": [
+          "Mecha Nyx Loading Screen",
+          "Mecha Nyx - Weapon",
+          "Mecha Nyx - Misc",
+          "Mecha Nyx - Head",
+          "Mecha Nyx - Back"
+        ]
+      },
+      {
+        "id": 25178,
+        "name": "Faithful Fortune",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Faithful_Fortune",
+        "pieces": [
+          "Faithful Fortune - Back",
+          "Faithful Fortune - Head",
+          "Faithful Fortune - Shoulder",
+          "Faithful Fortune - Armor"
+        ]
+      },
+      {
+        "id": 29295,
+        "name": "Ardalan Arms Race",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Ardalan_Arms_Race",
+        "pieces": [
+          "Ardalan Arms Race - Weapon",
+          "Ardalan Arms Race - Mount",
+          "Ardalan Arms Race - Head",
+          "Ardalan Arms Race - Armor",
+          "Ardalan Arms Race - Costume"
+        ]
+      },
+      {
+        "id": 29110,
+        "name": "Dread of Night",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/nightstalker_night_slaughter_loading_screen",
+        "pieces": [
+          "Dread of Night - Tail",
+          "Dread of Night - Legs",
+          "Dread of Night - Head",
+          "Dread of Night - Back",
+          "Dread of Night - Arms",
+          "Dread of Night - Loading Screen"
+        ]
+      },
+      {
+        "id": 31072,
+        "name": "Blackwing Bandolera",
+        "hero": "Muerta",
+        "heroCode": "muerta",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Blackwing_Bandolera",
+        "pieces": [
+          "Blackwing Bandolera - Ultimate Form",
+          "Blackwing Bandolera - Weapon",
+          "Blackwing Bandolera - Armor",
+          "Blackwing Bandolera - Back",
+          "Blackwing Bandolera - Head"
+        ]
+      },
+      {
+        "id": 26378,
+        "name": "Exquisite Agonies",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_exquisite_agonies",
+        "pieces": [
+          "Exquisite Agonies - Weapon",
+          "Exquisite Agonies - Shoulder",
+          "Exquisite Agonies - Head",
+          "Exquisite Agonies - Legs",
+          "Exquisite Agonies - Back"
+        ]
+      },
+      {
+        "id": 28334,
+        "name": "Colossal Terrorpin",
+        "hero": "Tiny",
+        "heroCode": "tiny",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/ancient_tresure_keeper_loadscreenl",
+        "pieces": [
+          "Colossal Terrorpin - Weapon",
+          "Colossal Terrorpin - Loading Screen",
+          "Colossal Terrorpin - Tiny",
+          "Colossal Terrorpin - Small",
+          "Colossal Terrorpin - Medium",
+          "Colossal Terrorpin - Large"
+        ]
+      },
+      {
+        "id": 29137,
+        "name": "Proselyte of the Sakura Clan",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Proselyte_of_the_Sakura_Clan",
+        "pieces": [
+          "Proselyte of the Sakura Clan - Weapon",
+          "Proselyte of the Sakura Clan - Offhand",
+          "Proselyte of the Sakura Clan - Head",
+          "Proselyte of the Sakura Clan - Armor",
+          "The Disciple's Path"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28275,
+        "name": "Bloodmoon Stalker",
+        "hero": "Luna",
+        "heroCode": "luna",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Bloodmoon_Stalker",
+        "pieces": [
+          "Bloodmoon Stalker - Mount",
+          "Bloodmoon Stalker - Shoulders",
+          "Bloodmoon Stalker - Offhand",
+          "Bloodmoon Stalker - Head",
+          "Bloodmoon Stalker - Crescent Glaive"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 28271,
+        "name": "Ancient Exile",
+        "hero": "Juggernaut",
+        "heroCode": "juggernaut",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Ancient_Exile",
+        "pieces": [
+          "Ancient Exile - Weapon",
+          "Ancient Exile - Ward",
+          "Ancient Exile - Legs",
+          "Ancient Exile - Head",
+          "Ancient Exile - Back",
+          "Ancient Exile - Arms"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 28270,
+        "name": "Aberrant Observer",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Aberrant_Observer",
+        "pieces": [
+          "Aberrant Observer - Back",
+          "Aberrant Observer - Belt",
+          "Aberrant Observer - Head",
+          "Aberrant Observer - Hook",
+          "Aberrant Observer - Offhand",
+          "Aberrant Observer - Left Arm",
+          "Aberrant Observer - Right Arm"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 30279,
+    "name": "Crownfall 2024 Collector's Cache II",
+    "year": "2024",
+    "releaseDate": "2024-07-17",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/crownfall_2024_collectors_cache_2",
+    "ordinary": [
+      {
+        "id": 28279,
+        "name": "Igneous Infernal",
+        "hero": "Doom Bringer",
+        "heroCode": "doom_bringer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Igneous_Infernal",
+        "pieces": [
+          "Igneous Infernal - Head",
+          "Igneous Infernal - Weapon",
+          "Igneous Infernal - Tail",
+          "Igneous Infernal - Shoulder",
+          "Igneous Infernal - Belt",
+          "Igneous Infernal - Back",
+          "Igneous Infernal - Arms"
+        ]
+      },
+      {
+        "id": 21504,
+        "name": "Bleeding Edge",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Bleeding_Edge",
+        "pieces": [
+          "Bleeding Edge - Shoulder",
+          "Bleeding Edge - Weapon",
+          "Bleeding Edge - Off-Hand",
+          "Bleeding Edge - Head",
+          "Bleeding Edge - Arms"
+        ]
+      },
+      {
+        "id": 30575,
+        "name": "Magus Mimicry",
+        "hero": "Invoker",
+        "heroCode": "invoker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Magus_Mimicry",
+        "pieces": [
+          "Acolyte of the Lost Arts",
+          "The Good Old Days",
+          "Magus Mimicry - Back",
+          "Magus Mimicry - Shoulder",
+          "Magus Mimicry - Head",
+          "Magus Mimicry - Forge Spirit",
+          "Magus Mimicry - Arms",
+          "Magus Mimicry - Armor"
+        ]
+      },
+      {
+        "id": 26647,
+        "name": "Seam Ripper Snuggle Time",
+        "hero": "Warlock",
+        "heroCode": "warlock",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/warlock_tailor_of_burning_puppet_loading_screen",
+        "pieces": [
+          "Seam Ripper Snuggle Time - Back",
+          "Seam Ripper Snuggle Time - Belt",
+          "Seam Ripper Snuggle Time - Pyro Plush",
+          "Seam Ripper Snuggle Time - Head",
+          "Seam Ripper Snuggle Time - Loading Screen",
+          "Seam Ripper Snuggle Time - Offhand Weapon",
+          "Seam Ripper Snuggle Time - Weapon",
+          "Seam Ripper Snuggle Time - Shoulder",
+          "Seam Ripper Snuggle Time - Arms"
+        ]
+      },
+      {
+        "id": 29144,
+        "name": "Angler in the Abyss",
+        "hero": "Slark",
+        "heroCode": "slark",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/slark_abyssal_loading_screen",
+        "pieces": [
+          "Angler in the Abyss - Loading Screen",
+          "Angler in the Abyss - Weapon",
+          "Angler in the Abyss - Shoulder",
+          "Angler in the Abyss - Head",
+          "Angler in the Abyss - Back",
+          "Angler in the Abyss - Arms"
+        ]
+      },
+      {
+        "id": 30388,
+        "name": "Phantom Balladeer",
+        "hero": "Abaddon",
+        "heroCode": "abaddon",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/wandering_poet",
+        "pieces": [
+          "Phantom Balladeer - Loading Screen",
+          "Phantom Balladeer - Mount",
+          "Phantom Balladeer - Shoulder",
+          "Phantom Balladeer - Back",
+          "Phantom Balladeer - Head",
+          "Phantom Balladeer - Weapon"
+        ]
+      },
+      {
+        "id": 29132,
+        "name": "Bootblack Brawler",
+        "hero": "Axe",
+        "heroCode": "axe",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/axe_dressed_to_cull_loading_screen",
+        "pieces": [
+          "Bootblack Brawler - Head",
+          "Bootblack Brawler - Loading Screen",
+          "Bootblack Brawler - Armor",
+          "Bootblack Brawler - Weapon",
+          "Bootblack Brawler - Belt",
+          "Bootblack Brawler - Misc"
+        ]
+      },
+      {
+        "id": 25525,
+        "name": "Needlepoint Necromancer",
+        "hero": "Dazzle",
+        "heroCode": "dazzle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Needlepoint_Necromancer",
+        "pieces": [
+          "Needlepoint Necromancer - Back",
+          "Needlepoint Necromancer - Arms",
+          "Needlepoint Necromancer - Legs",
+          "Needlepoint Necromancer - Misc",
+          "Needlepoint Necromancer - Weapon"
+        ]
+      },
+      {
+        "id": 31071,
+        "name": "Hare of the Cog",
+        "hero": "Rattletrap",
+        "heroCode": "rattletrap",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Farm_Mechanic__rattletrap",
+        "pieces": [
+          "Hare of the Cog - Weapon",
+          "Hare of the Cog - Misc",
+          "Hare of the Cog - Head",
+          "Hare of the Cog - Armor",
+          "Hare of the Cog - Carrot"
+        ]
+      },
+      {
+        "id": 22041,
+        "name": "Thundervolt",
+        "hero": "Zeus",
+        "heroCode": "zuus",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Thundervolt",
+        "pieces": [
+          "Thundervolt - Head",
+          "Thundervolt - Belt",
+          "Thundervolt - Back",
+          "Thundervolt - Arms"
+        ]
+      },
+      {
+        "id": 29284,
+        "name": "Caprine Chimera",
+        "hero": "Lion",
+        "heroCode": "lion",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Caprine_Chimera",
+        "pieces": [
+          "Caprine Chimera - Back",
+          "Caprine Chimera - Wearable",
+          "Caprine Chimera - Weapon",
+          "Caprine Chimera - Shoulder",
+          "Caprine Chimera - Arms"
+        ]
+      },
+      {
+        "id": 29578,
+        "name": "Canis Crystallum",
+        "hero": "Crystal Maiden",
+        "heroCode": "crystal_maiden",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Canis_Crystallum",
+        "pieces": [
+          "Conduit of the Blueheart",
+          "Blueheart Familiar",
+          "Canis Crystallum - Misc",
+          "Canis Crystallum - Head",
+          "Canis Crystallum - Armor",
+          "Canis Crystallum - Tail"
+        ]
+      },
+      {
+        "id": 31079,
+        "name": "Unchained Entropy",
+        "hero": "Ancient Apparition",
+        "heroCode": "ancient_apparition",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Unchained_Entropy",
+        "pieces": [
+          "Unchained Entropy - Head",
+          "Unchained Entropy - Tail",
+          "Unchained Entropy - Shoulder",
+          "Unchained Entropy - Arms"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28276,
+        "name": "Undying Love",
+        "hero": "Undying",
+        "heroCode": "undying",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Undying_Love",
+        "pieces": [
+          "Undying Love - Armor",
+          "Undying Love - Arms",
+          "Undying Love - Head",
+          "Undying Love - Amalgamation"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 30452,
+        "name": "Crystal Colossus",
+        "hero": "Spirit Breaker",
+        "heroCode": "spirit_breaker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/frost_beast",
+        "pieces": [
+          "Crystal Colossus - Loading Screen",
+          "Crystal Colossus - Arms",
+          "Crystal Colossus - Belt",
+          "Crystal Colossus - Head",
+          "Crystal Colossus - Shoulder",
+          "Crystal Colossus - Tail",
+          "Crystal Colossus - Weapon"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 29096,
+        "name": "Secondhand Sorcery",
+        "hero": "Rubick",
+        "heroCode": "rubick",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Secondhand_Sorcery",
+        "pieces": [
+          "Secondhand Sorcery - Shoulder",
+          "Secondhand Sorcery - Weapon",
+          "Secondhand Sorcery - Back",
+          "Secondhand Sorcery - Head"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 30937,
+    "name": "Crownfall Treasure I",
+    "year": "2024",
+    "releaseDate": "2024-04-18",
+    "kind": "TREASURE",
+    "icon": "econ/tools/crownfall_screeauk_treasure",
+    "ordinary": [
+      {
+        "id": 25502,
+        "name": "Blood Raven",
+        "hero": "Bloodseeker",
+        "heroCode": "bloodseeker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_BS_Grim_Harvester",
+        "pieces": [
+          "Blood Raven - Arms",
+          "Blood Raven - Beak",
+          "Blood Raven - Blade",
+          "Blood Raven - Offhand",
+          "Blood Raven - Cowl",
+          "Blood Raven - Belt",
+          "Blood Raven - Tunic"
+        ]
+      },
+      {
+        "id": 29200,
+        "name": "Tines of the Pyrexae",
+        "hero": "Jakiro",
+        "heroCode": "jakiro",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Tines_of_the_Pyrexae",
+        "pieces": [
+          "Tines of the Pyrexae - Body Head",
+          "Tines of the Pyrexae - Head",
+          "Tines of the Pyrexae - Back",
+          "Tines of the Pyrexae - Tail"
+        ]
+      },
+      {
+        "id": 21877,
+        "name": "Imperial Ember",
+        "hero": "Lina",
+        "heroCode": "lina",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Imperial_Ember",
+        "pieces": [
+          "Imperial Ember - Arms",
+          "Imperial Ember - Belt",
+          "Imperial Ember - Neck",
+          "Imperial Ember - Crown"
+        ]
+      },
+      {
+        "id": 21497,
+        "name": "Designs of Ancient Druud",
+        "hero": "Disruptor",
+        "heroCode": "disruptor",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/lightning_harbinger_ls",
+        "pieces": [
+          "Designs of Ancient Druud - Loading Screen",
+          "Designs of Ancient Druud - Weapon",
+          "Designs of Ancient Druud - Shoulder",
+          "Designs of Ancient Druud - Mount",
+          "Designs of Ancient Druud - Head",
+          "Designs of Ancient Druud - Back",
+          "Designs of Ancient Druud - Arms"
+        ]
+      },
+      {
+        "id": 25802,
+        "name": "Verdant Swarm",
+        "hero": "Nature's Prophet",
+        "heroCode": "furion",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_NP_Verdant_Swarm",
+        "pieces": [
+          "Verdant Swarm - Neck",
+          "Verdant Swarm - Arms",
+          "Verdant Swarm - Shoulder",
+          "Verdant Swarm - Back",
+          "Verdant Swarm - Weapon",
+          "Verdant Swarm - Treant",
+          "Verdant Swarm - Head"
+        ]
+      },
+      {
+        "id": 29283,
+        "name": "Phalanx of the Bronze Eagle",
+        "hero": "Legion Commander",
+        "heroCode": "legion_commander",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Legion_Commander_Imperial_Valor",
+        "pieces": [
+          "Phalanx of the Bronze Eagle - Weapon",
+          "Phalanx of the Bronze Eagle - Shoulder",
+          "Phalanx of the Bronze Eagle - Legs",
+          "Phalanx of the Bronze Eagle - Wearable",
+          "Phalanx of the Bronze Eagle - Back",
+          "Phalanx of the Bronze Eagle - Arms"
+        ]
+      },
+      {
+        "id": 21602,
+        "name": "Raven of Ristul",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Raven_of_Ristul",
+        "pieces": [
+          "Raven of Ristul - Weapon",
+          "Raven of Ristul - Shoulder",
+          "Raven of Ristul - Head",
+          "Raven of Ristul - Back"
+        ]
+      },
+      {
+        "id": 26271,
+        "name": "Eyes in the Endless Dark",
+        "hero": "Shadow Shaman",
+        "heroCode": "shadow_shaman",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Shaman_Shadow_Cultist",
+        "pieces": [
+          "Eyes in the Endless Dark - Serpent Wards",
+          "Eyes in the Endless Dark - Arms",
+          "Eyes in the Endless Dark - Head",
+          "Eyes in the Endless Dark - Belt",
+          "Eyes in the Endless Dark - Offhand",
+          "Eyes in the Endless Dark - Weapon"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28209,
+        "name": "Crown of the Condor",
+        "hero": "Skeleton King",
+        "heroCode": "skeleton_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Wraith_King_Avilliva__Set",
+        "pieces": [
+          "Crown of the Condor - Weapon",
+          "Crown of the Condor - Crown",
+          "Crown of the Condor - Shoulder",
+          "Crown of the Condor - Arms",
+          "Crown of the Condor - Back",
+          "Crown of the Condor - Armor"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 28221,
+        "name": "Whispering Wings",
+        "hero": "Silencer",
+        "heroCode": "silencer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Silencer_Avilliva__Set",
+        "pieces": [
+          "Whispering Wings - Offhand Weapon",
+          "Whispering Wings - Weapon",
+          "Whispering Wings - Head",
+          "Whispering Wings - Belt",
+          "Whispering Wings - Arms",
+          "Whispering Wings - Shoulder"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 30275,
+        "name": "Mocking Bird",
+        "hero": "Meepo",
+        "heroCode": "meepo",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Avilliva_Meepo_Set",
+        "pieces": [
+          "Mocking Bird - Shoulder",
+          "Mocking Bird - Beak",
+          "Mocking Bird - Back",
+          "Mocking Bird - Tail",
+          "Mocking Bird - Arms",
+          "Mocking Bird - Weapon",
+          "Taunt: Chicken Prance"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 27600,
+        "name": "Roost of the Winter Raven",
+        "hero": "Crystal Maiden",
+        "heroCode": "crystal_maiden",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Screeauk_CM_Set",
+        "pieces": [
+          "Frost Avalanche",
+          "Roost of the Winter Raven - Arms",
+          "Roost of the Winter Raven - Back",
+          "Roost of the Winter Raven - Head",
+          "Roost of the Winter Raven - Shoulder",
+          "Roost of the Winter Raven - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 25614,
+        "name": "Servant of Scree'Auk Baby Roshan",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/courier/baby_rosh/babyroshan_crownfall",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 30938,
+    "name": "Crownfall Treasure II",
+    "year": "2024",
+    "releaseDate": "2024-04-18",
+    "kind": "TREASURE",
+    "icon": "econ/tools/crownfall_screeauk_treasure_2",
+    "ordinary": [
+      {
+        "id": 29160,
+        "name": "Mischief of the Winter Moth",
+        "hero": "Puck",
+        "heroCode": "puck",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Puck_Firefly",
+        "pieces": [
+          "Mischief of the Winter Moth - Back",
+          "Mischief of the Winter Moth - Head",
+          "Mischief of the Winter Moth - Tail"
+        ]
+      },
+      {
+        "id": 28955,
+        "name": "Highborn Heretic",
+        "hero": "Skywrath Mage",
+        "heroCode": "skywrath_mage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Skywrath_Cultist",
+        "pieces": [
+          "Highborn Heretic - Weapon",
+          "Highborn Heretic - Shoulder",
+          "Highborn Heretic - Head",
+          "Highborn Heretic - Arms",
+          "Highborn Heretic - Back",
+          "Highborn Heretic - Belt"
+        ]
+      },
+      {
+        "id": 26814,
+        "name": "Twitcher",
+        "hero": "Tinker",
+        "heroCode": "tinker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Tinker_Soul_camera",
+        "pieces": [
+          "Twitcher - Back",
+          "Twitcher - Head",
+          "Twitcher - Offhand Weapon",
+          "Twitcher - Shoulder",
+          "Twitcher - Weapon"
+        ]
+      },
+      {
+        "id": 21551,
+        "name": "Keeper of the Nether-Lens",
+        "hero": "Pugna",
+        "heroCode": "pugna",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Pugna_Researcher_of_Oblivion_Magic",
+        "pieces": [
+          "Keeper of the Nether-Lens - Arms",
+          "Keeper of the Nether-Lens - Back",
+          "Keeper of the Nether-Lens - Belt",
+          "Keeper of the Nether-Lens - Head",
+          "Keeper of the Nether-Lens - Shoulder",
+          "Keeper of the Nether-Lens - Ward",
+          "Keeper of the Nether-Lens - Weapon"
+        ]
+      },
+      {
+        "id": 25414,
+        "name": "Song of the Sea Lotus",
+        "hero": "Naga Siren",
+        "heroCode": "naga_siren",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Naga_Song_of_Onnamusha",
+        "pieces": [
+          "Song of the Sea Lotus - Head",
+          "Song of the Sea Lotus - Armor",
+          "Song of the Sea Lotus - Weapon",
+          "Song of the Sea Lotus - Offhand Weapon",
+          "Song of the Sea Lotus - Tail"
+        ]
+      },
+      {
+        "id": 21926,
+        "name": "Lionheart",
+        "hero": "Omniknight",
+        "heroCode": "omniknight",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Lionheart_Guardian",
+        "pieces": [
+          "Lionheart - Weapon",
+          "Lionheart - Shoulder",
+          "Lionheart - Head",
+          "Lionheart - Back",
+          "Lionheart - Arms"
+        ]
+      },
+      {
+        "id": 25285,
+        "name": "Flight of the Gryphon Lord",
+        "hero": "Keeper Of The Light",
+        "heroCode": "keeper_of_the_light",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/kotl_arcane_griffin_master_loading_screen",
+        "pieces": [
+          "Flight of the Gryphon Lord - Loading Screen",
+          "Flight of the Gryphon Lord - Weapon",
+          "Flight of the Gryphon Lord - Mount",
+          "Flight of the Gryphon Lord - Head",
+          "Flight of the Gryphon Lord - Belt"
+        ]
+      },
+      {
+        "id": 25900,
+        "name": "Crystalline Crown",
+        "hero": "Ancient Apparition",
+        "heroCode": "ancient_apparition",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_AA_Frozen_Crown",
+        "pieces": [
+          "Crystalline Crown - Arms",
+          "Crystalline Crown - Head",
+          "Crystalline Crown - Tail",
+          "Crystalline Crown - Shoulder"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 27211,
+        "name": "Birdfeed Bandit",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Screeauk_Hoodwink_Set",
+        "pieces": [
+          "Birdfeed Bandit - Weapon",
+          "Birdfeed Bandit - Tail",
+          "Birdfeed Bandit - Back",
+          "Birdfeed Bandit - Armor"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 28201,
+        "name": "Thunderbird",
+        "hero": "Zeus",
+        "heroCode": "zuus",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Zeus_Avilliva__Set",
+        "pieces": [
+          "Thunderbird - Belt",
+          "Thunderbird - Head",
+          "Thunderbird - Back",
+          "Thunderbird - Arms"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 27208,
+        "name": "Ravencloak",
+        "hero": "Drow Ranger",
+        "heroCode": "drow_ranger",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Crownfall_Screeauk_Drow_Set_v1",
+        "pieces": [
+          "Ravencloak - Arms",
+          "Ravencloak - Legs",
+          "Ravencloak - Shoulders",
+          "Ravencloak - Head",
+          "Ravencloak - Back",
+          "Ravencloak - Weapon",
+          "Ravencloak - Quiver",
+          "Taunt: The Finer Points"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 27141,
+        "name": "Owly Bear",
+        "hero": "Ursa",
+        "heroCode": "ursa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Screeauk_Ursa_Set",
+        "pieces": [
+          "Owly Bear - Claws",
+          "Owly Bear - Belt",
+          "Owly Bear - Arms",
+          "Owly Bear - Back",
+          "Owly Bear - Head"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 25614,
+        "name": "Servant of Scree'Auk Baby Roshan",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/courier/baby_rosh/babyroshan_crownfall",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 30939,
+    "name": "Crownfall Treasure III",
+    "year": "2024",
+    "releaseDate": "2024-05-22",
+    "kind": "TREASURE",
+    "icon": "econ/tools/crownfall_screeauk_treasure_3",
+    "ordinary": [
+      {
+        "id": 29127,
+        "name": "Raven Harvest",
+        "hero": "Shadow Fiend",
+        "heroCode": "nevermore",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Blood_Raven_Harvester",
+        "pieces": [
+          "Raven Harvest - Shoulder",
+          "Raven Harvest - Head",
+          "Raven Harvest - Arms"
+        ]
+      },
+      {
+        "id": 29111,
+        "name": "Tome of Infinite Terror",
+        "hero": "Bane",
+        "heroCode": "bane",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Tome_of_Infinite_Terror",
+        "pieces": [
+          "Tome of Infinite Terror - Head",
+          "Tome of Infinite Terror - Back",
+          "Tome of Infinite Terror - Arms",
+          "Tome of Infinite Terror - Shoulder"
+        ]
+      },
+      {
+        "id": 26186,
+        "name": "The Rose of Ristul",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Rose_of_Ristul",
+        "pieces": [
+          "The Rose of Ristul - Back",
+          "The Rose of Ristul - Weapon",
+          "The Rose of Ristul - Shoulder",
+          "The Rose of Ristul - Head",
+          "The Rose of Ristul - Legs"
+        ]
+      },
+      {
+        "id": 30393,
+        "name": "Mars Gallus",
+        "hero": "Mars",
+        "heroCode": "mars",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Mars_Gallus",
+        "pieces": [
+          "Mars Gallus - Weapon",
+          "Mars Gallus - Shield",
+          "Mars Gallus - Legs",
+          "Mars Gallus - Armor"
+        ]
+      },
+      {
+        "id": 30580,
+        "name": "Spina Infernalis",
+        "hero": "Treant",
+        "heroCode": "treant",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spina_Infernalis",
+        "pieces": [
+          "Spina Infernalis - Legs",
+          "Spina Infernalis - Arms",
+          "Spina Infernalis - Shoulders",
+          "Spina Infernalis - Head"
+        ]
+      },
+      {
+        "id": 21382,
+        "name": "Draconic Requiem",
+        "hero": "Death Prophet",
+        "heroCode": "death_prophet",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Draconic_Requiem",
+        "pieces": [
+          "Draconic Requiem - Spirits",
+          "Draconic Requiem - Misc",
+          "Draconic Requiem - Legs",
+          "Draconic Requiem - Armor",
+          "Draconic Requiem - Belt",
+          "Draconic Requiem - Head"
+        ]
+      },
+      {
+        "id": 29049,
+        "name": "Grimfeather the Grotesque",
+        "hero": "Visage",
+        "heroCode": "visage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Grimfeather_the_Grotesque",
+        "pieces": [
+          "Grimfeather the Grotesque - Head",
+          "Grimfeather the Grotesque - Armor",
+          "Grimfeather the Grotesque - Familiar"
+        ]
+      },
+      {
+        "id": 30833,
+        "name": "Potion Potentate",
+        "hero": "Alchemist",
+        "heroCode": "alchemist",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Potion_Potentate",
+        "pieces": [
+          "Potion Potentate - Weapon",
+          "Potion Potentate - Shoulder",
+          "Potion Potentate - Offhand",
+          "Potion Potentate - Neck",
+          "Potion Potentate - Back",
+          "Potion Potentate - Arms",
+          "Potion Potentate - Armor"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 28226,
+        "name": "Barding of Balaur",
+        "hero": "Jakiro",
+        "heroCode": "jakiro",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Jakiro_Avilliva_Set",
+        "pieces": [
+          "Barding of Balaur - Tail",
+          "Barding of Balaur - Wings",
+          "Barding of Balaur - Ice Head",
+          "Barding of Balaur - Fire Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 27113,
+        "name": "Prophecies of Pavo",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Screeauk_Oracle_Set",
+        "pieces": [
+          "Prophecies of Pavo - Weapon",
+          "Prophecies of Pavo - Armor",
+          "Prophecies of Pavo - Back",
+          "Prophecies of Pavo - Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 28231,
+        "name": "Flock of Avilliva",
+        "hero": "Phantom Lancer",
+        "heroCode": "phantom_lancer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Phantom_Lancer_Avilliva_Set",
+        "pieces": [
+          "Flock of Avilliva - Head",
+          "Flock of Avilliva - Belt",
+          "Flock of Avilliva - Arms",
+          "Flock of Avilliva - Shoulder",
+          "Flock of Avilliva - Weapon",
+          "Taunt: Pole Position"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 27297,
+        "name": "Pinions of Piety",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Screeauk_AM_Set",
+        "pieces": [
+          "The Disciple's Path",
+          "Pinions of Piety - Armor",
+          "Pinions of Piety - Head",
+          "Pinions of Piety - Offhand",
+          "Pinions of Piety - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      },
+      {
+        "id": 25614,
+        "name": "Servant of Scree'Auk Baby Roshan",
+        "hero": "Courier",
+        "heroCode": null,
+        "previewKind": "prop",
+        "image": "econ/courier/baby_rosh/babyroshan_crownfall",
+        "pieces": [],
+        "rarity": "Cosmically Rare",
+        "curve": "fixed",
+        "scale": 0,
+        "floor": 4e-06
+      }
+    ]
+  },
+  {
+    "id": 31200,
+    "name": "Treasure of Wonders",
+    "year": "2026",
+    "releaseDate": "2026-06-18",
+    "kind": "TREASURE",
+    "icon": "econ/tools/dark_carnival_treasure_i",
+    "ordinary": [
+      {
+        "id": 36051,
+        "name": "Motley Marauder",
+        "hero": "Drow Ranger",
+        "heroCode": "drow_ranger",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Drow_Dark_Carnival_Set_",
+        "pieces": [
+          "Motley Marauder - Arms",
+          "Motley Marauder - Legs",
+          "Motley Marauder - Shoulders",
+          "Motley Marauder - Head",
+          "Motley Marauder - Back",
+          "Motley Marauder - Weapon",
+          "Motley Marauder - Quiver"
+        ]
+      },
+      {
+        "id": 36086,
+        "name": "Court Fester",
+        "hero": "Undying",
+        "heroCode": "undying",
+        "previewKind": "hero",
+        "image": "econ/set/DOTA_Item_Undying__Dark_Carnival",
+        "pieces": [
+          "Court Fester - Armor",
+          "Court Fester - Arms",
+          "Court Fester - Head",
+          "Court Fester - Golem"
+        ]
+      },
+      {
+        "id": 33975,
+        "name": "Mistress of Ceremonies",
+        "hero": "Queen of Pain",
+        "heroCode": "queenofpain",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Queen_of_Pain__Dark_Carnival",
+        "pieces": [
+          "Mistress of Ceremonies - Back",
+          "Mistress of Ceremonies - Head",
+          "Mistress of Ceremonies - Legs",
+          "Mistress of Ceremonies - Shoulders",
+          "Mistress of Ceremonies - Weapon"
+        ]
+      },
+      {
+        "id": 36025,
+        "name": "Palms of Prophecy",
+        "hero": "Arc Warden",
+        "heroCode": "arc_warden",
+        "previewKind": "hero",
+        "image": "econ/items/arc_warden/arc_warden_dark_carnival",
+        "pieces": [
+          "Palms of Prophecy - Back",
+          "Palms of Prophecy - Arms",
+          "Palms of Prophecy - Shoulder",
+          "Palms of Prophecy - Head"
+        ]
+      },
+      {
+        "id": 31091,
+        "name": "Lute and Pillager",
+        "hero": "Troll Warlord",
+        "heroCode": "troll_warlord",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Sharpest_Rhyme__Troll_Warlord_set",
+        "pieces": [
+          "Lute and Pillager - Weapon",
+          "Lute and Pillager - Shoulders",
+          "Lute and Pillager - Head",
+          "Lute and Pillager - Armor"
+        ]
+      },
+      {
+        "id": 36030,
+        "name": "Mademoiselle Macabaret",
+        "hero": "Death Prophet",
+        "heroCode": "death_prophet",
+        "previewKind": "hero",
+        "image": "econ/items/death_prophet/death_prophet_dark_carnival",
+        "pieces": [
+          "Mademoiselle Macabaret - Belt",
+          "Mademoiselle Macabaret - Legs",
+          "Mademoiselle Macabaret - Head",
+          "Mademoiselle Macabaret - Misc",
+          "Mademoiselle Macabaret - Armor",
+          "Mademoiselle Macabaret - Macabre Bear"
+        ]
+      },
+      {
+        "id": 34212,
+        "name": "Flim-Flam Felidae",
+        "hero": "Phantom Lancer",
+        "heroCode": "phantom_lancer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Phantom_Lancer__Dark_Carnival",
+        "pieces": [
+          "Flim-Flam Felidae - Head",
+          "Flim-Flam Felidae - Belt",
+          "Flim-Flam Felidae - Arms",
+          "Flim-Flam Felidae - Shoulder",
+          "Flim-Flam Felidae - Weapon"
+        ]
+      },
+      {
+        "id": 32685,
+        "name": "Bar Belle",
+        "hero": "Dawnbreaker",
+        "heroCode": "dawnbreaker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dawnbreaker_Dark_Carnival_Set",
+        "pieces": [
+          "Bar Belle - Weapon",
+          "Bar Belle - Arms",
+          "Bar Belle - Head",
+          "Bar Belle - Armor",
+          "Taunt: Bar Belle Ballet"
+        ]
+      },
+      {
+        "id": 31082,
+        "name": "Vaudevillain",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_FATAL_JOKE__Templar_Assassin_set",
+        "pieces": [
+          "Vaudevillain - Armor",
+          "Vaudevillain - Shoulders",
+          "Vaudevillain - Head",
+          "Vaudevillain - Weapon"
+        ]
+      },
+      {
+        "id": 36262,
+        "name": "Bonobo the Clown",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Monkey_King_Dark_Carnival",
+        "pieces": [
+          "Bonobo the Clown - Armor",
+          "Bonobo the Clown - Head",
+          "Bonobo the Clown - Shoulders",
+          "Bonobo the Clown - Weapon"
+        ]
+      },
+      {
+        "id": 33848,
+        "name": "The Woodcutter",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Woodcutter",
+        "pieces": [
+          "The Toy Butcher",
+          "The Woodcutter - Weapon",
+          "The Woodcutter - Offhand",
+          "The Woodcutter - Head",
+          "The Woodcutter - Arms",
+          "The Woodcutter - Armor"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 36205,
+        "name": "Mane Attraction",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Primal_Beast__Dark_Carnival",
+        "pieces": [
+          "Mane Attraction - Arms",
+          "Mane Attraction - Back",
+          "Mane Attraction - Head",
+          "Mane Attraction - Legs"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 36091,
+        "name": "Selemene Showgirl",
+        "hero": "Mirana",
+        "heroCode": "mirana",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Mirana__Dark_Carnival",
+        "pieces": [
+          "Selemene Showgirl - Head",
+          "Selemene Showgirl - Weapon",
+          "Selemene Showgirl - Arms",
+          "Selemene Showgirl - Mount",
+          "Selemene Showgirl - Misc",
+          "Selemene Showgirl - Back",
+          "Selemene Showgirl - Shoulder"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 34390,
+        "name": "Fairy Godmummer",
+        "hero": "Dark Willow",
+        "heroCode": "dark_willow",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Dark_Willow__Dark_Carnival",
+        "pieces": [
+          "Fairy Godmummer - Armor",
+          "Fairy Godmummer - Head",
+          "Fairy Godmummer - Offhand",
+          "Fairy Godmummer - Belt",
+          "Fairy Godmummer - Back"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 34398,
+        "name": "Madame Scrio",
+        "hero": "Wisp",
+        "heroCode": "wisp",
+        "previewKind": "hero",
+        "image": "econ/items/io/dark_carnival_io/dark_carnival_io",
+        "pieces": [
+          "Madame Scrio"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 31361,
+    "name": "Spring 2025 Heroes' Hoard",
+    "year": "2025",
+    "releaseDate": "2025-05-22",
+    "kind": "HEROES' HOARD",
+    "icon": "econ/tools/sc_2025_treasure",
+    "ordinary": [
+      {
+        "id": 31075,
+        "name": "Mariposa Mori",
+        "hero": "Muerta",
+        "heroCode": "muerta",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/the_netherbutterfly",
+        "pieces": [
+          "Mariposa Mori - Weapon",
+          "Mariposa Mori - Head",
+          "Mariposa Mori - Back",
+          "Mariposa Mori - Armor",
+          "Mariposa Mori - Ultimate",
+          "Mariposa Mori - Loading Screen"
+        ]
+      },
+      {
+        "id": 28333,
+        "name": "School of the Solar Fang",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_School_of_the_Solar_Fang",
+        "pieces": [
+          "School of the Solar Fang - Shoulder",
+          "School of the Solar Fang - Head",
+          "School of the Solar Fang - Back",
+          "School of the Solar Fang - Armor"
+        ]
+      },
+      {
+        "id": 26551,
+        "name": "Wasteland Rattler",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Wasteland_Rattler",
+        "pieces": [
+          "Wasteland Rattler - Mount",
+          "Wasteland Rattler - Armor",
+          "Wasteland Rattler - Costume",
+          "Wasteland Rattler - Weapon",
+          "Wasteland Rattler - Head"
+        ]
+      },
+      {
+        "id": 25724,
+        "name": "Red Dawn",
+        "hero": "Dawnbreaker",
+        "heroCode": "dawnbreaker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/dawnbreaker_lady_of_blaze_loading_screen",
+        "pieces": [
+          "Red Dawn - Loading Screen",
+          "Red Dawn - Armor",
+          "Red Dawn - Arms",
+          "Red Dawn - Head",
+          "Red Dawn - Weapon"
+        ]
+      },
+      {
+        "id": 28336,
+        "name": "Taurhorn Terror",
+        "hero": "Spirit Breaker",
+        "heroCode": "spirit_breaker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Taurhorn_Terror",
+        "pieces": [
+          "Taurhorn Terror - Weapon",
+          "Taurhorn Terror - Tail",
+          "Taurhorn Terror - Shoulder",
+          "Taurhorn Terror - Head",
+          "Taurhorn Terror - Belt",
+          "Taurhorn Terror - Arms"
+        ]
+      },
+      {
+        "id": 28338,
+        "name": "Shadow Stalker",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/2023panther_shadow_loading",
+        "pieces": [
+          "Shadow Stalker - Loading Screen",
+          "Shadow Stalker - Weapon",
+          "Shadow Stalker - Legs",
+          "Shadow Stalker - Head",
+          "Shadow Stalker - Armor",
+          "Exile Unveiled"
+        ]
+      },
+      {
+        "id": 29126,
+        "name": "Spellbreaker's Braid",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Spellbreakers_Braid",
+        "pieces": [
+          "Spellbreaker's Braid - Head",
+          "Spellbreaker's Braid - Armor",
+          "Spellbreaker's Braid - Offhand Weapon",
+          "Spellbreaker's Braid - Weapon",
+          "The Disciple's Path"
+        ]
+      },
+      {
+        "id": 31074,
+        "name": "The Burning Sentinel",
+        "hero": "Huskar",
+        "heroCode": "huskar",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_Burning_Sentinel",
+        "pieces": [
+          "The Burning Sentinel - Weapon",
+          "The Burning Sentinel - Shoulder",
+          "The Burning Sentinel - Offhand",
+          "The Burning Sentinel - Arms",
+          "The Burning Sentinel - Head"
+        ]
+      },
+      {
+        "id": 30721,
+        "name": "Urchin of Kazim",
+        "hero": "Invoker",
+        "heroCode": "invoker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Urchin_of_Kazim",
+        "pieces": [
+          "Acolyte of the Lost Arts",
+          "The Good Old Days",
+          "Urchin of Kazim - Shoulder",
+          "Urchin of Kazim - Head",
+          "Urchin of Kazim - Armor",
+          "Urchin of Kazim - Arms",
+          "Urchin of Kazim - Back",
+          "Taunt: Rug Cutter",
+          "Urchin of Kazim - Forged Spirit"
+        ]
+      },
+      {
+        "id": 21736,
+        "name": "Seeker of the Crescent Wheel",
+        "hero": "Luna",
+        "heroCode": "luna",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Seeker_of_the_Crescent_Wheel",
+        "pieces": [
+          "Seeker of the Crescent Wheel - Head",
+          "Seeker of the Crescent Wheel - Mount",
+          "Seeker of the Crescent Wheel - Shoulder",
+          "Seeker of the Crescent Wheel - Off-Hand",
+          "Seeker of the Crescent Wheel - Weapon"
+        ]
+      },
+      {
+        "id": 25023,
+        "name": "Rot-Iron Ripper",
+        "hero": "Necrophos",
+        "heroCode": "necrolyte",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_RotIron_Ripper",
+        "pieces": [
+          "Rot-Iron Ripper - Head",
+          "Rot-Iron Ripper - Body",
+          "Rot-Iron Ripper - Shoulders",
+          "Rot-Iron Ripper - Legs",
+          "Rot-Iron Ripper - Weapon"
+        ]
+      },
+      {
+        "id": 25822,
+        "name": "The Molten Fist",
+        "hero": "Axe",
+        "heroCode": "axe",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/axe_lava_legion_commander_ls",
+        "pieces": [
+          "The Molten Fist - Loading Screen",
+          "The Molten Fist - Armor",
+          "The Molten Fist - Belt",
+          "The Molten Fist - Head",
+          "The Molten Fist - Misc",
+          "The Molten Fist - Weapon"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21738,
+        "name": "Pallbringer",
+        "hero": "Earthshaker",
+        "heroCode": "earthshaker",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/baron_of_the_minotaur_ls",
+        "pieces": [
+          "Pallbringer - Arms",
+          "Pallbringer - Belt",
+          "Pallbringer - Head",
+          "Pallbringer - Weapon",
+          "Pallbringer - Loading Screen"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 26088,
+        "name": "Rotzo the Clown",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Rotzo_the_Clown",
+        "pieces": [
+          "Rotzo the Clown - Shoulder",
+          "Rotzo the Clown - Head",
+          "Rotzo the Clown - Weapon",
+          "Rotzo the Clown - Arms",
+          "Rotzo the Clown - Offhand Weapon",
+          "Rotzo the Clown - Belt",
+          "Rotzo the Clown - Back",
+          "Taunt: The Meat Wagon",
+          "Rotzo's Peepers"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 21846,
+        "name": "Serket of the Black Sands",
+        "hero": "Sand King",
+        "heroCode": "sand_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_King_of_Egypt",
+        "pieces": [
+          "Serket of the Black Sands - Shoulder",
+          "Serket of the Black Sands - Legs",
+          "Serket of the Black Sands - Head",
+          "Serket of the Black Sands - Back",
+          "Serket of the Black Sands - Arms"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 25460,
+        "name": "Cannonroar Confessor",
+        "hero": "Lion",
+        "heroCode": "lion",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Cannonroar_Confessor",
+        "pieces": [
+          "Cannonroar Confessor - Arms",
+          "Cannonroar Confessor - Back",
+          "Cannonroar Confessor - Head",
+          "Cannonroar Confessor - Shoulder",
+          "Cannonroar Confessor - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 32608,
+    "name": "Treasure of the Crimson Witness 2024",
+    "year": "2024",
+    "releaseDate": "2024-09-03",
+    "kind": "TREASURE",
+    "icon": "econ/tools/ti_2024_treasure_crimson",
+    "ordinary": [
+      {
+        "id": 32606,
+        "name": "Shadow of the Dark Age of the Crimson Witness",
+        "hero": "Night Stalker",
+        "heroCode": "night_stalker",
+        "previewKind": "hero",
+        "image": "econ/items/nightstalker/ns_ti10_immortal_arms/ns_ti10_immortal_arms2",
+        "pieces": [
+          "Shadow of the Dark Age of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 32607,
+        "name": "Everglyph Goggles of the Crimson Witness",
+        "hero": "Meepo",
+        "heroCode": "meepo",
+        "previewKind": "hero",
+        "image": "econ/items/meepo/meepo_2021_immortal/meepo_2021_immortal1",
+        "pieces": [
+          "Everglyph Goggles of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 32538,
+        "name": "Orb of Deliverance of the Crimson Witness",
+        "hero": "Disruptor",
+        "heroCode": "disruptor",
+        "previewKind": "hero",
+        "image": "econ/items/disruptor/disruptor_ti8_immortal_weapon/disruptor_ti8_immortal_weapon1",
+        "pieces": [
+          "Orb of Deliverance of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 32539,
+        "name": "Twilight Schism of the Crimson Witness",
+        "hero": "Luna",
+        "heroCode": "luna",
+        "previewKind": "hero",
+        "image": "econ/items/luna/luna_ti9_immortal/luna_ti9_immortal2",
+        "pieces": [
+          "Twilight Schism of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 32540,
+        "name": "Mantle of the Whispered Bond of the Crimson Witness",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_immortal_shoulders1",
+        "pieces": [
+          "Mantle of the Whispered Bond of the Crimson Witness"
+        ]
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": 32609,
+    "name": "Winter 2024 Heroes' Hoard",
+    "year": "2024",
+    "releaseDate": "2024-12-18",
+    "kind": "HEROES' HOARD",
+    "icon": "econ/tools/fall_2024_treasure",
+    "ordinary": [
+      {
+        "id": 28331,
+        "name": "Foreseen Horizons",
+        "hero": "Oracle",
+        "heroCode": "oracle",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Foreseen_Horizons",
+        "pieces": [
+          "Foreseen Horizons - Back",
+          "Foreseen Horizons - Armor",
+          "Foreseen Horizons - Weapon",
+          "Foreseen Horizons - Head"
+        ]
+      },
+      {
+        "id": 29157,
+        "name": "Tendrils of the Timeless",
+        "hero": "Faceless Void",
+        "heroCode": "faceless_void",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/faceless_void_finger_of_void_loading_screen",
+        "pieces": [
+          "Tendrils of the Timeless - Loading Screen",
+          "Tendrils of the Timeless - Shoulder",
+          "Tendrils of the Timeless - Belt",
+          "Tendrils of the Timeless - Head",
+          "Tendrils of the Timeless - Arms",
+          "Tendrils of the Timeless - Weapon"
+        ]
+      },
+      {
+        "id": 26818,
+        "name": "Verminator",
+        "hero": "Bounty Hunter",
+        "heroCode": "bounty_hunter",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Verminator",
+        "pieces": [
+          "Verminator - Head",
+          "Verminator - Back",
+          "Verminator - Armor",
+          "Verminator - Shoulder",
+          "Verminator - Offhand Weapon",
+          "Verminator - Weapon"
+        ]
+      },
+      {
+        "id": 32572,
+        "name": "Rose of Moira",
+        "hero": "Muerta",
+        "heroCode": "muerta",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/soul_warden_loading_screen",
+        "pieces": [
+          "Rose of Moira - Loading Screen",
+          "Rose of Moira - Ultimate",
+          "Rose of Moira - Crown",
+          "Rose of Moira - Raiment",
+          "Rose of Moira - Prison",
+          "Rose of Moira - Revolvers"
+        ]
+      },
+      {
+        "id": 30570,
+        "name": "Bilge Rat Buccaneer",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Bilge_Rat_Buccaneer",
+        "pieces": [
+          "Bilge Rat Buccaneer - Armor",
+          "Bilge Rat Buccaneer - Back",
+          "Bilge Rat Buccaneer - Tail",
+          "Bilge Rat Buccaneer - Weapon"
+        ]
+      },
+      {
+        "id": 21886,
+        "name": "Bloodzo the Bear",
+        "hero": "Ursa",
+        "heroCode": "ursa",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/circus_ursa_ls",
+        "pieces": [
+          "Bloodzo the Bear - Loading Screen",
+          "Bloodzo the Bear - Head",
+          "Bloodzo the Bear - Weapon",
+          "Bloodzo the Bear - Belt",
+          "Bloodzo the Bear - Back",
+          "Bloodzo the Bear - Arms"
+        ]
+      },
+      {
+        "id": 30385,
+        "name": "Velveteen Vanquisher",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Velveteen_Vanquisher",
+        "pieces": [
+          "Velveteen Vanquisher - Weapon",
+          "Velveteen Vanquisher - Offhand",
+          "Velveteen Vanquisher - Head",
+          "Velveteen Vanquisher - Arms",
+          "Velveteen Vanquisher - Armor",
+          "The Toy Butcher"
+        ]
+      },
+      {
+        "id": 30451,
+        "name": "Starforge Reformer",
+        "hero": "Dawnbreaker",
+        "heroCode": "dawnbreaker",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_starforge_reformer",
+        "pieces": [
+          "Starforge Reformer - Head",
+          "Starforge Reformer - Weapon",
+          "Starforge Reformer - Loading Screen",
+          "Starforge Reformer - Arms",
+          "Starforge Reformer - Armor"
+        ]
+      },
+      {
+        "id": 29294,
+        "name": "Shellshock Saturnalia",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/snapfire_royal_blue_witch_loading_screen",
+        "pieces": [
+          "Shellshock Saturnalia - Mount",
+          "Shellshock Saturnalia - Costume",
+          "Shellshock Saturnalia - Weapon",
+          "Shellshock Saturnalia - Head",
+          "Shellshock Saturnalia - Armor",
+          "Shellshock Saturnalia - Loading Screen"
+        ]
+      },
+      {
+        "id": 29159,
+        "name": "Onikage Disciple",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Onikage_Disciple",
+        "pieces": [
+          "Onikage Disciple - Weapon",
+          "Onikage Disciple - Back",
+          "Onikage Disciple - Belt",
+          "Onikage Disciple - Shoulder",
+          "Onikage Disciple - Head"
+        ]
+      },
+      {
+        "id": 26799,
+        "name": "Svarog the Infernal",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Svarog_the_Infernal",
+        "pieces": [
+          "Svarog the Infernal - Arms",
+          "Svarog the Infernal - Back",
+          "Svarog the Infernal - Head",
+          "Svarog the Infernal - Legs"
+        ]
+      },
+      {
+        "id": 28274,
+        "name": "Little Red",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_little_red",
+        "pieces": [
+          "Little Red - Hood",
+          "Little Red - Cloak",
+          "Little Red - Pack",
+          "Little Red - Armor",
+          "Little Red - Wolf Pet",
+          "Taunt: Riding High"
+        ]
+      },
+      {
+        "id": 28278,
+        "name": "Designs of the Dragon",
+        "hero": "Anti-Mage",
+        "heroCode": "antimage",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Designs_of_the_Dragon",
+        "pieces": [
+          "Designs of the Dragon - Armor",
+          "Designs of the Dragon - Head",
+          "Designs of the Dragon - Offhand",
+          "Designs of the Dragon - Weapon",
+          "The Disciple's Path"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21717,
+        "name": "Vile Vessel",
+        "hero": "Shadow Demon",
+        "heroCode": "shadow_demon",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/the_gate_of_hell_the_gate_of_hell_loading",
+        "pieces": [
+          "Vile Vessel - Armor",
+          "Vile Vessel - Back",
+          "Vile Vessel - Belt",
+          "Vile Vessel - Loading Screen",
+          "Vile Vessel - Tail"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 29155,
+        "name": "Ardalan Arsonist",
+        "hero": "Dark Willow",
+        "heroCode": "dark_willow",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Ardalan_Arsonist",
+        "pieces": [
+          "Ardalan Arsonist - Offhand Weapon",
+          "Ardalan Arsonist - Head",
+          "Ardalan Arsonist - Belt",
+          "Ardalan Arsonist - Back",
+          "Ardalan Arsonist - Armor"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 31295,
+        "name": "Mechamancer",
+        "hero": "Venomancer",
+        "heroCode": "venomancer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Mechamancer",
+        "pieces": [
+          "Mechamancer - Ward",
+          "Mechamancer - Arms",
+          "Mechamancer - Tail",
+          "Mechamancer - Back",
+          "Mechamancer - Head",
+          "Taunt: Mecha Bananadancer"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 21840,
+        "name": "Fluttering Breeze",
+        "hero": "Windranger",
+        "heroCode": "windrunner",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Fluttering_Breeze",
+        "pieces": [
+          "Fluttering Breeze - Head",
+          "Fluttering Breeze - Shoulder",
+          "Fluttering Breeze - Back",
+          "Fluttering Breeze - Arrows",
+          "Fluttering Breeze - Bow",
+          "Cape of the Rising Gale",
+          "Quiver of the Rising Gale",
+          "Armor of the Rising Gale",
+          "Compass of the Rising Gale",
+          "Longbow of the Rising Gale",
+          "Compass of the Rising Gale Loading Screen",
+          "Hair of the Rising Gale"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 32658,
+    "name": "The Charms of the Snake",
+    "year": "2025",
+    "releaseDate": "2025-01-15",
+    "kind": "TREASURE",
+    "icon": "econ/tools/new_bloom_2025",
+    "ordinary": [
+      {
+        "id": 21970,
+        "name": "Q'uq'umatz Charmer",
+        "hero": "Shadow Shaman",
+        "heroCode": "shadow_shaman",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_DragonTooth",
+        "pieces": [
+          "Q'uq'umatz Charmer - Arms",
+          "Q'uq'umatz Charmer - Belt",
+          "Q'uq'umatz Charmer - Head",
+          "Q'uq'umatz Charmer - Off-Hand",
+          "Q'uq'umatz Charmer - Weapon"
+        ]
+      },
+      {
+        "id": 25055,
+        "name": "Call of the Coral Cultist",
+        "hero": "Naga Siren",
+        "heroCode": "naga_siren",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Naga_Whisper_of_the_Deep",
+        "pieces": [
+          "Call of the Coral Cultist - Head",
+          "Call of the Coral Cultist - Legs",
+          "Call of the Coral Cultist - Armor",
+          "Call of the Coral Cultist - Weapon",
+          "Call of the Coral Cultist - Off-hand Weapon"
+        ]
+      },
+      {
+        "id": 31070,
+        "name": "Psionic Constrictor",
+        "hero": "Templar Assassin",
+        "heroCode": "templar_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Paradise_bird_sting",
+        "pieces": [
+          "Psionic Constrictor - Loading Screen",
+          "Psionic Constrictor - Armor",
+          "Psionic Constrictor - Shoulder",
+          "Psionic Constrictor - Head"
+        ]
+      },
+      {
+        "id": 32659,
+        "name": "Obsidian Ophis",
+        "hero": "Medusa",
+        "heroCode": "medusa",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_TI8_Medusa__Obsidian_Basilisk_from_Aziyog",
+        "pieces": [
+          "Obsidian Ophis - Weapon",
+          "Obsidian Ophis - Arms",
+          "Obsidian Ophis - Head",
+          "Obsidian Ophis - Armor",
+          "Obsidian Ophis - Tail"
+        ]
+      },
+      {
+        "id": 32693,
+        "name": "Slithering Stone",
+        "hero": "Earth Spirit",
+        "heroCode": "earth_spirit",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Legend_of_the_Jade_Serpent",
+        "pieces": [
+          "Slithering Stone - Weapon",
+          "Slithering Stone - Arms",
+          "Slithering Stone - Belt",
+          "Slithering Stone - Head",
+          "Slithering Stone - Neck"
+        ]
+      },
+      {
+        "id": 26538,
+        "name": "Madam Mamba",
+        "hero": "Snapfire",
+        "heroCode": "snapfire",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Snapfire_The_Red_Hex",
+        "pieces": [
+          "Madam Mamba - Mount",
+          "Madam Mamba - Head",
+          "Madam Mamba - Armor",
+          "Madam Mamba - Weapon",
+          "Madam Mamba - Costume"
+        ]
+      },
+      {
+        "id": 32692,
+        "name": "Arc Adder",
+        "hero": "Razor",
+        "heroCode": "razor",
+        "previewKind": "hero",
+        "image": "econ/loading_screens/thunder_python",
+        "pieces": [
+          "Arc Adder - Arms",
+          "Arc Adder - Armor",
+          "Arc Adder - Belt",
+          "Arc Adder - Head",
+          "Arc Adder - Weapon"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 21637,
+        "name": "Cobra-Ka",
+        "hero": "Lich",
+        "heroCode": "lich",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Vote_Only_Lich_Lord_of_Permafrost",
+        "pieces": [
+          "Cobra-Ka - Head",
+          "Cobra-Ka - Back",
+          "Cobra-Ka - Belt",
+          "Cobra-Ka - Arms",
+          "Cobra-Ka - Neck",
+          "Cobra-Ka - Loading Screen"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 32668,
+        "name": "Serpent's Spite",
+        "hero": "Necrophos",
+        "heroCode": "necrolyte",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Serpent_Sage",
+        "pieces": [
+          "Serpent's Spite - Head",
+          "Serpent's Spite - Robe",
+          "Serpent's Spite - Sash",
+          "Serpent's Spite - Scythe",
+          "Serpent's Spite - Tail"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      }
+    ]
+  },
+  {
+    "id": 32933,
+    "name": "Winter 2025 Collector's Cache",
+    "year": "2025",
+    "releaseDate": "2025-10-20",
+    "kind": "COLLECTOR'S CACHE",
+    "icon": "econ/tools/winter_2025_treasure",
+    "ordinary": [
+      {
+        "id": 32876,
+        "name": "Glutton of Punishment",
+        "hero": "Pudge",
+        "heroCode": "pudge",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Glutton_of_Punishment",
+        "pieces": [
+          "Glutton of Punishment - Armor",
+          "Glutton of Punishment - Arms",
+          "Glutton of Punishment - Weapon",
+          "Glutton of Punishment - Offhand",
+          "Glutton of Punishment - Head",
+          "The Toy Butcher"
+        ]
+      },
+      {
+        "id": 33213,
+        "name": "Lord of the Sundered Souls",
+        "hero": "Shadow Fiend",
+        "heroCode": "nevermore",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Lord_of_the_Sundered_Souls",
+        "pieces": [
+          "Lord of the Sundered Souls - Head",
+          "Lord of the Sundered Souls - Arms",
+          "Lord of the Sundered Souls - Shoulders"
+        ]
+      },
+      {
+        "id": 33465,
+        "name": "Prehistoric Predator",
+        "hero": "Primal Beast",
+        "heroCode": "primal_beast",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Prehistoric_Predator",
+        "pieces": [
+          "Prehistoric Predator - Arms",
+          "Prehistoric Predator - Back",
+          "Prehistoric Predator - Head",
+          "Prehistoric Predator - Legs"
+        ]
+      },
+      {
+        "id": 33051,
+        "name": "Insatiable Seas",
+        "hero": "Tidehunter",
+        "heroCode": "tidehunter",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Insatiable_Seas",
+        "pieces": [
+          "Insatiable Seas - Anchor",
+          "Insatiable Seas - Ship",
+          "Insatiable Seas - Maw",
+          "Insatiable Seas - Belt",
+          "Insatiable Seas - Charms",
+          "Insatiable Seas - Bracer"
+        ]
+      },
+      {
+        "id": 33382,
+        "name": "The White Widow",
+        "hero": "Broodmother",
+        "heroCode": "broodmother",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_The_White_Widow",
+        "pieces": [
+          "The White Widow - Head",
+          "The White Widow - Legs",
+          "The White Widow - Body",
+          "The White Widow - Back",
+          "The White Widow - Spiderling"
+        ]
+      },
+      {
+        "id": 32865,
+        "name": "Angel of the Abyss",
+        "hero": "Enigma",
+        "heroCode": "enigma",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Angel_of_the_Abyss",
+        "pieces": [
+          "Angel of the Abyss - Fetters",
+          "Angel of the Abyss - Servants",
+          "Angel of the Abyss - Armor",
+          "Angel of the Abyss - Halo"
+        ]
+      },
+      {
+        "id": 31451,
+        "name": "Blinding Bastion",
+        "hero": "Omniknight",
+        "heroCode": "omniknight",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Blinding_Bastion",
+        "pieces": [
+          "Blinding Bastion - Back",
+          "Blinding Bastion - Head",
+          "Blinding Bastion - Shoulders",
+          "Blinding Bastion - Flail",
+          "Blinding Bastion - Arms"
+        ]
+      },
+      {
+        "id": 33360,
+        "name": "Harrow's Harvest",
+        "hero": "Ringmaster",
+        "heroCode": "ringmaster",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Harrows_Harvest",
+        "pieces": [
+          "Harrow's Harvest - Weapon",
+          "Harrow's Harvest - Belt",
+          "Harrow's Harvest - Armor",
+          "Harrow's Harvest - Head"
+        ]
+      },
+      {
+        "id": 33459,
+        "name": "Seed of Strife",
+        "hero": "Chen",
+        "heroCode": "chen",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Seed_of_Strife",
+        "pieces": [
+          "Seed of Strife - The Seed",
+          "Seed of Strife - Shoulder",
+          "Seed of Strife - Red Panda",
+          "Seed of Strife - Head",
+          "Seed of Strife - Arms"
+        ]
+      },
+      {
+        "id": 33485,
+        "name": "Laurels of the Dawnstar",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Laurels_of_the_Dawnstar",
+        "pieces": [
+          "Laurels of the Dawnstar - Armor",
+          "Laurels of the Dawnstar - Back",
+          "Laurels of the Dawnstar - Head",
+          "Laurels of the Dawnstar - Cape"
+        ]
+      },
+      {
+        "id": 33057,
+        "name": "Sodbustin' Saboteurs",
+        "hero": "Techies",
+        "heroCode": "techies",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Sodbustin_Saboteurs",
+        "pieces": [
+          "Sodbustin' Saboteurs - Remote Cart",
+          "Sodbustin' Saboteurs - Sign",
+          "Sodbustin' Saboteurs - Boomstick",
+          "Sodbustin' Saboteurs - Sodbusteur",
+          "Sodbustin' Saboteurs - Proximity Mine",
+          "Sodbustin' Saboteurs - Farmer Spleen",
+          "Sodbustin' Saboteurs - Farmer Squee",
+          "Sodbustin' Saboteurs - Succulent Spoon"
+        ]
+      },
+      {
+        "id": 31425,
+        "name": "Sins of the Simian Sovereign",
+        "hero": "Monkey King",
+        "heroCode": "monkey_king",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Sins_of_the_Simian_Sovereign",
+        "pieces": [
+          "Sins of the Simian Sovereign - Staff",
+          "Sins of the Simian Sovereign - Shoulder",
+          "Sins of the Simian Sovereign - Crown",
+          "Sins of the Simian Sovereign - Armor"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 33126,
+        "name": "Worship of the Whispered Wing",
+        "hero": "Silencer",
+        "heroCode": "silencer",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Worship_of_the_Whispered_Wing",
+        "pieces": [
+          "Worship of the Whispered Wing - Weapon",
+          "Worship of the Whispered Wing - Shoulder",
+          "Worship of the Whispered Wing - Loading Screen",
+          "Worship of the Whispered Wing - Head",
+          "Worship of the Whispered Wing - Arms",
+          "Worship of the Whispered Wing - Offhand",
+          "Worship of the Whispered Wing - Belt"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 32702,
+        "name": "Cunning Counterfeit",
+        "hero": "Centaur",
+        "heroCode": "centaur",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Cunning_Counterfeit",
+        "pieces": [
+          "Cunning Counterfeit - Harmless Scepter",
+          "Cunning Counterfeit - Luxuriant Tail",
+          "Cunning Counterfeit - Natural Hide",
+          "Cunning Counterfeit - Convincing Visage",
+          "Cunning Counterfeit - Decorative Belt",
+          "Cunning Counterfeit - Saddle Packs",
+          "Cunning Counterfeit - Donkey Arms"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 33040,
+        "name": "Fluid Frenzy",
+        "hero": "Morphling",
+        "heroCode": "morphling",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Fluid_Frenzy",
+        "pieces": [
+          "Fluid Frenzy - Shoulders",
+          "Fluid Frenzy - Back",
+          "Fluid Frenzy - Misc",
+          "Fluid Frenzy - Arms",
+          "Fluid Frenzy - Head"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 31478,
+        "name": "Stone Giant Stronghold",
+        "hero": "Tiny",
+        "heroCode": "tiny",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Stone_Giant_Stronghold",
+        "pieces": [
+          "Stone Giant Stronghold - Fortress",
+          "Stone Giant Stronghold - Castle",
+          "Stone Giant Stronghold - Keep",
+          "Stone Giant Stronghold - Tower",
+          "Stone Giant Stronghold - Weapon"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 34332,
+    "name": "Cosmic 2025 Heroes' Hoard",
+    "year": "2025",
+    "releaseDate": "2025-09-15",
+    "kind": "HEROES' HOARD",
+    "icon": "econ/tools/cosmic_2025_treasure",
+    "ordinary": [
+      {
+        "id": 34319,
+        "name": "Taurid Twilight",
+        "hero": "Spirit Breaker",
+        "heroCode": "spirit_breaker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Taurid_Twilight",
+        "pieces": [
+          "Taurid Twilight - Weapon",
+          "Taurid Twilight - Tail",
+          "Taurid Twilight - Shoulder",
+          "Taurid Twilight - Head",
+          "Taurid Twilight - Belt",
+          "Taurid Twilight - Arms"
+        ]
+      },
+      {
+        "id": 32990,
+        "name": "Graviton Blackguard",
+        "hero": "Enigma",
+        "heroCode": "enigma",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Graviton_Blackguard",
+        "pieces": [
+          "Graviton Blackguard - Armor",
+          "Graviton Blackguard - Arms",
+          "Graviton Blackguard - Helm",
+          "Graviton Blackguard Probe"
+        ]
+      },
+      {
+        "id": 34320,
+        "name": "Umbral Expanse",
+        "hero": "Void Spirit",
+        "heroCode": "void_spirit",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Umbral_Expanse",
+        "pieces": [
+          "Umbral Expanse - Armor",
+          "Umbral Expanse - Belt",
+          "Umbral Expanse - Head",
+          "Umbral Expanse - Weapon"
+        ]
+      },
+      {
+        "id": 35890,
+        "name": "Frozen Nova",
+        "hero": "Ancient Apparition",
+        "heroCode": "ancient_apparition",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Frozen_Nova",
+        "pieces": [
+          "Frozen Nova - Tail",
+          "Frozen Nova - Shoulder",
+          "Frozen Nova - Arms",
+          "Frozen Nova - Head"
+        ]
+      },
+      {
+        "id": 34032,
+        "name": "Photax Fluttercat",
+        "hero": "Mirana",
+        "heroCode": "mirana",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Photax_Fluttercat",
+        "pieces": [
+          "Photax Fluttercat - Shoulder",
+          "Photax Fluttercat - Back",
+          "Photax Fluttercat - Quiver",
+          "Photax Fluttercat - Mount",
+          "Photax Fluttercat - Arms",
+          "Photax Fluttercat - Bow",
+          "Photax Fluttercat - Head"
+        ]
+      },
+      {
+        "id": 34329,
+        "name": "Photonic Father",
+        "hero": "Zeus",
+        "heroCode": "zuus",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Photonic_Father",
+        "pieces": [
+          "Photonic Father - Back",
+          "Photonic Father - Belt",
+          "Photonic Father - Head",
+          "Photonic Father - Arms"
+        ]
+      },
+      {
+        "id": 32927,
+        "name": "Star Sage",
+        "hero": "Phoenix",
+        "heroCode": "phoenix",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Star_Sage",
+        "pieces": [
+          "Star Sage - Wings",
+          "Star Sage - Rebirth",
+          "Star Sage - Head",
+          "Star Sage - Back"
+        ]
+      },
+      {
+        "id": 35562,
+        "name": "Astral Schism",
+        "hero": "Sven",
+        "heroCode": "sven",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Astral_Schism",
+        "pieces": [
+          "Astral Schism - Weapon",
+          "Astral Schism - Shoulder",
+          "Astral Schism - Belt",
+          "Astral Schism - Head",
+          "Astral Schism - Back",
+          "Astral Schism - Arms"
+        ]
+      },
+      {
+        "id": 33507,
+        "name": "Narwolf Nebula",
+        "hero": "Crystal Maiden",
+        "heroCode": "crystal_maiden",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Narwolf_Nebula",
+        "pieces": [
+          "Narwolf Nebula - Head",
+          "Narwolf Nebula - Stars",
+          "Narwolf Nebula - Armor",
+          "Narwolf Nebula - Tail",
+          "Conduit of the Blueheart"
+        ]
+      },
+      {
+        "id": 34366,
+        "name": "Chrononaut Continuum",
+        "hero": "Faceless Void",
+        "heroCode": "faceless_void",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Chrononaut_Continuum",
+        "pieces": [
+          "Chrononaut Continuum - Belt",
+          "Chrononaut Continuum - Weapon",
+          "Chrononaut Continuum - Arms",
+          "Chrononaut Continuum - Shoulder",
+          "Chrononaut Continuum - Head"
+        ]
+      },
+      {
+        "id": 25372,
+        "name": "Cosmic Cartographer",
+        "hero": "Marci",
+        "heroCode": "marci",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Cosmic_Cartographer",
+        "pieces": [
+          "Cosmic Cartographer - Armor",
+          "Cosmic Cartographer - Back",
+          "Cosmic Cartographer - Shoulder",
+          "Cosmic Cartographer - Head"
+        ]
+      },
+      {
+        "id": 32985,
+        "name": "Reaper of the Waning Veil",
+        "hero": "Phantom Assassin",
+        "heroCode": "phantom_assassin",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Reaper_of_the_Waning_Veil",
+        "pieces": [
+          "Reaper of the Waning Veil - Weapon",
+          "Reaper of the Waning Veil - Legs",
+          "Reaper of the Waning Veil - Head",
+          "Reaper of the Waning Veil - Armor",
+          "Exile Unveiled"
+        ]
+      },
+      {
+        "id": 32936,
+        "name": "Flame of Origin",
+        "hero": "Lina",
+        "heroCode": "lina",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Flame_of_Origin",
+        "pieces": [
+          "Flame of Origin - Head",
+          "Flame of Origin - Neck",
+          "Flame of Origin - Arms",
+          "Flame of Origin - Belt"
+        ]
+      }
+    ],
+    "bonuses": [
+      {
+        "id": 34372,
+        "name": "Interstellar Astrarium",
+        "hero": "Tinker",
+        "heroCode": "tinker",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Interstellar_Astrarium",
+        "pieces": [
+          "Interstellar Astrarium - Offhand",
+          "Interstellar Astrarium - Weapon",
+          "Interstellar Astrarium - Back",
+          "Interstellar Astrarium - Shoulder",
+          "Interstellar Astrarium - Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 36001,
+        "name": "Pisces Gemini",
+        "hero": "Ogre Magi",
+        "heroCode": "ogre_magi",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Pisces_Gemini",
+        "pieces": [
+          "Pisces Gemini - Weapon",
+          "Pisces Gemini - Back",
+          "Pisces Gemini - Belt",
+          "Pisces Gemini - Arms",
+          "Pisces Gemini - Head"
+        ],
+        "rarity": "Rare",
+        "curve": "rare",
+        "scale": 45,
+        "floor": 0.0005
+      },
+      {
+        "id": 34378,
+        "name": "Leonid Luminosity",
+        "hero": "Luna",
+        "heroCode": "luna",
+        "previewKind": "hero",
+        "image": "econ/sets/DOTA_Item_Leonid_Luminosity",
+        "pieces": [
+          "Leonid Luminosity - Mount",
+          "Leonid Luminosity - Offhand",
+          "Leonid Luminosity - Weapon",
+          "Leonid Luminosity - Shoulder",
+          "Leonid Luminosity - Head"
+        ],
+        "rarity": "Very Rare",
+        "curve": "very_rare",
+        "scale": 105,
+        "floor": 5e-05
+      },
+      {
+        "id": 34312,
+        "name": "Intergalactic Orbliterator",
+        "hero": "Earthshaker",
+        "heroCode": "earthshaker",
+        "previewKind": "hero",
+        "image": "econ/sets/dota_item_intergalactic_orbliterator",
+        "pieces": [
+          "Intergalactic Orbliterator - Totem",
+          "Intergalactic Orbliterator - Head",
+          "Intergalactic Orbliterator - Belt",
+          "Intergalactic Orbliterator - Arms",
+          "Planetfall",
+          "Planetfall - Bracers",
+          "Planetfall - Belt",
+          "Planetfall - Weapon",
+          "Planetfall - Head"
+        ],
+        "rarity": "Ultra Rare",
+        "curve": "ultra_rare",
+        "scale": 305,
+        "floor": 1e-05
+      }
+    ]
+  },
+  {
+    "id": 36016,
+    "name": "Treasure of the Crimson Witness 2025",
+    "year": "2025",
+    "releaseDate": "2025-08-25",
+    "kind": "TREASURE",
+    "icon": "econ/tools/ti2025_crimson_witness",
+    "ordinary": [
+      {
+        "id": 35533,
+        "name": "The Strings of Suradan of the Crimson Witness",
+        "hero": "Hoodwink",
+        "heroCode": "hoodwink",
+        "previewKind": "hero",
+        "image": "econ/items/hoodwink/hood_2022_immortal_weapon/hood_2022_immortal_weapon1",
+        "pieces": [
+          "The Strings of Suradan of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 31206,
+        "name": "Concord Dominion of the Crimson Witness",
+        "hero": "Phantom Lancer",
+        "heroCode": "phantom_lancer",
+        "previewKind": "hero",
+        "image": "econ/items/phantom_lancer/phantom_lancer_ti7_immortal_shoulder/phantom_lancer_ti7_immortal_shoulder1",
+        "pieces": [
+          "Concord Dominion of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 35387,
+        "name": "Hell-Spar Anathema of the Crimson Witness",
+        "hero": "Lion",
+        "heroCode": "lion",
+        "previewKind": "hero",
+        "image": "econ/items/lion/lion_ti8_arm/lion_ti8_arm_alt1",
+        "pieces": [
+          "Hell-Spar Anathema of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 31205,
+        "name": "The Barren Vector of the Crimson Witness",
+        "hero": "Sand King",
+        "heroCode": "sand_king",
+        "previewKind": "hero",
+        "image": "econ/items/sand_king/sand_king_immortal_arms_ti7/sand_king_ti7_immortal_arms1",
+        "pieces": [
+          "The Barren Vector of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 35392,
+        "name": "Shadow Masquerade of the Crimson Witness",
+        "hero": "Riki",
+        "heroCode": "riki",
+        "previewKind": "hero",
+        "image": "econ/items/rikimaru/ti6_blink_strike/riki_ti6_blink_strike2",
+        "pieces": [
+          "Shadow Masquerade of the Crimson Witness"
+        ]
+      }
+    ],
+    "bonuses": []
+  },
+  {
+    "id": 37112,
+    "name": "Treasure of the Crimson Witness 2026",
+    "year": "2026",
+    "releaseDate": "2026-07-30",
+    "kind": "TREASURE",
+    "icon": "econ/tools/ti_2026_treasure_crimson",
+    "ordinary": [
+      {
+        "id": 35389,
+        "name": "Full-Bore Bonanza of the Crimson Witness",
+        "hero": "Sniper",
+        "heroCode": "sniper",
+        "previewKind": "hero",
+        "image": "econ/items/sniper/sniper_cape_immortal/sniper_cape_immortal2",
+        "pieces": [
+          "Full-Bore Bonanza of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 35990,
+        "name": "Sylvan Vedette of the Crimson Witness",
+        "hero": "Windranger",
+        "heroCode": "windrunner",
+        "previewKind": "hero",
+        "image": "econ/items/windrunner/windranger_ti8_immortal_shoulders/windranger_ti8_immortal_shoulders1",
+        "pieces": [
+          "Sylvan Vedette of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 35988,
+        "name": "Primal Paean of the Crimson Witness",
+        "hero": "Beastmaster",
+        "heroCode": "beastmaster",
+        "previewKind": "hero",
+        "image": "econ/items/beastmaster/bm_ti7_immortal_shoulder/bm_ti7_immortal_shoulder1",
+        "pieces": [
+          "Primal Paean of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 37108,
+        "name": "Merry Wanderer's Brush of the Crimson Witness",
+        "hero": "Puck",
+        "heroCode": "puck",
+        "previewKind": "hero",
+        "image": "econ/items/puck/merry_wanderers_brush_tail/merry_wanderers_brush_tail1",
+        "pieces": [
+          "Merry Wanderer's Brush of the Crimson Witness"
+        ]
+      },
+      {
+        "id": 35264,
+        "name": "Aspect of Oscilla of the Crimson Witness",
+        "hero": "Silencer",
+        "heroCode": "silencer",
+        "previewKind": "hero",
+        "image": "econ/items/silencer/silencer_ti10_immortal_shield/silencer_ti10_immortal_shield1",
+        "pieces": [
+          "Aspect of Oscilla of the Crimson Witness"
+        ]
+      }
+    ],
+    "bonuses": []
+  }
+]

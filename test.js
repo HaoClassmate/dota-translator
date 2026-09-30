@@ -1200,7 +1200,9 @@ ok('no other product is named anywhere the public can read', () => {
   // file does not contain them either.
   const names = ['over' + 'plus', 'over' + 'wolf'];
   const files = ['README.md', 'CLAUDE.md', 'NOTES.md', 'NOTES-2026-09-20-memory.md', 'LICENSE.md', 'test.js', 'offsets.json',
-    ...['docs', 'src', 'tools'].flatMap((d) => fs.readdirSync(d).map((f) => path.join(d, f)))];
+    ...['docs', 'src', 'tools'].flatMap((d) => fs.readdirSync(d, { withFileTypes: true })
+      .filter((entry) => entry.isFile()).map((entry) => path.join(d, entry.name))),
+    path.join('docs', 'treasures', 'index.html')];
   for (const f of files) {
     const text = fs.readFileSync(f, 'utf8').toLowerCase();
     for (const n of names) assert.ok(!text.includes(n), f + ' names another product');

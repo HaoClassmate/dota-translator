@@ -1,0 +1,1149 @@
+{
+  "13777": {
+    "hero": "tinker",
+    "slot": "weapon",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "offhand_weapon": "models/heroes/tinker/tinker_left_arm.vmdl",
+      "shoulder": "models/heroes/tinker/tinker_shoulders.vmdl",
+      "head": "models/heroes/tinker/tinker_helmet.vmdl",
+      "body_head": "models/heroes/tinker/tinker_body_head.vmdl",
+      "back": "models/heroes/tinker/tinker_cape.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/tinker/tinker_ti10_immortal_laser/tinker_ti10_immortal_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13776": {
+    "hero": "night_stalker",
+    "slot": "arms",
+    "skin": 0,
+    "skinName": "ns_ti10_immortal_arms",
+    "defaultSlots": {
+      "back": "models/heroes/nightstalker/nightstalker_wings.vmdl",
+      "legs": "models/heroes/nightstalker/nightstalker_legarmor.vmdl",
+      "tail": "models/heroes/nightstalker/nightstalker_tail.vmdl"
+    },
+    "materials": {
+      "ns_ti10_immortal_arms": {
+        "color": "/treasures/assets/crimson/13776/0/color.png",
+        "emissive": "/treasures/assets/crimson/13776/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/nightstalker/ns_ti10_immortal_arms/ns_ti10_immortal_arms.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/13776/0/detail.png",
+            "scale": [
+              4.0,
+              4.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.025,
+              -0.025
+            ],
+            "rotation": 0.0,
+            "tint": [
+              0.0,
+              0.882353,
+              1.0
+            ],
+            "factor": 0.5
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/13776/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/nightstalker/nightstalker_ti10_silence/nightstalker_ti10_ambient.vpcf",
+      "particles/econ/items/nightstalker/nightstalker_ti10_silence/nightstalker_ti10_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13809": {
+    "hero": "warlock",
+    "slot": "head",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "weapon": "models/heroes/warlock/warlock_staff.vmdl",
+      "offhand_weapon": "models/heroes/warlock/warlock_lantern.vmdl",
+      "shoulder": "models/heroes/warlock/warlock_shoulder.vmdl",
+      "arms": "models/heroes/warlock/warlock_bracers.vmdl",
+      "back": "models/heroes/warlock/warlock_robe.vmdl",
+      "belt": "models/heroes/warlock/warlock_bag.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/warlock/warlock_ti10_head/warlock_ti_10_ambient_glyph.vpcf",
+      "particles/econ/items/warlock/warlock_ti10_head/warlock_ti_10_ambient_hair.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13787": {
+    "hero": "life_stealer",
+    "slot": "head",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "belt": "models/heroes/life_stealer/life_stealer_loincloth.vmdl",
+      "arms": "models/heroes/life_stealer/life_stealer_chains.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/lifestealer/ls_ti10_immortal/ls_ti10_immortal_head.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13773": {
+    "hero": "keeper_of_the_light",
+    "slot": "weapon",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "mount": "models/heroes/keeper_of_the_light/kotl_mount.vmdl",
+      "head": "models/heroes/keeper_of_the_light/kotl_hood.vmdl",
+      "belt": "models/heroes/keeper_of_the_light/kotl_skirt.vmdl",
+      "armor": "models/heroes/keeper_of_the_light/kotl_horse_accesories.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/keeper_of_the_light/kotl_ti10_immortal/kotl_ti10_ambient_trace.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13778": {
+    "hero": "medusa",
+    "slot": "tail",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "weapon": "models/heroes/medusa/medusa_bow.vmdl",
+      "head": "models/heroes/medusa/medusa_veil.vmdl",
+      "armor": "models/heroes/medusa/medusa_torso.vmdl",
+      "arms": "models/heroes/medusa/medusa_arms.vmdl"
+    },
+    "materials": {
+      "medusa_ti10_immortal_tail": {
+        "color": "/treasures/assets/crimson/13778/0/color.png",
+        "emissive": "/treasures/assets/crimson/13778/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/medusa/medusa_ti10_immortal_tail/medusa_ti10_immortal_tail.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/medusa/medusa_ti10_immortal_tail/medusa_ti10_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13767": {
+    "hero": "puck",
+    "slot": "back",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "tail": "models/heroes/puck/puck_tail.vmdl",
+      "head": "models/heroes/puck/puck_horns.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/puck/puck_ti10_immortal/puck_ti10_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13813": {
+    "hero": "night_stalker",
+    "slot": "arms",
+    "skin": 1,
+    "skinName": "ns_ti10_immortal_arms_gold",
+    "defaultSlots": {
+      "back": "models/heroes/nightstalker/nightstalker_wings.vmdl",
+      "legs": "models/heroes/nightstalker/nightstalker_legarmor.vmdl",
+      "tail": "models/heroes/nightstalker/nightstalker_tail.vmdl"
+    },
+    "materials": {
+      "ns_ti10_immortal_arms": {
+        "color": "/treasures/assets/crimson/13813/0/color.png",
+        "emissive": "/treasures/assets/crimson/13813/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/nightstalker/ns_ti10_immortal_arms_gold/ns_ti10_immortal_arms_gold.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/nightstalker/nightstalker_ti10_silence/nightstalker_ti10_ambient_gold.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "13818": {
+    "hero": "life_stealer",
+    "slot": "head",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "belt": "models/heroes/life_stealer/life_stealer_loincloth.vmdl",
+      "arms": "models/heroes/life_stealer/life_stealer_chains.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/lifestealer/ls_ti10_immortal/ls_ti10_immortal_head_gold.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "21426": {
+    "hero": "pudge",
+    "slot": "arms,weapon",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "back": "models/heroes/pudge/back.vmdl",
+      "offhand_weapon": "models/heroes/pudge/leftweapon.vmdl",
+      "shoulder": "models/heroes/pudge/leftarm.vmdl",
+      "head": "models/heroes/pudge/hair.vmdl",
+      "belt": "models/heroes/pudge/belt.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [],
+    "rewardModelCount": 3,
+    "desaturateNonReward": true
+  },
+  "32606": {
+    "hero": "night_stalker",
+    "slot": "arms",
+    "skin": 2,
+    "skinName": "ns_ti10_immortal_arms_crimson",
+    "defaultSlots": {
+      "back": "models/heroes/nightstalker/nightstalker_wings.vmdl",
+      "legs": "models/heroes/nightstalker/nightstalker_legarmor.vmdl",
+      "tail": "models/heroes/nightstalker/nightstalker_tail.vmdl"
+    },
+    "materials": {
+      "ns_ti10_immortal_arms": {
+        "color": "/treasures/assets/crimson/32606/0/color.png",
+        "emissive": "/treasures/assets/crimson/32606/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.823529,
+          0.72549
+        ],
+        "source": "materials/models/items/nightstalker/ns_ti10_immortal_arms/ns_ti10_immortal_arms_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/32606/0/detail.png",
+            "scale": [
+              2.0,
+              2.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.2,
+              0.2
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              0.376471,
+              0.235294
+            ],
+            "factor": 0.5
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/32606/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/nightstalker/nightstalker_ti10_silence/nightstalker_ti10_ambient_crimson.vpcf",
+      "particles/econ/items/nightstalker/nightstalker_ti10_silence/nightstalker_ti10_ambient_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "32607": {
+    "hero": "meepo",
+    "slot": "head",
+    "skin": 1,
+    "skinName": "crimson",
+    "defaultSlots": {
+      "weapon": "models/heroes/meepo/meepo_weapon.vmdl",
+      "back": "models/heroes/meepo/pack.vmdl",
+      "shoulder": "models/heroes/meepo/shoulders.vmdl",
+      "arms": "models/heroes/meepo/bracers.vmdl",
+      "tail": "models/heroes/meepo/tail.vmdl"
+    },
+    "materials": {
+      "meepo_2021_immortal": {
+        "color": "/treasures/assets/crimson/32607/0/color.png",
+        "emissive": "/treasures/assets/crimson/32607/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.364706,
+          0.364706
+        ],
+        "source": "materials/models/items/meepo/meepo_2021_immortal/meepo_2021_immortal_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/32607/0/detail.png",
+            "scale": [
+              0.976,
+              0.585
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              -0.5,
+              0.5
+            ],
+            "rotation": 222.261,
+            "tint": [
+              1.0,
+              0.639216,
+              0.639216
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/32607/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/meepo/meepo_2022_immortal/meepo_2022_ambient_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "32538": {
+    "hero": "disruptor",
+    "slot": "weapon",
+    "skin": 1,
+    "skinName": "0",
+    "defaultSlots": {
+      "arms": "models/heroes/disruptor/bracers.vmdl",
+      "head": "models/heroes/disruptor/hair.vmdl",
+      "back": "models/heroes/disruptor/back.vmdl",
+      "shoulder": "models/heroes/disruptor/shoulder.vmdl",
+      "legs": "models/heroes/disruptor/mount.vmdl"
+    },
+    "materials": {
+      "disruptor_ti8_immortal_weapon": {
+        "color": "/treasures/assets/crimson/32538/0/color.png",
+        "emissive": "/treasures/assets/crimson/32538/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.619608,
+          0.494118
+        ],
+        "source": "materials/models/items/disruptor/disruptor_ti8_immortal_weapon/disruptor_ti8_immortal_weapon_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/32538/0/detail.png",
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.1,
+              0.3
+            ],
+            "rotation": 0.0,
+            "tint": [
+              0.933333,
+              0.364706,
+              0.266667
+            ],
+            "factor": 0.5
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/32538/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/disruptor/disruptor_ti8_immortal_weapon/disruptor_ti8_immortal_crimson_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "32539": {
+    "hero": "luna",
+    "slot": "weapon",
+    "skin": 2,
+    "skinName": "2",
+    "defaultSlots": {
+      "offhand_weapon": "models/heroes/luna/luna_shield.vmdl",
+      "head": "models/heroes/luna/luna_helmet.vmdl",
+      "shoulder": "models/heroes/luna/luna_shoulder.vmdl",
+      "mount": "models/heroes/luna/luna_mount.vmdl",
+      "body_head": "models/heroes/luna/luna_head.vmdl"
+    },
+    "materials": {
+      "luna_ti9_immortal": {
+        "color": "/treasures/assets/crimson/32539/0/color.png",
+        "emissive": "/treasures/assets/crimson/32539/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/luna/luna_ti9_immortal/luna_ti9_crimson_immortal.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": []
+      },
+      "luna_ti9_immortal_blade": {
+        "color": "/treasures/assets/crimson/32539/1/color.png",
+        "emissive": "/treasures/assets/crimson/32539/1/emissive.png",
+        "bloom": [
+          0.741176,
+          0.972549,
+          1.0
+        ],
+        "source": "materials/models/items/luna/luna_ti9_immortal/luna_ti9_crimson_immortal_blade.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/32539/1/detail.png",
+            "scale": [
+              0.2,
+              0.2
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              -0.0,
+              -0.05
+            ],
+            "rotation": 60.0,
+            "tint": [
+              1.0,
+              0.439216,
+              0.298039
+            ],
+            "factor": 1.0
+          },
+          {
+            "map": "/treasures/assets/crimson/32539/1/detail2.png",
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              -0.01,
+              -0.01
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "factor": 0.5
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/32539/1/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/luna/luna_ti9_weapon/luna_ti9_crimson_weapon_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "32540": {
+    "hero": "templar_assassin",
+    "slot": "shoulder",
+    "skin": 1,
+    "skinName": "1",
+    "defaultSlots": {
+      "head": "models/heroes/lanaya/lanaya_hair.vmdl",
+      "armor": "models/heroes/lanaya/lanaya_bracers_skirt.vmdl"
+    },
+    "materials": {
+      "ta_ti9_immortal_shoulders": {
+        "color": "/treasures/assets/crimson/32540/0/color.png",
+        "emissive": "/treasures/assets/crimson/32540/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_crimson_immortal_shoulders.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/32540/0/detail.png",
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.002,
+              0.075
+            ],
+            "rotation": 270.0,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/32540/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/lanaya/ta_ti9_immortal_shoulders/ta_ti9_crimson_immortal_shoulders.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35533": {
+    "hero": "hoodwink",
+    "slot": "weapon",
+    "skin": 1,
+    "skinName": "1",
+    "defaultSlots": {
+      "back": "models/heroes/hoodwink/hoodwink_hood.vmdl",
+      "armor": "models/heroes/hoodwink/hoodwink_costume.vmdl",
+      "tail": "models/heroes/hoodwink/hoodwink_tail.vmdl"
+    },
+    "materials": {
+      "hood_2022_immortal_weapon": {
+        "color": "/treasures/assets/crimson/35533/0/color.png",
+        "emissive": "/treasures/assets/crimson/35533/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/hoodwink/hood_2022_immortal_weapon/hood_2022_immortal_weapon_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/hoodwink/hoodwink_2022_immortal/hoodwink_2022_crimson_immortal_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "31206": {
+    "hero": "phantom_lancer",
+    "slot": "shoulder",
+    "skin": 1,
+    "skinName": "1",
+    "defaultSlots": {
+      "body_head": "models/heroes/phantom_lancer/phantom_lancer_head.vmdl",
+      "belt": "models/heroes/phantom_lancer/phantom_lancer_belt.vmdl",
+      "arms": "models/heroes/phantom_lancer/phantom_lancer_gauntlet.vmdl",
+      "weapon": "models/heroes/phantom_lancer/phantom_lancer_weapon.vmdl"
+    },
+    "materials": {
+      "phantom_lancer_ti7_immortal_shoulder": {
+        "color": "/treasures/assets/crimson/31206/0/color.png",
+        "emissive": "/treasures/assets/crimson/31206/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/phantom_lancer/phantom_lancer_ti7_immortal_shoulder/phantom_lancer_ti7_immortal_shoulder_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/31206/0/detail.png",
+            "scale": [
+              4.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              -0.0,
+              -0.085
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/31206/0/detail-mask.png"
+      },
+      "phantom_lancer_ti7_immortal_shoulder_scrollfx": {
+        "color": "/treasures/assets/crimson/31206/1/color.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/phantom_lancer/phantom_lancer_ti7_immortal_shoulder/phantom_lancer_ti7_immortal_shoulder_scrollfx_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/31206/1/detail.png",
+            "scale": [
+              1.0,
+              2.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0,
+              0
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              0.443137,
+              0.443137
+            ],
+            "factor": 0.5
+          },
+          {
+            "map": "/treasures/assets/crimson/31206/1/detail2.png",
+            "scale": [
+              1.0,
+              2.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              -0.0,
+              -0.085
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "factor": 0.5
+          }
+        ]
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/phantom_lancer/ti7_immortal_shoulder/pl_ti7_immortal_ambient_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35387": {
+    "hero": "lion",
+    "slot": "arms",
+    "skin": 1,
+    "skinName": "1",
+    "defaultSlots": {
+      "weapon": "models/heroes/lion/lion_weapon.vmdl",
+      "back": "models/heroes/lion/lion_cape.vmdl",
+      "shoulder": "models/heroes/lion/lion_shoulder.vmdl"
+    },
+    "materials": {
+      "lion_ti8_arm_alt": {
+        "color": "/treasures/assets/crimson/35387/0/color.png",
+        "emissive": "/treasures/assets/crimson/35387/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.317647,
+          0.164706
+        ],
+        "source": "materials/models/items/lion/lion_ti8_arm/lion_ti8_arm_alt_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/35387/0/detail.png",
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.2,
+              -0.2
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              0.415686,
+              0.235294
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/35387/0/detail-mask.png"
+      },
+      "lion_ti8_arm_glow": {
+        "color": "/treasures/assets/crimson/35387/1/color.png",
+        "emissive": "/treasures/assets/crimson/35387/1/emissive.png",
+        "bloom": [
+          1.0,
+          0.352941,
+          0.188235
+        ],
+        "source": "materials/models/items/lion/lion_ti8_arm/lion_ti8_arm_glow_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": []
+      },
+      "lion_ti8_arm_shards_fx": {
+        "color": "/treasures/assets/crimson/35387/2/color.png",
+        "emissive": "/treasures/assets/crimson/35387/2/emissive.png",
+        "bloom": [
+          0.890196,
+          0.184314,
+          0.184314
+        ],
+        "source": "materials/models/items/lion/lion_ti8_arm/lion_ti8_arm_shards_fx_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/35387/2/detail.png",
+            "scale": [
+              1.0,
+              0.777
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.2,
+              -0.2
+            ],
+            "rotation": 0.0,
+            "tint": [
+              0.854902,
+              0.0,
+              0.0
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/35387/2/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/lion/lion_ti8/lion_ti8_arm_ambient_crimson_lvl2.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "31205": {
+    "hero": "sand_king",
+    "slot": "arms",
+    "skin": 1,
+    "skinName": "1",
+    "defaultSlots": {
+      "body_head": "models/heroes/sand_king/sand_king_head.vmdl",
+      "shoulder": "models/heroes/sand_king/sand_king_shoulder.vmdl",
+      "legs": "models/heroes/sand_king/sand_king_legs.vmdl",
+      "back": "models/heroes/sand_king/sand_king_tail.vmdl"
+    },
+    "materials": {
+      "sand_king_immortal_arms_ti7": {
+        "color": "/treasures/assets/crimson/31205/0/color.png",
+        "emissive": "/treasures/assets/crimson/31205/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.247059,
+          0.247059
+        ],
+        "source": "materials/models/items/sand_king/sand_king_immortal_arms_ti7/sand_king_immortal_arms_ti7_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/31205/0/detail.png",
+            "scale": [
+              1.5,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0,
+              0
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              0.356863,
+              0.356863
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/31205/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/sand_king/sandking_ti7_arms/sandking_ti7_ambient_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35392": {
+    "hero": "riki",
+    "slot": "shoulder",
+    "skin": 2,
+    "skinName": "2",
+    "defaultSlots": {
+      "head": "models/heroes/rikimaru/rikimaru_head.vmdl",
+      "tail": "models/heroes/rikimaru/rikimaru_tail.vmdl",
+      "arms": "models/heroes/rikimaru/rikimaru_gloves.vmdl",
+      "offhand_weapon": "models/heroes/rikimaru/rikimaru__offhand_weapon.vmdl",
+      "weapon": "models/heroes/rikimaru/rikimaru_weapon.vmdl"
+    },
+    "materials": {
+      "ti6_blink_strike": {
+        "color": "/treasures/assets/crimson/35392/0/color.png",
+        "emissive": "/treasures/assets/crimson/35392/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/rikimaru/ti6_blink_strike/ti6_blink_strike_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/riki/riki_immortal_ti6/riki_immortal_ti6_ambient_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35389": {
+    "hero": "sniper",
+    "slot": "back",
+    "skin": 2,
+    "skinName": "2",
+    "defaultSlots": {
+      "weapon": "models/heroes/sniper/weapon.vmdl",
+      "head": "models/heroes/sniper/headitem.vmdl",
+      "shoulder": "models/heroes/sniper/shoulder.vmdl",
+      "arms": "models/heroes/sniper/bracer.vmdl"
+    },
+    "materials": {
+      "sniper_cape_immortal": {
+        "color": "/treasures/assets/crimson/35389/0/color.png",
+        "emissive": "/treasures/assets/crimson/35389/0/emissive.png",
+        "bloom": [
+          1.0,
+          1.0,
+          1.0
+        ],
+        "source": "materials/models/items/sniper/sniper_cape_immortal/sniper_cape_immortal_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/sniper/sniper_immortal_cape/sniper_immortal_cape_crimson_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35990": {
+    "hero": "windrunner",
+    "slot": "shoulder",
+    "skin": 0,
+    "skinName": "default",
+    "defaultSlots": {
+      "weapon": "models/heroes/windrunner/windrunner_bow.vmdl",
+      "back": "models/heroes/windrunner/windrunner_cape.vmdl",
+      "offhand_weapon": "models/heroes/windrunner/windrunner_quiver.vmdl"
+    },
+    "materials": {},
+    "ambientParticles": [
+      "particles/econ/items/windrunner/wr_ti8_immortal_shoulder/wr_ti8_crimson_ambients.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35988": {
+    "hero": "beastmaster",
+    "slot": "shoulder",
+    "skin": 1,
+    "skinName": "crimson",
+    "defaultSlots": {
+      "weapon": "models/heroes/beastmaster/beastmaster_weapon.vmdl",
+      "head": "models/heroes/beastmaster/beastmaster_head.vmdl",
+      "arms": "models/heroes/beastmaster/beastmaster_arms.vmdl",
+      "belt": "models/heroes/beastmaster/beastmaster_belt.vmdl"
+    },
+    "materials": {
+      "bm_ti7_immortal_shoulder": {
+        "color": "/treasures/assets/crimson/35988/0/color.png",
+        "emissive": "/treasures/assets/crimson/35988/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.478431,
+          0.478431
+        ],
+        "source": "materials/models/items/beastmaster/bm_ti7_immortal_shoulder/bm_ti7_immortal_shoulder_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": []
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/beastmaster/bm_shoulder_ti7/bm_shoulder_ti7_crimson_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "37108": {
+    "hero": "puck",
+    "slot": "tail",
+    "skin": 1,
+    "skinName": "crimson",
+    "defaultSlots": {
+      "back": "models/heroes/puck/puck_wings.vmdl",
+      "head": "models/heroes/puck/puck_horns.vmdl"
+    },
+    "materials": {
+      "merry_wanderers_brush_tail": {
+        "color": "/treasures/assets/crimson/37108/0/color.png",
+        "emissive": "/treasures/assets/crimson/37108/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.772549,
+          0.576471
+        ],
+        "source": "materials/models/items/puck/merry_wanderers_brush_tail/merry_wanderers_brush_tail_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/37108/0/detail.png",
+            "scale": [
+              1.0,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.3,
+              -0.3
+            ],
+            "rotation": 0.0,
+            "tint": [
+              1.0,
+              0.623529,
+              0.498039
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/37108/0/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/puck/puck_merry_wanderer/puck_ambient_merry_wanderer_crimson.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  },
+  "35264": {
+    "hero": "silencer",
+    "slot": "offhand_weapon",
+    "skin": 1,
+    "skinName": "crimson",
+    "defaultSlots": {
+      "weapon": "models/heroes/silencer/silencer_weapon.vmdl",
+      "arms": "models/heroes/silencer/silender_bracers.vmdl",
+      "head": "models/heroes/silencer/silencer_helmet.vmdl",
+      "shoulder": "models/heroes/silencer/silencer_shoulder.vmdl",
+      "belt": "models/heroes/silencer/silencer_robe.vmdl"
+    },
+    "materials": {
+      "silencer_ti10_immortal_shield": {
+        "color": "/treasures/assets/crimson/35264/0/color.png",
+        "emissive": "/treasures/assets/crimson/35264/0/emissive.png",
+        "bloom": [
+          1.0,
+          0.686275,
+          0.686275
+        ],
+        "source": "materials/models/items/silencer/silencer_ti10_immortal_shield/silencer_ti10_immortal_shield_crimson.vmat",
+        "additive": false,
+        "alphaTest": 0.5,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/35264/0/detail.png",
+            "scale": [
+              2.0,
+              1.0
+            ],
+            "offset": [
+              1.0,
+              1.0
+            ],
+            "speed": [
+              0.0,
+              -0.2
+            ],
+            "rotation": 180.0,
+            "tint": [
+              1.0,
+              0.756863,
+              0.529412
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/35264/0/detail-mask.png"
+      },
+      "silencer_ti10_immortal_shield_additive": {
+        "color": "/treasures/assets/crimson/35264/1/color.png",
+        "emissive": "/treasures/assets/crimson/35264/1/emissive.png",
+        "bloom": [
+          1.0,
+          0.694118,
+          0.694118
+        ],
+        "source": "materials/models/items/silencer/silencer_ti10_immortal_shield/silencer_ti10_immortal_shield_additive_crimson.vmat",
+        "additive": true,
+        "alphaTest": 0,
+        "details": [
+          {
+            "map": "/treasures/assets/crimson/35264/1/detail.png",
+            "scale": [
+              2.0,
+              1.0
+            ],
+            "offset": [
+              1.0,
+              1.0
+            ],
+            "speed": [
+              0.0,
+              -0.2
+            ],
+            "rotation": 180.0,
+            "tint": [
+              1.0,
+              1.0,
+              1.0
+            ],
+            "factor": 0.5
+          },
+          {
+            "map": "/treasures/assets/crimson/35264/1/detail2.png",
+            "scale": [
+              0.5,
+              1.0
+            ],
+            "offset": [
+              0.0,
+              0.0
+            ],
+            "speed": [
+              0.0,
+              0.1
+            ],
+            "rotation": 0.0,
+            "tint": [
+              0.92549,
+              0.25098,
+              0.25098
+            ],
+            "factor": 1.0
+          }
+        ],
+        "detailMask": "/treasures/assets/crimson/35264/1/detail-mask.png"
+      }
+    },
+    "ambientParticles": [
+      "particles/econ/items/silencer/silencer_ti10_immortal_shield/silencer_ti10_immortal_crimson_ambient.vpcf"
+    ],
+    "rewardModelCount": 1,
+    "desaturateNonReward": true
+  }
+}

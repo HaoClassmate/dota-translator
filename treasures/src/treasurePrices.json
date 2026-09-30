@@ -1,0 +1,296 @@
+{
+  "12604": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-5.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-5.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "13780": {
+    "USD": 139,
+    "EUR": 139,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-4.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-3.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "13792": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "13795": {
+    "USD": 131,
+    "EUR": 117,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-4.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-3.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "13796": {
+    "USD": 126,
+    "EUR": 117,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-3.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-3.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "23228": {
+    "USD": null,
+    "EUR": null,
+    "basis": "chest-and-key",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28; locked chest price only, key price not shown",
+    "checked": "2026-09-28",
+    "chestEUR": 3,
+    "EURBasis": "chest plus separate key; key price unverified",
+    "keyUSD": 299,
+    "note": "Opening needs both chest and key; a component alone is not the total.",
+    "chestUSD": 3,
+    "USDSource": "User Dota screenshot us-2.png, 2026-10-01 (chest listing only)",
+    "USDChecked": "2026-10-01",
+    "keyUSDSource": "User instruction, 2026-10-01: standard key price $2.99"
+  },
+  "23662": {
+    "USD": 189,
+    "EUR": 161,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-2.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "23663": {
+    "USD": 485,
+    "EUR": 416,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-2.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "23664": {
+    "USD": 99,
+    "EUR": 92,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-2.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "23686": {
+    "USD": 97,
+    "EUR": 86,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-2.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "23741": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "24147": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "24613": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "26880": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "26932": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "27046": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "27435": {
+    "USD": null,
+    "EUR": null,
+    "basis": "treasure",
+    "source": "Installed items_game.txt price_info; EUR requires regional verification",
+    "checked": "2026-09-28"
+  },
+  "29639": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "30279": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "30937": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "30938": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-2.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "30939": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "31200": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-3.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "31361": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "32608": {
+    "USD": 17553,
+    "EUR": 14950,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "32609": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "32658": {
+    "USD": 249,
+    "EUR": 219,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "32933": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "34332": {
+    "USD": 299,
+    "EUR": 265,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "36016": {
+    "USD": 22719,
+    "EUR": 18486,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  },
+  "37112": {
+    "USD": 18394,
+    "EUR": 15577,
+    "basis": "treasure",
+    "source": "User Dota screenshot prices-1.png, 2026-09-28",
+    "checked": "2026-09-28",
+    "EURBasis": "displayed treasure purchase price",
+    "USDSource": "User Dota screenshot us-prices-1.png, 2026-10-01",
+    "USDChecked": "2026-10-01"
+  }
+}

@@ -284,9 +284,18 @@
 @media(max-width:600px){.gallery-main{padding:24px 14px 18px}.gallery-row{gap:10px}.gallery-case{min-height:155px}.gallery-case strong{font-size:10px;min-height:42px;height:42px}.gallery-case img{height:calc(100% - 42px)}.gallery-case .case-state{bottom:42px;padding:10px 2px;font-size:9px}.gallery-case .case-year{top:7px;left:8px;font-size:9px}.gallery-intro p:last-child{font-size:11px}}
 
 /* Dota-inspired escalating-odds table opened from each bonus reward. */
-.odds-line{width:100%;border:0;text-align:left;color:inherit;cursor:pointer}
-.odds-line:hover{background:#263239}
-.odds-line:focus-visible{outline:1px solid #d6b477;outline-offset:2px}
+.odds-line{width:100%;min-height:66px;gap:12px;padding:12px 14px;border:1px solid #35474d;border-left:3px solid #94b87d;border-radius:5px;background:linear-gradient(105deg,#202d32,#172229);text-align:left;color:#e9efec;cursor:pointer}
+.odds-line+.odds-line{margin-top:8px}
+.odds-line span{min-width:0;overflow-wrap:anywhere;line-height:1.35;color:#e9efec}
+.odds-line small{color:#adca8b}
+.odds-line b{flex:none;color:#d0e5bf;font-size:13px}
+.odds-line.bonus-1{border-left-color:#e5a06c}
+.odds-line.bonus-1 small,.odds-line.bonus-1 b{color:#eeb084}
+.odds-line.bonus-2{border-left-color:#f1c875}
+.odds-line.bonus-2 small,.odds-line.bonus-2 b{color:#f1cb8f}
+.odds-line.bonus-3 small,.odds-line.bonus-3 b{color:#deaaff}
+.odds-line:hover{background:linear-gradient(105deg,#293a3e,#1b2b30);box-shadow:inset 0 0 0 1px #6b818456}
+.odds-line:focus-visible{outline:2px solid #d6b477;outline-offset:2px}
 .odds-modal-backdrop{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:18px;background:#05090bdd;backdrop-filter:blur(3px)}
 .odds-modal{width:min(700px,100%);height:min(780px,86vh);display:flex;flex-direction:column;overflow:hidden;color:#d9dfdf;background:#141b1f;border:1px solid #465158;box-shadow:0 28px 90px #000e}
 .odds-modal-title{min-height:100px;display:flex;align-items:center;justify-content:space-between;padding:20px 28px;background:linear-gradient(110deg,#222b30,#12181b);border-bottom:1px solid #303a3e}

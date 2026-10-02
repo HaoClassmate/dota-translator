@@ -635,7 +635,6 @@ function trayMenu() {
     // The way a player says anything back: one big box and an optional
     // e-mail, no account needed. cfg.feedbackUrl (https only) overrides it.
     { label: 'Send feedback, or report a bad translation...', click: () => shell.openExternal(String(cfg.feedbackUrl || '').startsWith('https://') ? cfg.feedbackUrl : FEEDBACK_URL) },
-    { label: 'Support the developer (Ko-fi)', click: () => shell.openExternal('https://ko-fi.com/sc0rebreaker') },
     { label: 'Version ' + app.getVersion(), enabled: false },
     { type: 'separator' },
     { label: 'Quit' + (cfg.quitHotkey ? ' (' + pretty(cfg.quitHotkey) + ')' : ''), click: quitApp },

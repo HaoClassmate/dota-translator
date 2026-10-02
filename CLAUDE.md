@@ -2220,7 +2220,12 @@ then the realistic route for an individual in the EU is a paid certificate
 in their own name (Certum's open-source developer one was the cheap one
 named; terms NOT checked).
 
-## Donations (2026-09-20)
+## Donations (2026-09-20) - REMOVED 2026-10-02
+
+**The user, 2026-10-02: "remove the donation option (the kofi link)".** Gone from the
+landing page (FAQ and footer), the README, the tray menu, FUNDING.yml and the
+site's donate_click event. Do not put it back. Installed copies keep the tray
+item until the next release. What follows is history.
 
 Ko-fi, paid out through PayPal: `https://ko-fi.com/sc0rebreaker`. Stripe
 REJECTED the user for having no business number; do not suggest it again.

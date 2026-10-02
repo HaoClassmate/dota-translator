@@ -289,12 +289,6 @@ original line and what the app showed. If you prefer GitHub,
 have forms for a bad translation, a bug and an idea, and pull requests are
 welcome.
 
-## Supporting it
-
-It is free and stays free. If it helped and you feel like it:
-[ko-fi.com/sc0rebreaker](https://ko-fi.com/sc0rebreaker). Donors get nothing
-extra - there is nothing extra to get.
-
 ## Licence
 
 **[PolyForm Noncommercial 1.0.0](LICENSE.md)** - free for players, not for

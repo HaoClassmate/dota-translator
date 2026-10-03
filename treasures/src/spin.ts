@@ -4,7 +4,7 @@ import { CARMINE, type Opening, type Treasure } from './treasure.ts';
 // final reward appears when the track ends, regardless of its reward count.
 export const SPIN_UP_MS = 2200;
 export const ELIMINATION_DELAY_MS = 700;
-export const REVEAL_DELAY_MS = 900;
+export const REVEAL_DELAY_MS = 360;
 export const SPIN_MUSIC_DURATION_MS = 11228;
 
 export function eliminationStepMs(eliminations: number): number {

@@ -252,7 +252,12 @@ function App() {
       timers.current.forEach(clearTimeout);
       timers.current = [];
       const order = eliminationOrder(result, treasure);
+      const rewards = revealRewards(result, treasure);
       const stepMs = eliminationStepMs(order.length);
+      // Prepare the actual rewards while the soundtrack is playing.
+      timers.current.push(window.setTimeout(() => {
+        for (const itemId of rewards) preloadHero(itemId);
+      }, 100));
       let finished = false;
       const showResult = () => {
         if (finished) return;
@@ -261,7 +266,7 @@ function App() {
         timers.current = [];
         finishSpinMusic();
         setPhase('reveal');
-        setSelected(revealRewards(result, treasure)[0]);
+        setSelected(rewards[0]);
         play('reveal', 0.16);
       };
       startSpinMusic(showResult);
@@ -341,7 +346,7 @@ function App() {
     <header className="topbar">
       <div className="site-identity"><a className="brand" href="/"><img src="/logo-64.webp" width="30" height="30" alt="" /><span>Dota <b>Translator</b></span></a><span className="site-section">Treasures</span></div>
       <div className="topbar-controls">
-        {view === 'gallery' && <div className="top-actions"><span className="status-dot" /> {TREASURES.length} treasures available</div>}
+        <a className="dt-cta" href="https://dotatranslator.live/">Try Dota Translator →</a>
         <div className="global-spend" aria-label={`${totalCost.unpricedOpenings ? 'Known spending subtotal' : 'Total spent across all treasures'}: ${totalSpend}`}><span>{totalCost.unpricedOpenings ? 'KNOWN SPENDING' : 'TOTAL SPENT'}</span><strong>{totalSpend}</strong>{totalCost.unpricedOpenings > 0 && <small>+ {totalCost.unpricedOpenings} openings awaiting prices</small>}</div>
         <div className="currency-switch" role="group" aria-label="Display currency" title="USD prices use Dota 2 screenshots where available; others use the standard $2.99 price. Some chests need a separate key."><button className={currency === 'EUR' ? 'active' : ''} onClick={() => chooseCurrency('EUR')} aria-pressed={currency === 'EUR'}>EUR</button><button className={currency === 'USD' ? 'active' : ''} onClick={() => chooseCurrency('USD')} aria-pressed={currency === 'USD'}>USD</button></div>
         <button className="reset-history-button" onClick={() => setResetConfirm(true)}>RESET HISTORY</button>
@@ -385,7 +390,7 @@ function App() {
           <div className="stage-label">{phase === 'preview' ? 'TREASURE CONTENTS' : phase === 'spin' ? 'OPENING TREASURE' : 'YOUR REWARD'}</div>
           <div className={`stage ${phase} ${phase === 'preview' && selectedBonus ? `preview-rarity-${rarityTier(selectedBonus.rarity)}` : ''} ${phase === 'reveal' ? `reveal-rarity-${revealRarity}` : ''}`}>
             {phase === 'spin' ? <div className={`spin-lineup ${spinMode}`}
-              style={{ '--spin-transition': `${Math.min(700, Math.round(eliminationStepMs(elimination.length) * 0.85))}ms` } as React.CSSProperties}>
+              style={{ '--spin-transition': `${Math.min(280, Math.round(eliminationStepMs(elimination.length) * 0.85))}ms` } as React.CSSProperties}>
               <div className="spin-lineup-glow" />
               {allItems.map(item => {
                 const index = allItems.findIndex(entry => entry.id === item.id);

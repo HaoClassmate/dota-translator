@@ -364,7 +364,9 @@ function App() {
     <header className="topbar">
       <div className="site-identity"><a className="brand" href="/"><img src="/logo-64.webp" width="30" height="30" alt="" /><span>Dota <b>Translator</b></span></a><span className="site-section">Treasures</span></div>
       <div className="topbar-controls">
-        <a className="dt-cta" href="https://dotatranslator.live/">Try Dota Translator →</a>
+        {/* Russian-language browsers go to the Russian page (/ru/, 2026-10-04): it
+            offers what the app does for them - Ctrl+Enter, Russian to English. */}
+        <a className="dt-cta" href={/^(ru|be|kk)/i.test(navigator.language || '') ? '/ru/' : 'https://dotatranslator.live/'}>Try Dota Translator →</a>
         <div className="global-spend" aria-label={`${totalCost.unpricedOpenings ? 'Known spending subtotal' : 'Total spent across all treasures'}: ${totalSpend}`}><span>{totalCost.unpricedOpenings ? 'KNOWN SPENDING' : 'TOTAL SPENT'}</span><strong>{totalSpend}</strong>{totalCost.unpricedOpenings > 0 && <small>+ {totalCost.unpricedOpenings} openings awaiting prices</small>}</div>
         <div className="currency-switch" role="group" aria-label="Display currency" title="USD prices use Dota 2 screenshots where available; others use the standard $2.99 price. Some chests need a separate key."><button className={currency === 'EUR' ? 'active' : ''} onClick={() => chooseCurrency('EUR')} aria-pressed={currency === 'EUR'}>EUR</button><button className={currency === 'USD' ? 'active' : ''} onClick={() => chooseCurrency('USD')} aria-pressed={currency === 'USD'}>USD</button></div>
         <button className="reset-history-button" onClick={() => setResetConfirm(true)}>RESET HISTORY</button>

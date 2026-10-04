@@ -2372,6 +2372,27 @@ The user asked for a page "to make it sell (even though it's free)",
 like Paperbook's (`Desktop/paperbook/web/src/WelcomeV3.jsx`) but shorter,
 with a slider. What was built, and the rules it follows:
 
+- **A RUSSIAN PAGE, `docs/ru/index.html` (2026-10-04) - a TEST OF DEMAND.**
+  The Treasure Simulator brought thousands of mostly Russian-speaking, mostly
+  phone visitors (GA: 4,565 sessions Sep 27 - Oct 3, 90% "direct", a VK/Yandex
+  trace, Safari 3 -> 294). The translator is built for English speakers; the
+  one thing it already does for a Russian player is Ctrl+Enter Russian ->
+  English. The page offers THAT and nothing else, says plainly that incoming
+  chat is NOT translated into Russian, and carries the main page's honest
+  points in Russian (keys pressed, GSI cfg file, two screen spots, where text
+  goes, Valve has not approved it, at your own risk). No word about memory.
+  A test holds all of it, and that every example on it is a real answer
+  already on the main page. Linked from the main nav ("По-русски") and the
+  simulator's button sends ru/be/kk browsers there (`treasures/src/main.tsx`
+  AND the built bundle, patched identically - this checkout has no pnpm or
+  node_modules to rebuild; Ukrainian left out on purpose). Analytics:
+  `treasure_cta_click` {device, to: ru|en}. The MEASURE is the server's
+  Ctrl+Enter counter (lines and players by target language; "into English"
+  is the Russian-player use) on the owner's page. Only if that is real is a
+  "My language: Russian" mode (incoming translated INTO Russian - 3-5x the
+  paid lines of an English user) worth building. Russian text written by
+  the model; no native speaker has read the page.
+
 - **THE HERO SPEAKS THREE LANGUAGES (2026-09-23; the user: "at the top of
   landing we only display russia and english ... add that there are these
   other pairs too").** Above the slider, a "Your teammates write" row -

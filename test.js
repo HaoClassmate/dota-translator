@@ -1367,6 +1367,25 @@ await okAsync('the landing page offers exactly the languages the app does, and i
   }
 });
 
+ok('the Russian page offers only what the app does for a Russian player, and says what it does not', () => {
+  // 2026-10-04: a test of demand. It must not sell a feature that is not there:
+  // incoming chat is NOT translated into Russian, and the page says so.
+  const ru = fs.readFileSync(path.join('docs', 'ru', 'index.html'), 'utf8');
+  const main = fs.readFileSync(path.join('docs', 'index.html'), 'utf8');
+  assert.ok(ru.includes('<script src="/analytics.js" defer>'), 'the Russian page is not counted');
+  assert.match(ru, /Чужой чат на русский пока не переводится/);
+  assert.match(ru, /на свой страх и риск/);
+  assert.match(ru, /В игру ничего не записывается/);
+  assert.match(ru, /Valve это приложение не проверяла и не одобряла/);
+  assert.doesNotMatch(ru, /безопасн|не заблокируют|без бана/i, 'the Russian page promises safety');
+  assert.doesNotMatch(ru, /memory|памят/i, 'the website does not talk about memory reading');
+  // Every Ctrl+Enter example is a real answer already on the main page.
+  for (const [, said, out] of ru.matchAll(/<span class="typed">([^<]+)<[/]span>.*?<span class="out" lang="en">([^<]+)<[/]span>/g)) {
+    assert.ok(main.includes(said) && main.includes(out), 'not a recorded translation: ' + said + ' / ' + out);
+  }
+  assert.ok(main.includes('href="ru/"'), 'the main page does not link the Russian one');
+});
+
 await okAsync('the game\'s own hero portraits: a pak is indexed, a texture decoded, and anything odd is a quiet no', async () => {
   const { readIndex, decodeTexture, faces } = await import('./src/heroface.js');
   // A compiled texture as the game lays one out: 16 bytes of header, one

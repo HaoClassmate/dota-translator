@@ -87,6 +87,14 @@ function itemById(id: number, treasure: Treasure) { return [...treasure.ordinary
 function preloadHero(itemId: number) {
   void import('./HeroPreview').then(module => module.preloadHero(itemId)).catch(() => {});
 }
+function whenIdle(callback: () => void, timeout: number): () => void {
+  if (typeof window.requestIdleCallback === 'function') {
+    const id = window.requestIdleCallback(callback, { timeout });
+    return () => window.cancelIdleCallback(id);
+  }
+  const id = window.setTimeout(callback, Math.min(timeout, 250));
+  return () => window.clearTimeout(id);
+}
 function rarityTier(rarity?: string) { return rarity === 'Rare' ? 0 : rarity === 'Very Rare' ? 1 : rarity === 'Cosmically Rare' ? 3 : 2; }
 function odds(value: number) {
   const n = 1 / value;
@@ -131,6 +139,8 @@ function App() {
     try { localStorage.setItem(CURRENCY_KEY, value); } catch { /* preference remains active until reload */ }
   }
   const [viewportWidth, setViewportWidth] = useState(() => window.innerWidth);
+  const [viewportHeight, setViewportHeight] = useState(() => window.innerHeight);
+  const compactViewport = viewportWidth <= 700 || (viewportWidth <= 900 && viewportHeight <= 600);
   const [selected, setSelected] = useState<number>(TREASURES[0].ordinary[0].id);
   const [interactiveId, setInteractiveId] = useState<number | null>(null);
   const [opening, setOpening] = useState<Opening | null>(null);
@@ -154,33 +164,34 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [resetConfirm, oddsIndex]);
   useEffect(() => {
-    const onResize = () => setViewportWidth(window.innerWidth);
+    const onResize = () => { setViewportWidth(window.innerWidth); setViewportHeight(window.innerHeight); };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
   }, []);
   useEffect(() => {
-    if (view !== 'gallery') return;
-    const idle = window.requestIdleCallback(() => {
+    if (view !== 'gallery' || compactViewport) return;
+    return whenIdle(() => {
       preloadHero(TREASURES[0].ordinary[0].id);
-    }, { timeout: 2500 });
-    return () => window.cancelIdleCallback(idle);
-  }, [view]);
+    }, 2500);
+  }, [view, compactViewport]);
   useEffect(() => {
     if (view !== 'treasure') return;
+    const asset = compactViewport ? 'hero-stills' : 'hero-turntables';
     for (const item of allItems) {
       const image = new Image();
-      image.src = `/treasures/assets/hero-turntables/${item.id}.webp?v=orbs3`;
+      image.src = `/treasures/assets/${asset}/${item.id}.webp?v=orbs3`;
     }
-  }, [view, treasure.id]);
+  }, [view, treasure.id, compactViewport]);
   useEffect(() => {
     if (!autoStartFirst.current || view !== 'treasure' || phase !== 'preview') return;
+    if (compactViewport) { autoStartFirst.current = false; return; }
     if (selected !== treasure.ordinary[0].id) { autoStartFirst.current = false; return; }
     const timer = window.setTimeout(() => {
       autoStartFirst.current = false;
       setInteractiveId(treasure.ordinary[0].id);
     }, 180);
     return () => window.clearTimeout(timer);
-  }, [view, phase, selected, treasure.id]);
+  }, [view, phase, selected, treasure.id, compactViewport]);
 
   const fullMask = (1 << treasure.ordinary.length) - 1;
   const seen = state.seen === fullMask ? 0 : state.seen;
@@ -255,9 +266,9 @@ function App() {
       const rewards = revealRewards(result, treasure);
       const stepMs = eliminationStepMs(order.length);
       // Prepare the actual rewards while the soundtrack is playing.
-      timers.current.push(window.setTimeout(() => {
+      whenIdle(() => {
         for (const itemId of rewards) preloadHero(itemId);
-      }, 100));
+      }, 1500);
       let finished = false;
       const showResult = () => {
         if (finished) return;
@@ -339,6 +350,13 @@ function App() {
   const eliminated = new Set(elimination.slice(0, spinStep));
   const winning = opening ? new Set([revealItems[0]]) : new Set<number>();
   const lastEliminatedIndex = spinStep > 0 ? allItems.findIndex(item => item.id === elimination[spinStep - 1]) : -1;
+  const compactOpening = compactViewport;
+  const compactRemaining = elimination.slice(spinStep, spinStep + 3);
+  if (compactOpening && opening && elimination.length - spinStep < 3) compactRemaining.push(revealItems[0]);
+  const spinItems = compactOpening && opening
+    ? [...(spinStep > 0 ? [itemById(elimination[spinStep - 1], treasure)] : []),
+       ...compactRemaining.map(id => itemById(id, treasure))]
+    : allItems;
   const totalCost = totalOpeningCost(histories, currency);
   const totalSpend = moneyFormat[currency].format(totalCost.cents / 100);
 
@@ -392,17 +410,19 @@ function App() {
             {phase === 'spin' ? <div className={`spin-lineup ${spinMode}`}
               style={{ '--spin-transition': `${Math.min(280, Math.round(eliminationStepMs(elimination.length) * 0.85))}ms` } as React.CSSProperties}>
               <div className="spin-lineup-glow" />
-              {allItems.map(item => {
+              {spinItems.map(item => {
                 const index = allItems.findIndex(entry => entry.id === item.id);
-                const offset = index - (allItems.length - 1) / 2;
+                const offset = compactOpening
+                  ? (compactRemaining.indexOf(item.id) < 0 ? -2 : compactRemaining.indexOf(item.id) - (compactRemaining.length - 1) / 2)
+                  : index - (allItems.length - 1) / 2;
                 const isFinalHero = item.id === revealItems[0] && spinStep === elimination.length;
                 return <div className={`spin-item model-item ${eliminated.has(item.id) ? 'eliminated' : ''} ${winning.has(item.id) && spinStep === elimination.length ? 'winner' : ''}`} key={item.id}
-                  style={{ left: isFinalHero ? '50%' : `calc(50% + ${offset * 8.7}vw)`, '--stagger': `${index * -95}ms` } as React.CSSProperties}>
-                  <Model itemId={item.id} motion="spin" />
+                  style={{ left: isFinalHero ? '50%' : `calc(50% + ${offset * (compactOpening ? 37 : 8.7)}vw)`, '--stagger': `${index * -95}ms` } as React.CSSProperties}>
+                  {compactOpening ? <StaticHeroPreview itemId={item.id} /> : <Model itemId={item.id} motion="spin" />}
                 </div>;
               })}
               {lastEliminatedIndex >= 0 && <div className="spin-smoke-puff" key={spinStep}
-                style={{ left: `calc(50% + ${(lastEliminatedIndex - (allItems.length - 1) / 2) * 8.7}vw)` }} />}
+                style={{ left: compactOpening ? 'calc(50% - 74vw)' : `calc(50% + ${(lastEliminatedIndex - (allItems.length - 1) / 2) * 8.7}vw)` }} />}
               <div className="spin-floor" />
               <div className="spin-control"><strong>OPEN TREASURE</strong><p>{spinMode === 'windup' ? 'The rewards are gathering…' : 'Revealing the contents…'}</p><div className="spin-control-progress"><i style={{ width: `${spinStep / elimination.length * 100}%` }} /></div><button onClick={skipOpening}>SKIP</button></div>
             </div> : phase === 'preview' ? <div className="preview-lineup" ref={previewRef} aria-label="Treasure rewards; use left and right arrow keys or scroll to browse">
@@ -426,7 +446,7 @@ function App() {
                   <div className="reward-identity-text"><strong>{selectedItem.hero}</strong><span>{selectedItem.name}</span></div>
                 </div>
                 {selectedBonus && <button className="reward-identity-rarity rarity-odds-button" aria-haspopup="dialog" aria-label={`Show odds for ${selectedBonus.name}`} onClick={() => setOddsIndex(selectedBonusIndex)}><span>BONUS REWARD</span><strong>{selectedBonus.rarity} ↗</strong></button>}
-                <small className="reward-identity-hint">DRAG HERO TO ROTATE</small>
+                <small className="reward-identity-hint">{compactOpening && interactiveId !== selected ? 'TAP HERO TO ROTATE' : 'DRAG HERO TO ROTATE'}</small>
               </div>
               <button className="preview-arrow arrow-right" onClick={() => browse(1)} aria-label="Next reward" disabled={selectedIndex === allItems.length - 1}>›</button>
             </div> : <>

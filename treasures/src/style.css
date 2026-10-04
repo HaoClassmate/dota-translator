@@ -369,3 +369,48 @@
 .dt-cta:hover{background:#f6c163;transform:translateY(-1px)}
 @keyframes dtGlow{0%,100%{box-shadow:0 0 10px rgba(240,180,76,.55),0 0 22px rgba(240,180,76,.25)}50%{box-shadow:0 0 18px rgba(240,180,76,.95),0 0 40px rgba(240,180,76,.5)}}
 @media (prefers-reduced-motion:reduce){.dt-cta{animation:none}}
+
+/* The opening uses the available phone viewport instead of a desktop-sized overlay. */
+@media(max-width:700px), (max-width:900px) and (max-height:600px){
+  .detail-view.opening-active{height:100dvh;min-height:560px;display:flex;flex-direction:column}
+  .detail-view.opening-active .topbar{display:none}
+  .detail-view.opening-active .shell{flex:1;min-height:0;display:flex}
+  .detail-view.opening-active .content{flex:1;min-height:0}
+  .detail-view.opening-active .stage-panel{height:100%;min-height:0}
+  .detail-view.opening-active .stage.spin,.detail-view.opening-active .stage.reveal{height:100%;min-height:0;padding:0}
+  .detail-view.opening-active .phase-spin .spin-item{top:47%;width:clamp(145px,48vw,205px);height:min(53%,390px);transition:left var(--spin-transition,280ms) ease,opacity var(--spin-transition,280ms) ease,transform var(--spin-transition,280ms) ease}
+  .detail-view.opening-active .phase-spin .spin-lineup .spin-item,
+  .detail-view.opening-active .phase-spin .spin-lineup.eliminating .spin-item,
+  .detail-view.opening-active .phase-spin .spin-lineup .spin-item.eliminated,
+  .detail-view.opening-active .phase-spin .spin-lineup .spin-item.winner{filter:none}
+  .detail-view.opening-active .phase-spin .spin-item.model-item .hero-3d{height:82%;filter:none}
+  .detail-view.opening-active .spin-lineup.windup .spin-item img{animation:none}
+  .detail-view.opening-active .spin-lineup.windup .spin-item.model-item .hero-3d{animation:mobile-windup .65s ease-out both}
+  .detail-view.opening-active .phase-spin .spin-item.winner .hero-3d{filter:drop-shadow(0 0 18px #83c6ff9c)}
+  .spin-control{inset:10px 10px auto;width:auto;height:76px;padding:11px 12px;display:grid;grid-template-columns:minmax(0,1fr) 74px;grid-template-rows:auto 4px;align-items:center;gap:8px 12px}
+  .spin-control strong{font-size:13px}
+  .spin-control p{display:none}
+  .spin-control-progress{grid-column:1;grid-row:2;margin:0}
+  .spin-control button{grid-column:2;grid-row:1/span 2;width:74px;height:44px;flex:none;font-size:11px}
+  .detail-view.opening-active .stage.reveal .hero-3d-large{position:absolute;left:0;top:0;width:100%;height:calc(100% - 285px);max-height:none;filter:none;animation:mobile-model-arrive .45s ease-out both}
+  .reveal-plate{bottom:122px;width:min(340px,calc(100% - 24px))}
+  .reveal-plate .reward-identity-text strong{font-size:17px}
+  .reveal-plate .reward-identity-text span{font-size:12px;white-space:normal;overflow:visible;text-overflow:clip}
+  .reveal-control{inset:auto 10px 10px;width:auto;height:100px;padding:10px 12px;display:grid;grid-template-columns:minmax(0,1fr) 112px;grid-template-rows:auto 1fr;gap:4px 8px}
+  .reveal-control>strong,.reveal-control>p:not(.reveal-award-count){display:none}
+  .reveal-control .reveal-award-count{grid-column:1;grid-row:1;margin:0;font-size:10px}
+  .reveal-control .reveal-spend{grid-column:1;grid-row:2;align-self:center;min-width:0;margin:0;padding:0;border:0;gap:1px}
+  .reveal-control .reveal-spend span{font-size:9px}
+  .reveal-control .reveal-spend b{font-size:15px}
+  .reveal-control .reveal-spend small{font-size:10px}
+  .reveal-control button{grid-column:2;grid-row:1/span 2;align-self:center;width:112px;height:52px;flex:none;font-size:14px}
+  .phase-reveal .bonus-reveal{display:none}
+}
+@keyframes mobile-model-arrive{from{opacity:0;transform:translateY(15px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes mobile-windup{from{opacity:.35;transform:translateY(18px) scale(.86)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(min-width:701px) and (max-width:900px) and (max-height:600px){
+  .detail-view.opening-active{min-height:0}
+  .detail-view.opening-active .stage.reveal .hero-3d-large{width:55%;height:100%}
+  .reveal-plate{left:auto;right:12px;bottom:122px;transform:none;width:38%}
+  .reveal-control{left:auto;right:12px;width:38%}
+}

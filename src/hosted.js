@@ -18,7 +18,10 @@ export function explainHosted(code) {
   return null;
 }
 
-export function createHosted({ url, id, version = '', fetchImpl = globalThis.fetch, timeoutMs = 20000 } = {}) {
+// `kind` says which of the two the id was made from - 'steam' or 'install' -
+// so the owner's page can tell confirmed players from fresh installs. The
+// Steam id itself still never leaves the PC.
+export function createHosted({ url, id, kind = null, version = '', fetchImpl = globalThis.fetch, timeoutMs = 20000 } = {}) {
   const post = async (route, body) => {
     const base = String(typeof url === 'function' ? url() : url || '').replace(/\/+$/, '');
     const ctl = new AbortController();
@@ -28,7 +31,7 @@ export function createHosted({ url, id, version = '', fetchImpl = globalThis.fet
       res = await fetchImpl(base + route, {
         method: 'POST',
         headers: { 'content-type': 'application/json', 'user-agent': 'dota-translator/' + version },
-        body: JSON.stringify({ id: id(), ...body }),
+        body: JSON.stringify({ id: id(), ...(kind ? { kind: kind() } : {}), ...body }),
         signal: ctl.signal,
       });
       try { data = await res.json(); } catch { /* not JSON: a proxy's error page */ }

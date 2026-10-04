@@ -115,6 +115,13 @@ key is always used instead of the server.
   is in use, `main.js` posts `/v1/ping` (the id, nothing else) at once and
   every minute, so the server's /health can say how many players are in a
   game NOW (the user asked for live users). A failed ping is silent.
+- **THE KIND OF ID GOES WITH IT (v0.6.10, 2026-10-04; the user: "check if the
+  3 users in game now are real steam ids").** Every request now carries
+  `kind: 'steam'` once the feed has given the player's Steam id (the id is
+  then its hash) and `'install'` before that (`createHosted`'s `kind`). Still
+  no Steam id in any body (a test holds it). The server counts the steam ones
+  separately; it is the app's word, not a check against Steam. Copies older
+  than 0.6.10 send no kind and count as not confirmed until they update.
 - **THE SERVER WINS OVER A SAVED KEY (v0.5.4).** SEEN the same evening: the
   user's installed copy still held the key it had saved before 0.5.0, so it
   went to Google's free tier directly - which was in a bad spell ("high

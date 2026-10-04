@@ -2275,6 +2275,16 @@ ok('gsi mode reads no memory: nothing of it opens the game, reads it, or starts 
     assert.match(ID, /^[a-f0-9]{64}$/);
     assert.ok(!ID.includes('76561198'));
     assert.notEqual(hashId('steam', '1'), hashId('install', '1'));
+    // Which kind of id it is goes with it (the owner's page counts confirmed
+    // Steam players), and nothing else: still no Steam id in the body.
+    let k = 'install';
+    const h2 = createHosted({ url: 'https://example.invalid', id: () => ID, kind: () => k, fetchImpl });
+    reply.status = 200; reply.body = { ok: true };
+    await h2.ping();
+    k = 'steam';
+    await h2.ping();
+    assert.deepEqual(sent.slice(-2).map((x) => x.body), [{ id: ID, kind: 'install' }, { id: ID, kind: 'steam' }]);
+    assert.ok(!JSON.stringify(sent).includes('76561198'));
   });
 
   ok('hosted: the feed says who the local player is, once; a spectator\'s payload names nobody', () => {

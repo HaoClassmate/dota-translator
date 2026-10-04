@@ -301,7 +301,7 @@ function installHash() {
   }
   return hashId('install', cfg.installId);
 }
-const hosted = createHosted({ url: () => cfg.hostedUrl, id: () => playerId || installHash(), version: app.getVersion() });
+const hosted = createHosted({ url: () => cfg.hostedUrl, id: () => playerId || installHash(), kind: () => (playerId ? 'steam' : 'install'), version: app.getVersion() });
 
 // While the game is in front and the hosted translator is in use, tell it
 // once a minute that a player is in a game (players.now on its /health).

@@ -28,13 +28,12 @@
   .hero, .post { color: var(--muted); font-size: 12px; }
   .post { border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
   .time { margin-left: auto; color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
-  .orig { margin-top: 2px; color: var(--muted); word-break: break-word; }
-  .zh { margin-top: 1px; font-size: 19px; color: var(--text); word-break: break-word; }
-  .orig.only { color: var(--text); font-size: 17px; }
-  .wait { color: var(--faint); font-size: 13px; }
+  .msg { margin-top: 2px; font-size: 18px; color: var(--text); word-break: break-word; }
+  .orig { margin-left: 4px; font-size: 15px; color: var(--muted); }
+  .wait { color: var(--faint); font-size: 15px; }
   .err { color: var(--err); font-size: 12px; }
   #empty { padding: 80px 16px; text-align: center; color: var(--faint); }
-  @media (max-width: 520px) { .zh { font-size: 17px; } .who { max-width: 9em; } }
+  @media (max-width: 520px) { .msg { font-size: 16px; } .who { max-width: 9em; } }
 </style>
 </head>
 <body>
@@ -57,9 +56,10 @@ const day = (t) => new Date(t).toLocaleString('zh-CN', { month: 'numeric', day: 
 function row(l) {
   const name = l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
   let body;
-  if (l.state === 'done' && l.zh) body = `<div class="orig">${esc(l.text)}</div><div class="zh">${esc(l.zh)}</div>`;
-  else if (l.state === 'pending') body = `<div class="orig">${esc(l.text)}</div><div class="wait">翻译中…</div>`;
-  else body = `<div class="orig only">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="err">翻译失败：${esc(l.error)}</div>` : '');
+  // 译文(原文) on one line; a line with nothing to translate is shown once.
+  if (l.state === 'done' && l.zh) body = `<div class="msg">${esc(l.zh)}<span class="orig">(${esc(l.text)})</span></div>`;
+  else if (l.state === 'pending') body = `<div class="msg"><span class="wait">翻译中…</span><span class="orig">(${esc(l.text)})</span></div>`;
+  else body = `<div class="msg">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="err">翻译失败：${esc(l.error)}</div>` : '');
   return `<div class="row${l.self ? ' self' : ''}${fresh.has(l.id) ? ' new' : ''}" style="--slot:${SLOT[l.slot] || '#888'}">`
     + `<div class="head"><span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span>`
     + `<span class="who">${esc(l.self ? name + '（我）' : name)}</span>`

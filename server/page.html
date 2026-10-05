@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dota 聊天翻译</title>
+<style>
+  :root { --bg: #0f1115; --card: #181b22; --line: #262a33; --text: #e8eaed; --muted: #8a909c; --zh: #ffffff; --team: #4caf50; --all: #f0a030; --err: #ff6b6b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  header { position: sticky; top: 0; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--bg); border-bottom: 1px solid var(--line); z-index: 1; }
+  h1 { font-size: 16px; margin: 0; font-weight: 600; }
+  #status { margin-left: auto; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  #dot { width: 9px; height: 9px; border-radius: 50%; background: #555; }
+  #dot.on { background: #3ddc84; } #dot.idle { background: #f0a030; } #dot.off { background: var(--err); }
+  label { font-size: 13px; color: var(--muted); display: flex; gap: 4px; align-items: center; cursor: pointer; }
+  main { padding: 12px 16px 40px; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+  .row { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--slot, #555); border-radius: 8px; padding: 8px 12px; }
+  .row.new { animation: flash 1.2s ease-out; }
+  @keyframes flash { from { background: #2a3140; } to { background: var(--card); } }
+  .meta { font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .who { color: var(--slot, var(--text)); font-weight: 600; font-size: 14px; }
+  .ch { font-size: 12px; padding: 0 6px; border-radius: 4px; border: 1px solid currentColor; }
+  .ch.team { color: var(--team); } .ch.all { color: var(--all); }
+  .zh { font-size: 22px; color: var(--zh); margin-top: 2px; word-break: break-word; }
+  .orig { font-size: 14px; color: var(--muted); word-break: break-word; }
+  .pending { color: var(--muted); font-size: 16px; }
+  .error { color: var(--err); font-size: 13px; }
+  #empty { color: var(--muted); text-align: center; padding: 60px 0; }
+  body.compact .orig { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Dota 聊天翻译</h1>
+  <label><input type="checkbox" id="showOrig" checked> 显示原文</label>
+  <div id="status"><span id="dot"></span><span id="statusText">连接中…</span></div>
+</header>
+<main id="list"><div id="empty">等待游戏中的聊天…</div></main>
+<script>
+const SLOT = ['#3375ff', '#66ffbf', '#bf00bf', '#f3f00b', '#ff6b00', '#fe86c2', '#a1b447', '#65d9f7', '#008321', '#a46900'];
+const SLOT_ZH = ['蓝', '青', '紫', '黄', '橙', '粉', '橄榄', '浅蓝', '绿', '棕'];
+const list = document.getElementById('list');
+const rows = new Map();
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const time = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
+
+const showOrig = document.getElementById('showOrig');
+try { showOrig.checked = localStorage.getItem('showOrig') !== '0'; } catch {}
+const applyOrig = () => { document.body.classList.toggle('compact', !showOrig.checked); try { localStorage.setItem('showOrig', showOrig.checked ? '1' : '0'); } catch {} };
+showOrig.onchange = applyOrig; applyOrig();
+
+function render(l, fresh) {
+  let el = rows.get(l.id);
+  if (!el) {
+    el = document.createElement('div');
+    el.className = 'row' + (fresh ? ' new' : '');
+    rows.set(l.id, el);
+    document.getElementById('empty')?.remove();
+    list.prepend(el);
+    while (rows.size > 300) { const [id, old] = rows.entries().next().value; old.remove(); rows.delete(id); }
+  }
+  const side = l.slot < 5 ? '天辉' : '夜魇';
+  el.style.setProperty('--slot', SLOT[l.slot] || '#888');
+  const name = l.name && !/^(Blue|Teal|Purple|Yellow|Orange|Pink|Olive|Light Blue|Green|Brown|Player \d+)$/.test(l.name) ? l.name : `${side}${SLOT_ZH[l.slot] ?? l.slot}`;
+  let main;
+  if (l.state === 'done') main = `<div class="zh">${esc(l.zh || l.text)}</div>` + (l.zh ? `<div class="orig">${esc(l.text)}</div>` : '');
+  else if (l.state === 'pending') main = `<div class="orig" style="display:block">${esc(l.text)}</div><div class="pending">翻译中…</div>`;
+  else main = `<div class="zh">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="error">翻译失败：${esc(l.error)}</div>` : '');
+  el.innerHTML = `<div class="meta"><span class="who">${esc(name)}</span>${l.hero ? `<span>${esc(l.hero)}</span>` : ''}<span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span><span>${side}</span><span>${time(l.at)}</span></div>${main}`;
+}
+
+const dot = document.getElementById('dot'), statusText = document.getElementById('statusText');
+let lastFeed = 0, connected = false;
+function paintStatus() {
+  if (!connected) { dot.className = 'off'; statusText.textContent = '与服务器断开，重连中…'; return; }
+  const ago = lastFeed ? (Date.now() - lastFeed) / 1000 : Infinity;
+  if (ago < 20) { dot.className = 'on'; statusText.textContent = '游戏数据正常'; }
+  else { dot.className = 'idle'; statusText.textContent = lastFeed ? `游戏 ${Math.round(ago)} 秒没发数据` : '还没收到游戏数据'; }
+}
+setInterval(paintStatus, 2000);
+
+const k = new URLSearchParams(location.search).get('k') || '';
+const es = new EventSource('events?k=' + encodeURIComponent(k));
+es.onopen = () => { connected = true; paintStatus(); };
+es.onerror = () => { connected = false; paintStatus(); };
+es.addEventListener('history', (e) => { list.innerHTML = '<div id="empty">等待游戏中的聊天…</div>'; rows.clear(); for (const l of JSON.parse(e.data)) render(l, false); });
+es.addEventListener('line', (e) => { const l = JSON.parse(e.data); render(l, !rows.has(l.id)); });
+es.addEventListener('status', (e) => { lastFeed = JSON.parse(e.data).lastFeed; paintStatus(); });
+</script>
+</body>
+</html>

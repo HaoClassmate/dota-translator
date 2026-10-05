@@ -28,6 +28,8 @@ export const SCRIPTS = {
   arabic: /[\u0620-\u064A\u066E-\u06D3\u06FA-\u06FF]/,
   thai: /[\u0E00-\u0E7F]/,
   spanish,
+  // Every line: the remote server (server/) translates whatever is not Chinese.
+  any: /\S/,
 };
 
 export function needsTranslation(text, scripts = ['cyrillic']) {

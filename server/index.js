@@ -21,6 +21,9 @@ const LLM_URL = env.LLM_API_URL || 'https://api.deepseek.com/chat/completions';
 const LLM_KEY = env.LLM_API_KEY || '';
 const LLM_MODEL = env.LLM_MODEL || 'deepseek-chat';
 const KEEP = 300;
+// The system prompt, re-read when the file changes: edit it on the server
+// between games to tune the translation, no restart.
+const PROMPT_FILE = env.PROMPT_FILE || '';
 
 if (!TOKEN) { console.error('GSI_TOKEN is required: it keeps strangers out of the feed and the page.'); process.exit(1); }
 if (!LLM_KEY) console.warn('LLM_API_KEY is not set: lines are shown untranslated.');
@@ -46,14 +49,29 @@ const isChinese = (t) => {
 // Nothing to translate: digits, punctuation, "?" spam.
 const isTrivial = (t) => !/[\p{L}]/u.test(t);
 
-const PROMPT = [
+const DEFAULT_PROMPT = [
   '你是 Dota 2 东南亚服务器的聊天翻译。把玩家发的消息翻译成简体中文，口语化、简短，保留语气（包括骂人）。',
   '消息可能是英语、菲律宾语(Tagalog/Taglish)、印尼语、马来语、泰语、俄语、越南语或混杂，以及大量缩写和游戏黑话（ss/mia=敌人消失, b=撤退, bb=买活, rosh=肉山, ff=投降, ez, gg, noob, bobo, gago, tanga, pota, anjing, goblok, babi, bodoh 等）。',
   '英雄、物品、技能名用国服常用叫法。只输出译文本身，不要解释、不要引号。如果看不懂就输出原文。',
 ].join('\n');
 
 const cache = new Map();
+let prompt = DEFAULT_PROMPT, promptMtime = 0;
+function currentPrompt() {
+  if (!PROMPT_FILE) return prompt;
+  try {
+    const m = fs.statSync(PROMPT_FILE).mtimeMs;
+    if (m !== promptMtime) {
+      const text = fs.readFileSync(PROMPT_FILE, 'utf8').trim();
+      promptMtime = m;
+      if (text && text !== prompt) { prompt = text; cache.clear(); console.log('prompt reloaded from', PROMPT_FILE); }
+    }
+  } catch (err) { if (promptMtime !== -1) { promptMtime = -1; console.warn('prompt file:', err.message); } }
+  return prompt;
+}
+
 async function translate(text) {
+  const system = currentPrompt();
   if (cache.has(text)) return cache.get(text);
   const res = await fetch(LLM_URL, {
     method: 'POST',
@@ -62,7 +80,7 @@ async function translate(text) {
       model: LLM_MODEL,
       temperature: 0.2,
       max_tokens: 200,
-      messages: [{ role: 'system', content: PROMPT }, { role: 'user', content: text }],
+      messages: [{ role: 'system', content: system }, { role: 'user', content: text }],
     }),
     signal: AbortSignal.timeout(15000),
   });
@@ -74,11 +92,13 @@ async function translate(text) {
   return out;
 }
 
+let selfSlot = null;
 const chat = createGsiChat({
   scripts: ['any'],
+  onSelf: (me) => { selfSlot = me ? me.slot : null; },
   onUnknownChannel: (n) => console.log('unknown channel_type', n),
   onMessage: (m) => {
-    const line = { id: nextId++, at: Date.now(), name: m.name, hero: m.hero || null, slot: m.slot, channel: m.channel, text: m.text, zh: null, state: 'pending' };
+    const line = { id: nextId++, at: Date.now(), name: m.name, hero: m.hero || null, slot: m.slot, self: m.slot === selfSlot, channel: m.channel, text: m.text, zh: null, state: 'pending' };
     if (isChinese(m.text) || isTrivial(m.text)) { line.zh = ''; line.state = 'done'; }
     else if (!LLM_KEY) line.state = 'off';
     lines.push(line);

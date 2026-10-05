@@ -8,10 +8,12 @@
 GSI_TOKEN=<随机口令> LLM_API_KEY=<key> node server/index.js
 ```
 
-环境变量：`PORT`(47854) `HOST`(0.0.0.0) `LLM_API_URL`(DeepSeek，任意 OpenAI 兼容接口) `LLM_MODEL`(deepseek-chat)。
-线上用 systemd：`/etc/systemd/system/dota-chat.service`，配置在 `/etc/dota-chat.env`。
+环境变量：`PORT`(47854) `HOST`(0.0.0.0) `LLM_API_URL`(DeepSeek，任意 OpenAI 兼容接口) `LLM_MODEL`(deepseek-chat) `PROMPT_FILE`(提示词文件，改了即生效，不用重启)。
 
-网页：`http://<域名>:47854/?k=<GSI_TOKEN>`
+线上（wanghaodev）：systemd `dota-chat`，配置 `/etc/dota-chat.env`，提示词 `/etc/dota-chat.prompt`，只听 127.0.0.1。
+前面是 Caddy（`/etc/caddy/Caddyfile`），再前面是 Cloudflare 代理（SSL Full，源站自签证书）。
+
+网页：`https://dota.wanghaos.com/?k=<GSI_TOKEN>`。自己发的消息也翻译，标"我"。
 
 ## 游戏电脑
 
@@ -21,7 +23,7 @@ GSI_TOKEN=<随机口令> LLM_API_KEY=<key> node server/index.js
 ```
 "Remote chat"
 {
-    "uri"           "http://<域名>:47854/"
+    "uri"           "http://dota.wanghaos.com/"
     "timeout"       "5.0"
     "buffer"        "0.1"
     "throttle"      "0.1"

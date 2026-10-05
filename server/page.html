@@ -23,17 +23,17 @@
   .ch { font-size: 12px; padding: 0 6px; border-radius: 4px; border: 1px solid currentColor; }
   .ch.team { color: var(--team); } .ch.all { color: var(--all); }
   .zh { font-size: 22px; color: var(--zh); margin-top: 2px; word-break: break-word; }
-  .orig { font-size: 14px; color: var(--muted); word-break: break-word; }
+  .me { font-size: 12px; padding: 0 6px; border-radius: 4px; background: #3a4258; color: #fff; }
+  .orig { font-size: 17px; color: #c3c8d2; margin-top: 4px; word-break: break-word; }
   .pending { color: var(--muted); font-size: 16px; }
   .error { color: var(--err); font-size: 13px; }
   #empty { color: var(--muted); text-align: center; padding: 60px 0; }
-  body.compact .orig { display: none; }
+  .tag { display: inline-block; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; margin-right: 6px; vertical-align: 3px; }
 </style>
 </head>
 <body>
 <header>
   <h1>Dota 聊天翻译</h1>
-  <label><input type="checkbox" id="showOrig" checked> 显示原文</label>
   <div id="status"><span id="dot"></span><span id="statusText">连接中…</span></div>
 </header>
 <main id="list"><div id="empty">等待游戏中的聊天…</div></main>
@@ -45,10 +45,6 @@ const rows = new Map();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const time = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
 
-const showOrig = document.getElementById('showOrig');
-try { showOrig.checked = localStorage.getItem('showOrig') !== '0'; } catch {}
-const applyOrig = () => { document.body.classList.toggle('compact', !showOrig.checked); try { localStorage.setItem('showOrig', showOrig.checked ? '1' : '0'); } catch {} };
-showOrig.onchange = applyOrig; applyOrig();
 
 function render(l, fresh) {
   let el = rows.get(l.id);
@@ -64,10 +60,13 @@ function render(l, fresh) {
   el.style.setProperty('--slot', SLOT[l.slot] || '#888');
   const name = l.name && !/^(Blue|Teal|Purple|Yellow|Orange|Pink|Olive|Light Blue|Green|Brown|Player \d+)$/.test(l.name) ? l.name : `${side}${SLOT_ZH[l.slot] ?? l.slot}`;
   let main;
-  if (l.state === 'done') main = `<div class="zh">${esc(l.zh || l.text)}</div>` + (l.zh ? `<div class="orig">${esc(l.text)}</div>` : '');
-  else if (l.state === 'pending') main = `<div class="orig" style="display:block">${esc(l.text)}</div><div class="pending">翻译中…</div>`;
-  else main = `<div class="zh">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="error">翻译失败：${esc(l.error)}</div>` : '');
-  el.innerHTML = `<div class="meta"><span class="who">${esc(name)}</span>${l.hero ? `<span>${esc(l.hero)}</span>` : ''}<span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span><span>${side}</span><span>${time(l.at)}</span></div>${main}`;
+  // Original always, translation under it - also to judge the prompt.
+  const orig = `<div class="orig"><span class="tag">原</span>${esc(l.text)}</div>`;
+  if (l.state === 'done' && l.zh) main = orig + `<div class="zh"><span class="tag">译</span>${esc(l.zh)}</div>`;
+  else if (l.state === 'done') main = orig;
+  else if (l.state === 'pending') main = orig + `<div class="pending"><span class="tag">译</span>翻译中…</div>`;
+  else main = orig + (l.state === 'error' ? `<div class="error">翻译失败：${esc(l.error)}</div>` : '');
+  el.innerHTML = `<div class="meta"><span class="who">${esc(name)}</span>${l.self ? '<span class="me">我</span>' : ''}${l.hero ? `<span>${esc(l.hero)}</span>` : ''}<span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span><span>${side}</span><span>${time(l.at)}</span></div>${main}`;
 }
 
 const dot = document.getElementById('dot'), statusText = document.getElementById('statusText');

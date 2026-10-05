@@ -5,30 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dota 聊天翻译</title>
 <style>
-  :root { --bg: #0f1115; --card: #181b22; --line: #262a33; --text: #e8eaed; --muted: #8a909c; --zh: #ffffff; --team: #4caf50; --all: #f0a030; --err: #ff6b6b; }
+  :root { --bg: #0d0f13; --row: #14171d; --self: #172030; --line: #232731; --text: #f2f4f7; --muted: #8b919d; --faint: #5d636e; --team: #5fd38a; --all: #f2a541; --err: #ff6b6b; }
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
-  header { position: sticky; top: 0; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--bg); border-bottom: 1px solid var(--line); z-index: 1; }
-  h1 { font-size: 16px; margin: 0; font-weight: 600; }
-  #status { margin-left: auto; font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
-  #dot { width: 9px; height: 9px; border-radius: 50%; background: #555; }
-  #dot.on { background: #3ddc84; } #dot.idle { background: #f0a030; } #dot.off { background: var(--err); }
-  label { font-size: 13px; color: var(--muted); display: flex; gap: 4px; align-items: center; cursor: pointer; }
-  main { padding: 12px 16px 40px; max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
-  .row { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--slot, #555); border-radius: 8px; padding: 8px 12px; }
-  .row.new { animation: flash 1.2s ease-out; }
-  @keyframes flash { from { background: #2a3140; } to { background: var(--card); } }
-  .meta { font-size: 13px; color: var(--muted); display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-  .who { color: var(--slot, var(--text)); font-weight: 600; font-size: 14px; }
-  .ch { font-size: 12px; padding: 0 6px; border-radius: 4px; border: 1px solid currentColor; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
+  header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(13,15,19,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  h1 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .02em; }
+  #status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  #dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
+  #dot.on { background: #3ddc84; box-shadow: 0 0 6px #3ddc84; } #dot.idle { background: var(--all); } #dot.off { background: var(--err); }
+  main { max-width: 860px; margin: 0 auto; padding: 4px 0 48px; }
+  .match { display: flex; align-items: center; gap: 10px; padding: 18px 16px 6px; font-size: 12px; color: var(--faint); }
+  .match::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  .row { position: relative; padding: 7px 16px 8px 19px; border-bottom: 1px solid var(--line); background: var(--row); }
+  .row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--slot); }
+  .row.self { background: var(--self); }
+  .row.new { animation: flash 1.4s ease-out; }
+  @keyframes flash { from { background: #25304a; } }
+  .head { display: flex; align-items: baseline; gap: 6px; font-size: 13px; }
+  .ch { font-size: 11px; font-weight: 600; }
   .ch.team { color: var(--team); } .ch.all { color: var(--all); }
-  .zh { font-size: 22px; color: var(--zh); margin-top: 2px; word-break: break-word; }
-  .me { font-size: 12px; padding: 0 6px; border-radius: 4px; background: #3a4258; color: #fff; }
-  .orig { font-size: 17px; color: #c3c8d2; margin-top: 4px; word-break: break-word; }
-  .pending { color: var(--muted); font-size: 16px; }
-  .error { color: var(--err); font-size: 13px; }
-  #empty { color: var(--muted); text-align: center; padding: 60px 0; }
-  .tag { display: inline-block; font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; margin-right: 6px; vertical-align: 3px; }
+  .who { color: var(--slot); font-weight: 600; max-width: 14em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .hero, .post { color: var(--muted); font-size: 12px; }
+  .post { border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
+  .time { margin-left: auto; color: var(--faint); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .orig { margin-top: 2px; color: var(--muted); word-break: break-word; }
+  .zh { margin-top: 1px; font-size: 19px; color: var(--text); word-break: break-word; }
+  .orig.only { color: var(--text); font-size: 17px; }
+  .wait { color: var(--faint); font-size: 13px; }
+  .err { color: var(--err); font-size: 12px; }
+  #empty { padding: 80px 16px; text-align: center; color: var(--faint); }
+  @media (max-width: 520px) { .zh { font-size: 17px; } .who { max-width: 9em; } }
 </style>
 </head>
 <body>
@@ -40,42 +46,52 @@
 <script>
 const SLOT = ['#3375ff', '#66ffbf', '#bf00bf', '#f3f00b', '#ff6b00', '#fe86c2', '#a1b447', '#65d9f7', '#008321', '#a46900'];
 const SLOT_ZH = ['蓝', '青', '紫', '黄', '橙', '粉', '橄榄', '浅蓝', '绿', '棕'];
+const COLOUR_NAME = /^(Blue|Teal|Purple|Yellow|Orange|Pink|Olive|Light Blue|Green|Brown|Player \d+)$/;
 const list = document.getElementById('list');
-const rows = new Map();
+const lines = new Map();
+let fresh = new Set();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const time = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
+const hm = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
+const day = (t) => new Date(t).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
 
+function row(l) {
+  const name = l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
+  let body;
+  if (l.state === 'done' && l.zh) body = `<div class="orig">${esc(l.text)}</div><div class="zh">${esc(l.zh)}</div>`;
+  else if (l.state === 'pending') body = `<div class="orig">${esc(l.text)}</div><div class="wait">翻译中…</div>`;
+  else body = `<div class="orig only">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="err">翻译失败：${esc(l.error)}</div>` : '');
+  return `<div class="row${l.self ? ' self' : ''}${fresh.has(l.id) ? ' new' : ''}" style="--slot:${SLOT[l.slot] || '#888'}">`
+    + `<div class="head"><span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span>`
+    + `<span class="who">${esc(l.self ? name + '（我）' : name)}</span>`
+    + (l.hero ? `<span class="hero">${esc(l.hero)}</span>` : '')
+    + (l.post ? '<span class="post">赛后</span>' : '')
+    + `<span class="time">${hm(l.at)}</span></div>${body}</div>`;
+}
 
-function render(l, fresh) {
-  let el = rows.get(l.id);
-  if (!el) {
-    el = document.createElement('div');
-    el.className = 'row' + (fresh ? ' new' : '');
-    rows.set(l.id, el);
-    document.getElementById('empty')?.remove();
-    list.prepend(el);
-    while (rows.size > 300) { const [id, old] = rows.entries().next().value; old.remove(); rows.delete(id); }
+// Newest first, a divider wherever the match changes.
+function render() {
+  const all = [...lines.values()].sort((a, b) => b.id - a.id);
+  if (!all.length) { list.innerHTML = '<div id="empty">等待游戏中的聊天…</div>'; return; }
+  let html = '', match;
+  for (const l of all) {
+    if (l.match !== match) {
+      match = l.match;
+      const first = all.filter((x) => x.match === match).at(-1);
+      html += `<div class="match">${match ? '比赛 ' + esc(match) : '比赛'} · ${day(first.at)}</div>`;
+    }
+    html += row(l);
   }
-  const side = l.slot < 5 ? '天辉' : '夜魇';
-  el.style.setProperty('--slot', SLOT[l.slot] || '#888');
-  const name = l.name && !/^(Blue|Teal|Purple|Yellow|Orange|Pink|Olive|Light Blue|Green|Brown|Player \d+)$/.test(l.name) ? l.name : `${side}${SLOT_ZH[l.slot] ?? l.slot}`;
-  let main;
-  // Original always, translation under it - also to judge the prompt.
-  const orig = `<div class="orig"><span class="tag">原</span>${esc(l.text)}</div>`;
-  if (l.state === 'done' && l.zh) main = orig + `<div class="zh"><span class="tag">译</span>${esc(l.zh)}</div>`;
-  else if (l.state === 'done') main = orig;
-  else if (l.state === 'pending') main = orig + `<div class="pending"><span class="tag">译</span>翻译中…</div>`;
-  else main = orig + (l.state === 'error' ? `<div class="error">翻译失败：${esc(l.error)}</div>` : '');
-  el.innerHTML = `<div class="meta"><span class="who">${esc(name)}</span>${l.self ? '<span class="me">我</span>' : ''}${l.hero ? `<span>${esc(l.hero)}</span>` : ''}<span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span><span>${side}</span><span>${time(l.at)}</span></div>${main}`;
+  list.innerHTML = html;
+  fresh = new Set();
 }
 
 const dot = document.getElementById('dot'), statusText = document.getElementById('statusText');
 let lastFeed = 0, connected = false;
 function paintStatus() {
-  if (!connected) { dot.className = 'off'; statusText.textContent = '与服务器断开，重连中…'; return; }
+  if (!connected) { dot.className = 'off'; statusText.textContent = '重连中…'; return; }
   const ago = lastFeed ? (Date.now() - lastFeed) / 1000 : Infinity;
-  if (ago < 20) { dot.className = 'on'; statusText.textContent = '游戏数据正常'; }
-  else { dot.className = 'idle'; statusText.textContent = lastFeed ? `游戏 ${Math.round(ago)} 秒没发数据` : '还没收到游戏数据'; }
+  if (ago < 20) { dot.className = 'on'; statusText.textContent = '游戏连接中'; }
+  else { dot.className = 'idle'; statusText.textContent = lastFeed ? `${ago < 3600 ? Math.round(ago / 60) + ' 分钟' : '很久'}没有游戏数据` : '未收到游戏数据'; }
 }
 setInterval(paintStatus, 2000);
 
@@ -83,8 +99,8 @@ const k = new URLSearchParams(location.search).get('k') || '';
 const es = new EventSource('events?k=' + encodeURIComponent(k));
 es.onopen = () => { connected = true; paintStatus(); };
 es.onerror = () => { connected = false; paintStatus(); };
-es.addEventListener('history', (e) => { list.innerHTML = '<div id="empty">等待游戏中的聊天…</div>'; rows.clear(); for (const l of JSON.parse(e.data)) render(l, false); });
-es.addEventListener('line', (e) => { const l = JSON.parse(e.data); render(l, !rows.has(l.id)); });
+es.addEventListener('history', (e) => { lines.clear(); for (const l of JSON.parse(e.data)) lines.set(l.id, l); render(); });
+es.addEventListener('line', (e) => { const l = JSON.parse(e.data); if (!lines.has(l.id)) fresh.add(l.id); lines.set(l.id, l); render(); });
 es.addEventListener('status', (e) => { lastFeed = JSON.parse(e.data).lastFeed; paintStatus(); });
 </script>
 </body>

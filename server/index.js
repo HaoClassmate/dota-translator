@@ -20,7 +20,9 @@ const TOKEN = env.GSI_TOKEN || '';
 const LLM_URL = env.LLM_API_URL || 'https://api.deepseek.com/chat/completions';
 const LLM_KEY = env.LLM_API_KEY || '';
 const LLM_MODEL = env.LLM_MODEL || 'deepseek-chat';
-const KEEP = 300;
+const KEEP = 1000;
+// Where the lines are kept across restarts (systemd's StateDirectory).
+const STATE_FILE = env.STATE_DIRECTORY ? path.join(env.STATE_DIRECTORY, 'lines.json') : '';
 // The system prompt, re-read when the file changes: edit it on the server
 // between games to tune the translation, no restart.
 const PROMPT_FILE = env.PROMPT_FILE || '';
@@ -34,6 +36,31 @@ const lines = [];
 const clients = new Set();
 let nextId = 1;
 let lastFeed = 0;
+// Of the payload being read: which match, and whether it is over (post-game
+// chat is still chat, and the feed keeps sending it on the end screen).
+let matchid = '';
+let gameState = '';
+
+if (STATE_FILE) {
+  try {
+    for (const l of JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'))) {
+      if (l.state === 'pending') l.state = 'error', l.error = '服务重启，未翻译';
+      lines.push(l);
+    }
+    nextId = Math.max(0, ...lines.map((l) => l.id)) + 1;
+  } catch { /* first start */ }
+}
+let saving = null;
+const save = () => {
+  if (!STATE_FILE || saving) return;
+  saving = setTimeout(() => {
+    saving = null;
+    fs.writeFile(STATE_FILE + '.tmp', JSON.stringify(lines), (err) => {
+      if (err) return console.error('save:', err.message);
+      fs.rename(STATE_FILE + '.tmp', STATE_FILE, () => {});
+    });
+  }, 2000);
+};
 
 function broadcast(event, data) {
   const msg = `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`;
@@ -98,24 +125,31 @@ const chat = createGsiChat({
   onSelf: (me) => { selfSlot = me ? me.slot : null; },
   onUnknownChannel: (n) => console.log('unknown channel_type', n),
   onMessage: (m) => {
-    const line = { id: nextId++, at: Date.now(), name: m.name, hero: m.hero || null, slot: m.slot, self: m.slot === selfSlot, channel: m.channel, text: m.text, zh: null, state: 'pending' };
+    console.log('chat:', m.channel, 'slot', m.slot, gameState || '-');
+    const line = { id: nextId++, at: Date.now(), match: matchid, post: gameState === 'DOTA_GAMERULES_STATE_POST_GAME', name: m.name, hero: m.hero || null, slot: m.slot, self: m.slot === selfSlot, channel: m.channel, text: m.text, zh: null, state: 'pending' };
     if (isChinese(m.text) || isTrivial(m.text)) { line.zh = ''; line.state = 'done'; }
     else if (!LLM_KEY) line.state = 'off';
     lines.push(line);
     if (lines.length > KEEP) lines.shift();
     broadcast('line', line);
+    save();
     if (line.state !== 'pending') return;
     translate(m.text)
       .then((zh) => { line.zh = zh; line.state = 'done'; })
       .catch((err) => { line.state = 'error'; line.error = String(err.message || err); console.error('translate:', line.error); })
-      .finally(() => broadcast('line', line));
+      .finally(() => { broadcast('line', line); save(); });
   },
 });
 
-const tokenIn = (body) => {
-  try { return JSON.parse(body)?.auth?.token || ''; } catch { /* malformed, see gsisource.js */ }
+// Token, match and state of a payload; malformed JSON (see gsisource.js)
+// still gives its token.
+const readHead = (body) => {
+  try {
+    const d = JSON.parse(body);
+    return { token: d?.auth?.token || '', match: d?.map?.matchid || '', state: d?.map?.game_state || '' };
+  } catch { /* below */ }
   const m = /"auth"\s*:\s*\{\s*"token"\s*:\s*"((?:[^"\\]|\\.)*)"/.exec(body);
-  return m ? m[1] : '';
+  return { token: m ? m[1] : '', match: null, state: null };
 };
 
 const server = http.createServer((req, res) => {
@@ -127,7 +161,14 @@ const server = http.createServer((req, res) => {
     req.on('data', (c) => { if (over) return; body += c; if (body.length > 4 * 1024 * 1024) { over = true; body = ''; } });
     req.on('end', () => {
       res.writeHead(200); res.end('ok');
-      if (over || tokenIn(body) !== TOKEN) return;
+      if (over) return;
+      const head = readHead(body);
+      if (head.token !== TOKEN) return;
+      if (head.match !== null) {
+        // Logged so a real game shows what the feed sends when (menu, post-game...).
+        if (head.match !== matchid || head.state !== gameState) console.log('feed: match', head.match || '-', 'state', head.state || '-');
+        matchid = head.match; gameState = head.state;
+      }
       if (chat.payload(body)) lastFeed = Date.now();
     });
     return;

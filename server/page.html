@@ -5,25 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dota 聊天翻译</title>
 <style>
-  :root { --bg: #0d0f13; --row: #14171d; --self: #172030; --line: #232731; --text: #f2f4f7; --muted: #8b919d; --faint: #5d636e; --team: #5fd38a; --all: #f2a541; --err: #ff6b6b; }
+  :root { --bg: #0d0f13; --panel: #13161c; --row: #14171d; --self: #172030; --line: #232731; --text: #f2f4f7; --muted: #8b919d; --faint: #5d636e; --accent: #4f8cff; --team: #5fd38a; --all: #f2a541; --ocr: #7aa7ff; --err: #ff6b6b; }
   * { box-sizing: border-box; }
   html, body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.45 system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; }
-  header { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: 10px; padding: 10px 16px; background: rgba(13,15,19,.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  a { color: inherit; }
+  .top { position: sticky; top: 0; z-index: 2; background: rgba(13,15,19,.94); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
+  header { display: flex; align-items: center; gap: 10px; padding: 10px 16px 6px; max-width: 900px; margin: 0 auto; }
   h1 { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: .02em; }
   #status { margin-left: auto; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
   #dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
   #dot.on { background: #3ddc84; box-shadow: 0 0 6px #3ddc84; } #dot.idle { background: var(--all); } #dot.off { background: var(--err); }
-  main { max-width: 860px; margin: 0 auto; padding: 4px 0 48px; }
-  .match { display: flex; align-items: center; gap: 10px; padding: 18px 16px 6px; font-size: 12px; color: var(--faint); }
-  .match::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  /* 对局切换条：最新的在最左 */
+  #matches { display: flex; gap: 6px; overflow-x: auto; padding: 4px 16px 10px; max-width: 900px; margin: 0 auto; scrollbar-width: thin; }
+  #matches::-webkit-scrollbar { height: 4px; } #matches::-webkit-scrollbar-thumb { background: #2a2f39; border-radius: 2px; } #matches::-webkit-scrollbar-track { background: transparent; }
+  #matches { scrollbar-color: #2a2f39 transparent; }
+  .chip { flex: none; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); color: var(--muted); cursor: pointer; font: inherit; text-align: left; }
+  .chip:hover { border-color: #3a404c; color: var(--text); }
+  .chip.on { border-color: var(--accent); background: #18233a; color: var(--text); }
+  .chip b { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+  .chip small { font-size: 11px; color: var(--faint); }
+  .chip .live { width: 6px; height: 6px; border-radius: 50%; background: #3ddc84; }
+  .chip.unread b::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--all); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 0 0 48px; }
+  .summary { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; padding: 14px 16px 10px; color: var(--muted); font-size: 13px; }
+  .summary h2 { margin: 0; font-size: 17px; font-weight: 600; color: var(--text); }
+  .summary .ext { margin-left: auto; font-size: 12px; color: var(--faint); text-decoration: none; }
+  .summary .ext:hover { color: var(--text); }
+  #back { display: none; margin: 0 16px 8px; padding: 6px 12px; border: 1px solid var(--accent); border-radius: 8px; background: #18233a; color: var(--text); font: inherit; font-size: 13px; cursor: pointer; }
+
   .row { position: relative; padding: 7px 16px 8px 19px; border-bottom: 1px solid var(--line); background: var(--row); }
+  .row:first-of-type { border-top: 1px solid var(--line); }
   .row::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--slot); }
   .row.self { background: var(--self); }
   .row.new { animation: flash 1.4s ease-out; }
   @keyframes flash { from { background: #25304a; } }
   .head { display: flex; align-items: baseline; gap: 6px; font-size: 13px; }
   .ch { font-size: 11px; font-weight: 600; }
-  .ch.team { color: var(--team); } .ch.all { color: var(--all); } .ch.ocr { color: #7aa7ff; }
+  .ch.team { color: var(--team); } .ch.all { color: var(--all); } .ch.ocr { color: var(--ocr); }
   .who { color: var(--slot); font-weight: 600; max-width: 14em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .hero, .post { color: var(--muted); font-size: 12px; }
   .post { border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
@@ -32,66 +52,111 @@
   .orig { margin-left: 4px; font-size: 15px; color: var(--muted); }
   .wait { color: var(--faint); font-size: 15px; }
   .err { color: var(--err); font-size: 12px; }
-  #empty { padding: 80px 16px; text-align: center; color: var(--faint); }
-  @media (max-width: 520px) { .msg { font-size: 16px; } .who { max-width: 9em; } }
+  .empty { padding: 80px 16px; text-align: center; color: var(--faint); }
+  @media (max-width: 520px) { .msg { font-size: 16px; } .who { max-width: 9em; } .summary .ext { margin-left: 0; } }
 </style>
 </head>
 <body>
-<header>
-  <h1>Dota 聊天翻译</h1>
-  <div id="status"><span id="dot"></span><span id="statusText">连接中…</span></div>
-</header>
-<main id="list"><div id="empty">等待游戏中的聊天…</div></main>
+<div class="top">
+  <header>
+    <h1>Dota 聊天翻译</h1>
+    <div id="status"><span id="dot"></span><span id="statusText">连接中…</span></div>
+  </header>
+  <nav id="matches"></nav>
+</div>
+<main>
+  <div id="summary"></div>
+  <button id="back">最新对局有新消息，点击查看 →</button>
+  <div id="list"><div class="empty">等待游戏中的聊天…</div></div>
+</main>
 <script>
 const SLOT = ['#3375ff', '#66ffbf', '#bf00bf', '#f3f00b', '#ff6b00', '#fe86c2', '#a1b447', '#65d9f7', '#008321', '#a46900'];
 const SLOT_ZH = ['蓝', '青', '紫', '黄', '橙', '粉', '橄榄', '浅蓝', '绿', '棕'];
 const COLOUR_NAME = /^(Blue|Teal|Purple|Yellow|Orange|Pink|Olive|Light Blue|Green|Brown|Player \d+)$/;
-const list = document.getElementById('list');
+const $ = (id) => document.getElementById(id);
 const lines = new Map();
 let fresh = new Set();
+// 默认跟着最新的对局；点了旧对局就停在那一局，直到点回最新
+let follow = true, selected = null;
+const unread = new Set();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const hm = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
-const day = (t) => new Date(t).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+const hm = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' });
+const hms = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
+const md = (t) => new Date(t).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' });
+// 不在对局里（主菜单、组队时的截图）都归到"对局外"
+const keyOf = (l) => (l.match && l.match !== '0' ? l.match : '');
 
 function row(l) {
   const name = l.channel === 'ocr' ? (l.name || '') : l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
   let body;
-  // 译文(原文) on one line; a line with nothing to translate is shown once.
+  // 译文(原文) 一行；不需要翻译的只显示一次
   if (l.state === 'done' && l.zh) body = `<div class="msg">${esc(l.zh)}<span class="orig">(${esc(l.text)})</span></div>`;
   else if (l.state === 'pending') body = `<div class="msg"><span class="wait">翻译中…</span><span class="orig">(${esc(l.text)})</span></div>`;
   else body = `<div class="msg">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="err">翻译失败：${esc(l.error)}</div>` : '');
   return `<div class="row${l.self ? ' self' : ''}${fresh.has(l.id) ? ' new' : ''}" style="--slot:${SLOT[l.slot] || '#5d636e'}">`
     + `<div class="head"><span class="ch ${l.channel}">${{ team: '队伍', all: '全体', ocr: '截图' }[l.channel] || '全体'}</span>`
-    + `<span class="who">${esc(l.self ? name + '（我）' : name)}</span>`
+    + (name ? `<span class="who">${esc(l.self ? name + '（我）' : name)}</span>` : '')
     + (l.hero ? `<span class="hero">${esc(l.hero)}</span>` : '')
     + (l.post ? '<span class="post">赛后</span>' : '')
-    + `<span class="time">${hm(l.at)}</span></div>${body}</div>`;
+    + `<span class="time">${hms(l.at)}</span></div>${body}</div>`;
 }
 
-// Newest first, a divider wherever the match changes.
-function render() {
-  const all = [...lines.values()].sort((a, b) => b.id - a.id);
-  if (!all.length) { list.innerHTML = '<div id="empty">等待游戏中的聊天…</div>'; return; }
-  let html = '', match;
-  for (const l of all) {
-    if (l.match !== match) {
-      match = l.match;
-      const first = all.filter((x) => x.match === match).at(-1);
-      html += `<div class="match">${match ? '比赛 ' + esc(match) : '比赛'} · ${day(first.at)}</div>`;
-    }
-    html += row(l);
+// 按对局分组，最近有消息的对局排最前
+function groups() {
+  const by = new Map();
+  for (const l of lines.values()) {
+    const k = keyOf(l);
+    if (!by.has(k)) by.set(k, []);
+    by.get(k).push(l);
   }
-  list.innerHTML = html;
+  return [...by.entries()]
+    .map(([key, ls]) => { ls.sort((a, b) => b.id - a.id); return { key, lines: ls, first: ls.at(-1).at, last: ls[0].at, lastId: ls[0].id }; })
+    .sort((a, b) => b.lastId - a.lastId);
+}
+
+function render() {
+  const gs = groups();
+  if (!gs.length) { $('matches').innerHTML = ''; $('summary').innerHTML = ''; $('list').innerHTML = '<div class="empty">等待游戏中的聊天…</div>'; return; }
+  if (follow || !gs.some((g) => g.key === selected)) { follow = true; selected = gs[0].key; }
+  unread.delete(selected);
+  const live = Date.now() - lastFeed < 20000;
+
+  $('matches').innerHTML = gs.map((g, i) => `<button class="chip${g.key === selected ? ' on' : ''}${unread.has(g.key) ? ' unread' : ''}" data-key="${esc(g.key)}">`
+    + `<b>${i === 0 && live && g.key ? '<span class="live"></span>' : ''}${g.key ? hm(g.first) : '对局外'}</b>`
+    + `<small>${md(g.first)} · ${g.lines.length} 条</small></button>`).join('');
+
+  const g = gs.find((x) => x.key === selected);
+  const me = g.lines.find((l) => l.self && l.hero);
+  const dur = Math.round((g.last - g.first) / 60000);
+  $('summary').innerHTML = `<div class="summary"><h2>${g.key ? '比赛 ' + esc(g.key) : '对局外'}</h2>`
+    + `<span>${md(g.first)} ${hm(g.first)}${dur > 0 ? ' – ' + hm(g.last) : ''}</span><span>${g.lines.length} 条消息</span>`
+    + (me ? `<span>我：${esc(me.hero)}</span>` : '')
+    + (/^\d{6,}$/.test(g.key) ? `<a class="ext" href="https://www.dotabuff.com/matches/${g.key}" target="_blank" rel="noopener">Dotabuff ↗</a>` : '')
+    + '</div>';
+  $('back').style.display = !follow && gs[0].key !== selected && unread.has(gs[0].key) ? 'block' : 'none';
+  $('list').innerHTML = g.lines.map(row).join('');
   fresh = new Set();
 }
 
-const dot = document.getElementById('dot'), statusText = document.getElementById('statusText');
-let lastFeed = 0, connected = false;
+$('matches').addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (!chip) return;
+  selected = chip.dataset.key;
+  follow = chip === $('matches').firstElementChild;
+  render();
+  window.scrollTo({ top: 0 });
+});
+$('back').addEventListener('click', () => { follow = true; render(); window.scrollTo({ top: 0 }); });
+
+const dot = $('dot'), statusText = $('statusText');
+let lastFeed = 0, connected = false, wasLive = false;
 function paintStatus() {
   if (!connected) { dot.className = 'off'; statusText.textContent = '重连中…'; return; }
   const ago = lastFeed ? (Date.now() - lastFeed) / 1000 : Infinity;
   if (ago < 20) { dot.className = 'on'; statusText.textContent = '游戏连接中'; }
   else { dot.className = 'idle'; statusText.textContent = lastFeed ? `${ago < 3600 ? Math.round(ago / 60) + ' 分钟' : '很久'}没有游戏数据` : '未收到游戏数据'; }
+  // 对局条上"进行中"的绿点跟着状态变
+  if ((ago < 20) !== wasLive) { wasLive = ago < 20; render(); }
 }
 setInterval(paintStatus, 2000);
 
@@ -100,7 +165,12 @@ const es = new EventSource('events?k=' + encodeURIComponent(k));
 es.onopen = () => { connected = true; paintStatus(); };
 es.onerror = () => { connected = false; paintStatus(); };
 es.addEventListener('history', (e) => { lines.clear(); for (const l of JSON.parse(e.data)) lines.set(l.id, l); render(); });
-es.addEventListener('line', (e) => { const l = JSON.parse(e.data); if (!lines.has(l.id)) fresh.add(l.id); lines.set(l.id, l); render(); });
+es.addEventListener('line', (e) => {
+  const l = JSON.parse(e.data);
+  if (!lines.has(l.id)) { fresh.add(l.id); if (keyOf(l) !== selected) unread.add(keyOf(l)); }
+  lines.set(l.id, l);
+  render();
+});
 es.addEventListener('status', (e) => { lastFeed = JSON.parse(e.data).lastFeed; paintStatus(); });
 </script>
 </body>

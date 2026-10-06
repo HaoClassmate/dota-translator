@@ -16,7 +16,7 @@
   #dot { width: 8px; height: 8px; border-radius: 50%; background: var(--faint); }
   #dot.on { background: #3ddc84; box-shadow: 0 0 6px #3ddc84; } #dot.idle { background: var(--all); } #dot.off { background: var(--err); }
 
-  /* 对局切换条：最新的在最左 */
+  /* 对局切换条：按时间从左往右，最新的在最右 */
   #matches { display: flex; gap: 6px; overflow-x: auto; padding: 4px 16px 10px; max-width: 900px; margin: 0 auto; scrollbar-width: thin; }
   #matches::-webkit-scrollbar { height: 4px; } #matches::-webkit-scrollbar-thumb { background: #2a2f39; border-radius: 2px; } #matches::-webkit-scrollbar-track { background: transparent; }
   #matches { scrollbar-color: #2a2f39 transparent; }
@@ -127,9 +127,14 @@ function render() {
   unread.delete(selected);
   const live = Date.now() - lastFeed < 20000;
 
-  $('matches').innerHTML = gs.map((g, i) => `<button class="chip${g.key === selected ? ' on' : ''}${unread.has(g.key) ? ' unread' : ''}" data-key="${esc(g.key)}">`
-    + `<b>${i === 0 && live && g.key ? '<span class="live"></span>' : ''}${g.key ? hm(g.first) : '对局外'}</b>`
+  const bar = $('matches');
+  bar.innerHTML = [...gs].reverse().map((g, i, arr) => `<button class="chip${g.key === selected ? ' on' : ''}${unread.has(g.key) ? ' unread' : ''}" data-key="${esc(g.key)}">`
+    + `<b>${i === arr.length - 1 && live && g.key ? '<span class="live"></span>' : ''}${g.key ? hm(g.first) : '对局外'}</b>`
     + `<small>${md(g.first)} · ${g.lines.length} 条</small></button>`).join('');
+
+  // 跟着最新一局时对局条停在最右边；否则让选中的那局露出来
+  if (follow) bar.scrollLeft = bar.scrollWidth;
+  else bar.querySelector('.chip.on')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 
   const g = gs.find((x) => x.key === selected);
   const me = g.lines.find((l) => l.self && l.hero);
@@ -151,7 +156,7 @@ $('matches').addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if (!chip) return;
   selected = chip.dataset.key;
-  follow = chip === $('matches').firstElementChild;
+  follow = chip === $('matches').lastElementChild;
   render();
 });
 $('back').addEventListener('click', () => { follow = true; render(); });

@@ -114,7 +114,13 @@ function groups() {
     .sort((a, b) => b.lastId - a.lastId);
 }
 
+// 聊天从上往下按时间排，最新的在最下面；人在底部时新消息来了自动滚到底
+const atBottom = () => window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120;
+const toBottom = () => window.scrollTo({ top: document.documentElement.scrollHeight });
+let shown = null;
+
 function render() {
+  const stick = atBottom();
   const gs = groups();
   if (!gs.length) { $('matches').innerHTML = ''; $('summary').innerHTML = ''; $('list').innerHTML = '<div class="empty">等待游戏中的聊天…</div>'; return; }
   if (follow || !gs.some((g) => g.key === selected)) { follow = true; selected = gs[0].key; }
@@ -134,8 +140,11 @@ function render() {
     + (/^\d{6,}$/.test(g.key) ? `<a class="ext" href="https://www.dotabuff.com/matches/${g.key}" target="_blank" rel="noopener">Dotabuff ↗</a>` : '')
     + '</div>';
   $('back').style.display = !follow && gs[0].key !== selected && unread.has(gs[0].key) ? 'block' : 'none';
-  $('list').innerHTML = g.lines.map(row).join('');
+  $('list').innerHTML = [...g.lines].reverse().map(row).join('');
   fresh = new Set();
+  // 换了一局（包括打开页面时）或者本来就在底部：滚到最新一条
+  if (shown !== selected || stick) toBottom();
+  shown = selected;
 }
 
 $('matches').addEventListener('click', (e) => {
@@ -144,9 +153,8 @@ $('matches').addEventListener('click', (e) => {
   selected = chip.dataset.key;
   follow = chip === $('matches').firstElementChild;
   render();
-  window.scrollTo({ top: 0 });
 });
-$('back').addEventListener('click', () => { follow = true; render(); window.scrollTo({ top: 0 }); });
+$('back').addEventListener('click', () => { follow = true; render(); });
 
 const dot = $('dot'), statusText = $('statusText');
 let lastFeed = 0, connected = false, wasLive = false;

@@ -40,6 +40,10 @@ let lastFeed = 0;
 // Of the payload being read: which match, and whether it is over (post-game
 // chat is still chat, and the feed keeps sending it on the end screen).
 let matchid = '';
+// When the current match was first seen: the page opens its tab right away,
+// before anybody has said anything.
+let matchSince = 0;
+const status = () => ({ lastFeed, match: matchid, since: matchSince });
 let gameState = '';
 
 if (STATE_FILE) {
@@ -159,7 +163,8 @@ const server = http.createServer((req, res) => {
       if (head.match !== null) {
         // Logged so a real game shows what the feed sends when (menu, post-game...).
         if (head.match !== matchid || head.state !== gameState) console.log('feed: match', head.match || '-', 'state', head.state || '-');
-        matchid = head.match; gameState = head.state;
+        if (head.match !== matchid) { matchSince = Date.now(); matchid = head.match; gameState = head.state; broadcast('status', status()); }
+        gameState = head.state;
       }
       if (chat.payload(body)) lastFeed = Date.now();
     });
@@ -172,7 +177,7 @@ const server = http.createServer((req, res) => {
   } else if (url.pathname === '/events') {
     res.writeHead(200, { 'Content-Type': 'text/event-stream', 'Cache-Control': 'no-cache', Connection: 'keep-alive', 'X-Accel-Buffering': 'no' });
     res.write(`event: history\ndata: ${JSON.stringify(lines)}\n\n`);
-    res.write(`event: status\ndata: ${JSON.stringify({ lastFeed })}\n\n`);
+    res.write(`event: status\ndata: ${JSON.stringify(status())}\n\n`);
     clients.add(res);
     req.on('close', () => clients.delete(res));
   } else {
@@ -182,6 +187,6 @@ const server = http.createServer((req, res) => {
 
 // Status every few seconds keeps the stream open through proxies and tells
 // the page whether Dota is still sending.
-setInterval(() => broadcast('status', { lastFeed }), 5000).unref();
+setInterval(() => broadcast('status', status()), 5000).unref();
 
 server.listen(PORT, HOST, () => console.log(`listening on ${HOST}:${PORT}, model ${LLM_MODEL}`));

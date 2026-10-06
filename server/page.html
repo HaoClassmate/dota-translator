@@ -26,6 +26,8 @@
   .chip b { font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
   .chip small { font-size: 11px; color: var(--faint); }
   .chip .live { width: 6px; height: 6px; border-radius: 50%; background: #3ddc84; }
+  .chip.ocr b { color: var(--ocr); }
+  #matches .sep { flex: none; width: 1px; margin: 4px 4px; background: var(--line); }
   .chip.unread b::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--all); }
 
   main { max-width: 900px; margin: 0 auto; padding: 0 0 48px; }
@@ -78,13 +80,17 @@ const lines = new Map();
 let fresh = new Set();
 // 默认跟着最新的对局；点了旧对局就停在那一局，直到点回最新
 let follow = true, selected = null;
+// 服务器说的当前对局（还没人说话时也知道已经开了新的一局）
+let current = { match: '', since: 0 };
 const unread = new Set();
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const hm = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false, hour: '2-digit', minute: '2-digit' });
 const hms = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
 const md = (t) => new Date(t).toLocaleDateString('zh-CN', { month: 'numeric', day: 'numeric' });
 // 不在对局里（主菜单、组队时的截图）都归到"对局外"
-const keyOf = (l) => (l.match && l.match !== '0' ? l.match : '');
+// 截图翻译（DeepRant 推来的）单独一个标签页，不和对局混在一起
+const OCR = 'ocr';
+const keyOf = (l) => (l.channel === 'ocr' ? OCR : l.match && l.match !== '0' ? l.match : '');
 
 function row(l) {
   const name = l.channel === 'ocr' ? (l.name || '') : l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
@@ -109,9 +115,14 @@ function groups() {
     if (!by.has(k)) by.set(k, []);
     by.get(k).push(l);
   }
-  return [...by.entries()]
+  const list = [...by.entries()]
     .map(([key, ls]) => { ls.sort((a, b) => b.id - a.id); return { key, lines: ls, first: ls.at(-1).at, last: ls[0].at, lastId: ls[0].id }; })
     .sort((a, b) => b.lastId - a.lastId);
+  // 新开的一局还没人说话也先给它一个标签，排在最前（最新）
+  if (current.match && current.match !== '0' && !by.has(current.match)) {
+    list.unshift({ key: current.match, lines: [], first: current.since, last: current.since, lastId: Infinity });
+  }
+  return list;
 }
 
 // 聊天从上往下按时间排，最新的在最下面；人在底部时新消息来了自动滚到底
@@ -121,33 +132,44 @@ let shown = null;
 
 function render() {
   const stick = atBottom();
-  const gs = groups();
-  if (!gs.length) { $('matches').innerHTML = ''; $('summary').innerHTML = ''; $('list').innerHTML = '<div class="empty">等待游戏中的聊天…</div>'; return; }
-  if (follow || !gs.some((g) => g.key === selected)) { follow = true; selected = gs[0].key; }
+  const all = groups();
+  const ocr = all.find((g) => g.key === OCR) || { key: OCR, lines: [], first: 0, last: 0, lastId: 0 };
+  const gs = all.filter((g) => g.key !== OCR);
+  // 跟随时选最新的对局；还没有对局就看截图页
+  if (follow || (selected !== OCR && !gs.some((g) => g.key === selected))) { follow = true; selected = gs.length ? gs[0].key : OCR; }
   unread.delete(selected);
   const live = Date.now() - lastFeed < 20000;
 
   const bar = $('matches');
-  bar.innerHTML = [...gs].reverse().map((g, i, arr) => `<button class="chip${g.key === selected ? ' on' : ''}${unread.has(g.key) ? ' unread' : ''}" data-key="${esc(g.key)}">`
-    + `<b>${i === arr.length - 1 && live && g.key ? '<span class="live"></span>' : ''}${g.key ? hm(g.first) : '对局外'}</b>`
-    + `<small>${md(g.first)} · ${g.lines.length} 条</small></button>`).join('');
+  const chip = (g, label, sub, extra = '') => `<button class="chip${extra}${g.key === selected ? ' on' : ''}${unread.has(g.key) ? ' unread' : ''}" data-key="${esc(g.key)}"><b>${label}</b><small>${sub}</small></button>`;
+  bar.innerHTML = chip(ocr, '截图翻译', `${ocr.lines.length} 条`, ' ocr') + '<span class="sep"></span>'
+    + [...gs].reverse().map((g, i, arr) => chip(g, `${i === arr.length - 1 && live && g.key ? '<span class="live"></span>' : ''}${g.key ? hm(g.first) : '对局外'}`, `${md(g.first)} · ${g.lines.length} 条`)).join('');
 
-  // 跟着最新一局时对局条停在最右边；否则让选中的那局露出来
+  // 跟着最新一局时对局条停在最右边；否则让选中的那个露出来
   if (follow) bar.scrollLeft = bar.scrollWidth;
   else bar.querySelector('.chip.on')?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
 
-  const g = gs.find((x) => x.key === selected);
-  const me = g.lines.find((l) => l.self && l.hero);
-  const dur = Math.round((g.last - g.first) / 60000);
-  $('summary').innerHTML = `<div class="summary"><h2>${g.key ? '比赛 ' + esc(g.key) : '对局外'}</h2>`
-    + `<span>${md(g.first)} ${hm(g.first)}${dur > 0 ? ' – ' + hm(g.last) : ''}</span><span>${g.lines.length} 条消息</span>`
-    + (me ? `<span>我：${esc(me.hero)}</span>` : '')
-    + (/^\d{6,}$/.test(g.key) ? `<a class="ext" href="https://www.dotabuff.com/matches/${g.key}" target="_blank" rel="noopener">Dotabuff ↗</a>` : '')
-    + '</div>';
-  $('back').style.display = !follow && gs[0].key !== selected && unread.has(gs[0].key) ? 'block' : 'none';
-  $('list').innerHTML = [...g.lines].reverse().map(row).join('');
+  const g = selected === OCR ? ocr : gs.find((x) => x.key === selected);
+  if (!g.lines.length) {
+    $('summary').innerHTML = '';
+    $('list').innerHTML = selected === OCR
+      ? '<div class="empty">还没有截图翻译。<br>在 DeepRant「截图翻译」页面开启「推送到网页」并填好口令，游戏里按截图翻译快捷键后会出现在这里。</div>'
+      : g.key ? '<div class="empty">这局还没有人说话</div>' : '<div class="empty">等待游戏中的聊天…</div>';
+    if (g.key && g.key !== OCR) $('summary').innerHTML = `<div class="summary"><h2>比赛 ${esc(g.key)}</h2><span>${md(g.first)} ${hm(g.first)} 开始</span></div>`;
+  } else {
+    const me = g.lines.find((l) => l.self && l.hero);
+    const dur = Math.round((g.last - g.first) / 60000);
+    const title = g.key === OCR ? '截图翻译' : g.key ? '比赛 ' + esc(g.key) : '对局外';
+    $('summary').innerHTML = `<div class="summary"><h2>${title}</h2>`
+      + `<span>${md(g.first)} ${hm(g.first)}${dur > 0 ? ' – ' + (md(g.last) !== md(g.first) ? md(g.last) + ' ' : '') + hm(g.last) : ''}</span><span>${g.lines.length} 条消息</span>`
+      + (me ? `<span>我：${esc(me.hero)}</span>` : '')
+      + (/^\d{6,}$/.test(g.key) ? `<a class="ext" href="https://www.dotabuff.com/matches/${g.key}" target="_blank" rel="noopener">Dotabuff ↗</a>` : '')
+      + '</div>';
+    $('list').innerHTML = [...g.lines].reverse().map(row).join('');
+  }
+  $('back').style.display = !follow && gs.length && gs[0].key !== selected && unread.has(gs[0].key) ? 'block' : 'none';
   fresh = new Set();
-  // 换了一局（包括打开页面时）或者本来就在底部：滚到最新一条
+  // 换了一页（包括打开页面时）或者本来就在底部：滚到最新一条
   if (shown !== selected || stick) toBottom();
   shown = selected;
 }
@@ -156,7 +178,7 @@ $('matches').addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if (!chip) return;
   selected = chip.dataset.key;
-  follow = chip === $('matches').lastElementChild;
+  follow = selected !== OCR && chip === $('matches').lastElementChild;
   render();
 });
 $('back').addEventListener('click', () => { follow = true; render(); });
@@ -184,7 +206,14 @@ es.addEventListener('line', (e) => {
   lines.set(l.id, l);
   render();
 });
-es.addEventListener('status', (e) => { lastFeed = JSON.parse(e.data).lastFeed; paintStatus(); });
+es.addEventListener('status', (e) => {
+  const d = JSON.parse(e.data);
+  lastFeed = d.lastFeed;
+  const changed = d.match !== current.match;
+  current = { match: d.match || '', since: d.since || Date.now() };
+  if (changed) render();
+  paintStatus();
+});
 </script>
 </body>
 </html>

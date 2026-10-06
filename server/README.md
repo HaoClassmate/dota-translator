@@ -44,3 +44,15 @@ GSI_TOKEN=<随机口令> LLM_API_KEY=<key> node server/index.js
 ```
 
 本地测试：`node server/fakegsi.mjs http://127.0.0.1:47854/ <token> "ss mid b" "bobo ka"`
+
+## 调提示词
+
+默认提示词在 `server/prompt.txt`；线上读 `/etc/dota-chat.prompt`，改了下一条就生效。翻译时会带上同一局最近 8 条聊天作上下文。
+改之前先用真实对局记录对比新旧译文：
+
+```
+cd /opt/dota-chat && set -a && . /etc/dota-chat.env && set +a
+node server/retranslate.mjs /var/lib/dota-chat/lines.json --prompt /path/to/new-prompt.txt --match <比赛编号>
+node server/retranslate.mjs /var/lib/dota-chat/lines.json --prompt /path/to/new-prompt.txt "torm" "xd"
+```
+

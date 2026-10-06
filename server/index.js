@@ -12,6 +12,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createGsiChat } from '../src/gsisource.js';
+import { createTranslator, contextFor, isChinese, isTrivial } from './translate.js';
 
 const env = process.env;
 const PORT = Number(env.PORT) || 47854;
@@ -67,57 +68,11 @@ function broadcast(event, data) {
   for (const res of clients) res.write(msg);
 }
 
-// Mostly Chinese already: shown as it is, no call.
-const isChinese = (t) => {
-  const han = (t.match(/[一-鿿]/g) || []).length;
-  const letters = (t.match(/[A-Za-zÀ-ɏЀ-ӿ฀-๿가-힯]/g) || []).length;
-  return han > 0 && han >= letters;
-};
-// Nothing to translate: digits, punctuation, "?" spam.
-const isTrivial = (t) => !/[\p{L}]/u.test(t);
-
-const DEFAULT_PROMPT = [
-  '你是 Dota 2 东南亚服务器的聊天翻译。把玩家发的消息翻译成简体中文，口语化、简短，保留语气（包括骂人）。',
-  '消息可能是英语、菲律宾语(Tagalog/Taglish)、印尼语、马来语、泰语、俄语、越南语或混杂，以及大量缩写和游戏黑话（ss/mia=敌人消失, b=撤退, bb=买活, rosh=肉山, ff=投降, ez, gg, noob, bobo, gago, tanga, pota, anjing, goblok, babi, bodoh 等）。',
-  '英雄、物品、技能名用国服常用叫法。只输出译文本身，不要解释、不要引号。如果看不懂就输出原文。',
-].join('\n');
-
-const cache = new Map();
-let prompt = DEFAULT_PROMPT, promptMtime = 0;
-function currentPrompt() {
-  if (!PROMPT_FILE) return prompt;
-  try {
-    const m = fs.statSync(PROMPT_FILE).mtimeMs;
-    if (m !== promptMtime) {
-      const text = fs.readFileSync(PROMPT_FILE, 'utf8').trim();
-      promptMtime = m;
-      if (text && text !== prompt) { prompt = text; cache.clear(); console.log('prompt reloaded from', PROMPT_FILE); }
-    }
-  } catch (err) { if (promptMtime !== -1) { promptMtime = -1; console.warn('prompt file:', err.message); } }
-  return prompt;
-}
-
-async function translate(text) {
-  const system = currentPrompt();
-  if (cache.has(text)) return cache.get(text);
-  const res = await fetch(LLM_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${LLM_KEY}` },
-    body: JSON.stringify({
-      model: LLM_MODEL,
-      temperature: 0.2,
-      max_tokens: 200,
-      messages: [{ role: 'system', content: system }, { role: 'user', content: text }],
-    }),
-    signal: AbortSignal.timeout(15000),
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`);
-  const json = await res.json();
-  const out = String(json?.choices?.[0]?.message?.content || '').trim();
-  if (cache.size > 2000) cache.clear();
-  cache.set(text, out);
-  return out;
-}
+// server/prompt.txt is the default; PROMPT_FILE (edited on the server) wins.
+const translate = createTranslator({
+  url: LLM_URL, key: LLM_KEY, model: LLM_MODEL, promptFile: PROMPT_FILE,
+  defaultPrompt: fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'prompt.txt'), 'utf8'),
+});
 
 let selfSlot = null;
 const chat = createGsiChat({
@@ -134,7 +89,7 @@ const chat = createGsiChat({
     broadcast('line', line);
     save();
     if (line.state !== 'pending') return;
-    translate(m.text)
+    translate(line, contextFor(lines, line))
       .then((zh) => { line.zh = zh; line.state = 'done'; })
       .catch((err) => { line.state = 'error'; line.error = String(err.message || err); console.error('translate:', line.error); })
       .finally(() => { broadcast('line', line); save(); });

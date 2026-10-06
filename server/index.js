@@ -107,8 +107,45 @@ const readHead = (body) => {
   return { token: m ? m[1] : '', match: null, state: null };
 };
 
+// Lines DeepRant read off the screen (its screenshot translation) and already
+// translated. The same chat box is captured again and again, so a line seen
+// in the last 15 minutes is not added twice.
+const OCR_DEDUPE_MS = 15 * 60 * 1000;
+function addOcr(items) {
+  const now = Date.now();
+  const recent = new Set(lines.filter((l) => l.channel === 'ocr' && now - l.at < OCR_DEDUPE_MS).map((l) => l.name + '|' + l.text));
+  let added = 0;
+  for (const it of Array.isArray(items) ? items : []) {
+    const text = String(it?.text || '').trim().slice(0, 500);
+    const name = String(it?.name || '').trim().slice(0, 60);
+    if (!text || recent.has(name + '|' + text)) continue;
+    recent.add(name + '|' + text);
+    const line = { id: nextId++, at: now, match: matchid, post: false, name, hero: null, slot: -1, self: false, channel: 'ocr', text, zh: String(it?.zh || '').slice(0, 500), state: 'done' };
+    lines.push(line);
+    if (lines.length > KEEP) lines.shift();
+    broadcast('line', line);
+    added++;
+  }
+  if (added) save();
+  return added;
+}
+
 const server = http.createServer((req, res) => {
   const url = new URL(req.url, 'http://x');
+  if (req.method === 'POST' && url.pathname === '/ocr') {
+    let body = '';
+    req.setEncoding('utf8');
+    req.on('data', (c) => { if (body.length < 256 * 1024) body += c; });
+    req.on('end', () => {
+      let d = null;
+      try { d = JSON.parse(body); } catch { /* below */ }
+      if (!d || d.token !== TOKEN) { res.writeHead(403); res.end('forbidden'); return; }
+      const added = addOcr(d.items);
+      console.log('ocr: added', added);
+      res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ added }));
+    });
+    return;
+  }
   if (req.method === 'POST') {
     let body = '';
     let over = false;

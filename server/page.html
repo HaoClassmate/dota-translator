@@ -23,7 +23,7 @@
   @keyframes flash { from { background: #25304a; } }
   .head { display: flex; align-items: baseline; gap: 6px; font-size: 13px; }
   .ch { font-size: 11px; font-weight: 600; }
-  .ch.team { color: var(--team); } .ch.all { color: var(--all); }
+  .ch.team { color: var(--team); } .ch.all { color: var(--all); } .ch.ocr { color: #7aa7ff; }
   .who { color: var(--slot); font-weight: 600; max-width: 14em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .hero, .post { color: var(--muted); font-size: 12px; }
   .post { border: 1px solid var(--line); border-radius: 3px; padding: 0 4px; }
@@ -54,14 +54,14 @@ const hm = (t) => new Date(t).toLocaleTimeString('zh-CN', { hour12: false });
 const day = (t) => new Date(t).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
 
 function row(l) {
-  const name = l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
+  const name = l.channel === 'ocr' ? (l.name || '') : l.name && !COLOUR_NAME.test(l.name) ? l.name : `${l.slot < 5 ? '天辉' : '夜魇'}·${SLOT_ZH[l.slot] ?? l.slot}`;
   let body;
   // 译文(原文) on one line; a line with nothing to translate is shown once.
   if (l.state === 'done' && l.zh) body = `<div class="msg">${esc(l.zh)}<span class="orig">(${esc(l.text)})</span></div>`;
   else if (l.state === 'pending') body = `<div class="msg"><span class="wait">翻译中…</span><span class="orig">(${esc(l.text)})</span></div>`;
   else body = `<div class="msg">${esc(l.text)}</div>` + (l.state === 'error' ? `<div class="err">翻译失败：${esc(l.error)}</div>` : '');
-  return `<div class="row${l.self ? ' self' : ''}${fresh.has(l.id) ? ' new' : ''}" style="--slot:${SLOT[l.slot] || '#888'}">`
-    + `<div class="head"><span class="ch ${l.channel}">${l.channel === 'team' ? '队伍' : '全体'}</span>`
+  return `<div class="row${l.self ? ' self' : ''}${fresh.has(l.id) ? ' new' : ''}" style="--slot:${SLOT[l.slot] || '#5d636e'}">`
+    + `<div class="head"><span class="ch ${l.channel}">${{ team: '队伍', all: '全体', ocr: '截图' }[l.channel] || '全体'}</span>`
     + `<span class="who">${esc(l.self ? name + '（我）' : name)}</span>`
     + (l.hero ? `<span class="hero">${esc(l.hero)}</span>` : '')
     + (l.post ? '<span class="post">赛后</span>' : '')

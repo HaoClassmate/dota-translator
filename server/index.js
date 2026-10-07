@@ -143,7 +143,10 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       let d = null;
       try { d = JSON.parse(body); } catch { /* below */ }
-      if (!d || d.token !== TOKEN) { res.writeHead(403); res.end('forbidden'); return; }
+      if (!d || d.token !== TOKEN) {
+        console.log('ocr: rejected', d ? 'wrong token' : 'not JSON', 'from', req.headers['cf-connecting-ip'] || req.socket.remoteAddress);
+        res.writeHead(403); res.end('forbidden'); return;
+      }
       const added = addOcr(d.items);
       console.log('ocr: added', added);
       res.writeHead(200, { 'Content-Type': 'application/json' }); res.end(JSON.stringify({ added }));
